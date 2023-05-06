@@ -10,12 +10,12 @@
   </template>
   
   <script>
-  import TopLineNavigation from './components/TopLineNavigation.vue'
-  import Header from './components/Header.vue'
-  import Gallery from './components/Gallery.vue'
-  import CallMe from './components/CallMe.vue'
-  import Regalia from './components/Regalia.vue'
-  import Footer from './components/Footer.vue'
+  import TopLineNavigation from '@/components/TopLineNavigation.vue'
+  import Header from '@/components/Header.vue'
+  import Gallery from '@/components/Gallery.vue'
+  import CallMe from '@/components/CallMe.vue'
+  import Regalia from '@/components/Regalia.vue'
+  import Footer from '@/components/Footer.vue'
   
   export default {
     name: 'App',
