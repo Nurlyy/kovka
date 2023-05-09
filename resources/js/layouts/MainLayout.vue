@@ -2,9 +2,7 @@
     <TopLineNavigation />
       <div class="mine-conteaner">
         <Header />
-        <Gallery />
-        <CallMe />
-        <Regalia />
+        <router-view></router-view>
       </div>
     <Footer />
   </template>
