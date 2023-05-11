@@ -6,17 +6,36 @@
       </a>
     </div>
     <h1>
-      Летняя коллекция мебели для дома и улицы на заказ
+        {{ title }}
     </h1>
-    <p>
-      Кованая мебель - популярный пример применения художественной ковки в интерьере и экстерьере. Скамьи, качели, летние беседки, перголы, столы и стулья, зоны для барбекю, арки и калитки - все они могут быть изготовлены из кованого металла и использованы как внутри дома, так и на улице. 
+    <p v-html="body">
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data() {
+    return {
+        header: null,
+        title: null,
+        body: null,
+    }
+  },
+  mounted(){
+    this.getMainPage();
+  },
+  methods:{
+    getMainPage(){
+        axios.post('/api/get-main-page').then((response) => {
+            this.header = response.data.mainPage.header;
+            this.title = response.data.mainPage.title;
+            this.body = response.data.mainPage.body;
+            document.title = this.header;
+        })
+    }
+  }
 }
 </script>
 
