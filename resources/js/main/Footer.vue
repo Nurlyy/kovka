@@ -2,16 +2,30 @@
   <div class="wrapper-footer">
     <div class="footer">
       <span class="copy">© 2023 · ООО “Ковка и Дерево”</span>
-      <span>+7 992 202 57 51</span>
-      <span>malkov.sergey.a@yandex.ru</span>
-      <span>Россия Санкт-Петербург Петровская коса 1</span>
+      <span>{{ number }}</span>
+      <span>{{email}}</span>
+      <span>{{address}}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  data(){
+        return {
+            email: null,
+            number: null,
+            address: null,
+        }
+    },
+    mounted() {
+        axios.post("/api/get-contacts", {}).then((response) => {
+            this.number = response.data.contacts.phone_number;
+            this.email = response.data.contacts.email;
+            this.address = response.data.contacts.address;
+        });
+    },
 }
 </script>
 
