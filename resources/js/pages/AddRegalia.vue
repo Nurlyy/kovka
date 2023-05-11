@@ -1,15 +1,19 @@
 <template>
     <h1 v-if="id==null">Добавить Преимущество</h1>
     <h1 v-if="id!=null">Изменить Преимущество</h1>
+    <br>
     <CForm @submit.prevent="submitForm()">
         <div class="mb-3">
-            <CFormLabel for="image">Изображение преимущества</CFormLabel>
+            <h5>Выбранное изображение преимущества</h5>
+            <img id="imagePreview" alt="Preview Image" style="height: 150px; border-radius: 15px; margin-top: 15; display:none;" class="mb-3" />
+            <CFormLabel v-if="id==null" for="image">Изображение преимущества</CFormLabel>
+            <CFormLabel v-if="id!=null" for="image">Изменить изображение преимущества</CFormLabel>
             <CFormInput
                 @change="saveImage"
                 type="file"
                 id="image"
-                :disabled="image != null"
             />
+            
         </div>
         <br>
         <div class="mb-3">
@@ -45,7 +49,6 @@ export default {
             image: null,
             title: null,
             body: null,
-            imageSrc: "",
             id: null,
         };
     },
@@ -75,6 +78,7 @@ export default {
                     formData.append("image", this.image);
                     formData.append("body", this.body);
                     formData.append("title", this.title);
+                    formData.append("id", this.id); 
                     // formData.append(
                     //     "imageFilters",
                     //     JSON.stringify(this.imageFilters)
@@ -98,6 +102,20 @@ export default {
         },
         saveImage(event) {
             this.image = event.target.files[0];
+            var preview = document.getElementById("imagePreview");
+
+            // Create a new FileReader instance
+            var reader = new FileReader();
+
+            // Set the image preview source
+            reader.onload = function (event) {
+                preview.src = event.target.result;
+            };
+
+            preview.style.display = "block";
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(event.target.files[0]);
         },
         // addFilter(index, filter) {
         //     // filter.selected = true;
@@ -119,8 +137,8 @@ export default {
             axios.post("/api/get-regalia", { id: id }).then((response) => {
                 // this.page = response.data.page;
                 // console.log(reponse.data);
-                this.image = response.data.regalia.path;
-                this.body = response.data.regalia.description;
+                this.image = response.data.regalia.image;
+                this.body = response.data.regalia.body;
                 this.title = response.data.regalia.title;
                 
                 // this.imageFilters =
@@ -128,6 +146,9 @@ export default {
                 //         ? response.data.image_filters
                 //         : [];
                 this.id = id;
+                var preview = document.getElementById("imagePreview");
+                preview.src = this.image;
+                preview.style.display = "block";
                 
                     // if (this.availableFilters.includes(imageFilter)) {
                     //     this.availableFilters.splice(
