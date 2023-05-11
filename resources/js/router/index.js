@@ -118,6 +118,18 @@ const routes = [
                 props: true,
                 meta: { requiresAuth: true },
             },
+            {
+                path: "/admin/regalias",
+                name: "Regalias",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/Regalias.vue"
+                    ),
+                meta: { requiresAuth: true },
+            },
             // {
             //     path: "/admin/images/add-image",
             //     name: "AddImage",
