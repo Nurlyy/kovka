@@ -39,12 +39,12 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')
 // Route::post('update-page', "App\Http\Controllers\PageController@updatePage")->middleware('auth:api');
 // Route::post('delete-page', "App\Http\Controllers\PageController@deletePage")->middleware('auth:api');
 // Route::post('save-contacts', "App\Http\Controllers\ContactsController@saveContacts")->middleware('auth:api');
-// Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainPage")->middleware('auth:api');
+Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainPage")->middleware('auth:api');
 // Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
 
 // Route::post('get-filters', "App\Http\Controllers\FilterController@getFilters");
-// Route::post('get-main-page', "App\Http\Controllers\MainPageController@getMainPage");
+Route::post('get-main-page', "App\Http\Controllers\MainPageController@getMainPage");
 // Route::post('get-filter-admin', "App\Http\Controllers\FilterController@getFilterAdmin")->middleware('auth:api');
 // Route::post('update-filter', "App\Http\Controllers\FilterController@updateFilter")->middleware('auth:api');
 // Route::post('delete-filter', "App\Http\Controllers\FilterController@deleteFilter")->middleware('auth:api');
@@ -53,7 +53,7 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')
 // Route::post('get-likes', "App\Http\Controllers\ImageController@getLikes");
 // Route::post('get-images-admin', "App\Http\Controllers\ImageController@getImagesAdmin")->middleware('auth:api');
 // Route::post('get-contacts', "App\Http\Controllers\ContactsController@getContacts");
-// Route::post('get-admin', "App\Http\Controllers\AdminController@getAdmin");
+Route::post('get-admin', "App\Http\Controllers\AdminController@getAdmin");
 // Route::post('get-page', "App\Http\Controllers\PageController@getPage");
 // Route::post('get-pages', "App\Http\Controllers\PageController@getPages");
 // Route::post('get-pages-admin', "App\Http\Controllers\PageController@getPagesAdmin")->middleware('auth:api');
