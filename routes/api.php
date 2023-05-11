@@ -38,7 +38,7 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')
 // Route::post('add-page', "App\Http\Controllers\PageController@addPage")->middleware('auth:api');
 // Route::post('update-page', "App\Http\Controllers\PageController@updatePage")->middleware('auth:api');
 // Route::post('delete-page', "App\Http\Controllers\PageController@deletePage")->middleware('auth:api');
-// Route::post('save-contacts', "App\Http\Controllers\ContactsController@saveContacts")->middleware('auth:api');
+Route::post('save-contacts', "App\Http\Controllers\ContactsController@saveContacts")->middleware('auth:api');
 Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainPage")->middleware('auth:api');
 // Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
@@ -52,7 +52,7 @@ Route::post('get-main-page', "App\Http\Controllers\MainPageController@getMainPag
 // Route::get('get-category-images', "App\Http\Controllers\ImageController@getCategoryImages");
 // Route::post('get-likes', "App\Http\Controllers\ImageController@getLikes");
 // Route::post('get-images-admin', "App\Http\Controllers\ImageController@getImagesAdmin")->middleware('auth:api');
-// Route::post('get-contacts', "App\Http\Controllers\ContactsController@getContacts");
+Route::post('get-contacts', "App\Http\Controllers\ContactsController@getContacts");
 Route::post('get-admin', "App\Http\Controllers\AdminController@getAdmin");
 // Route::post('get-page', "App\Http\Controllers\PageController@getPage");
 // Route::post('get-pages', "App\Http\Controllers\PageController@getPages");
