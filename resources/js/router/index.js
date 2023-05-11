@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import createStore from "../store/index.js";
 
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-
+import Index from "@/main/Index.vue";
 // import MainLayout from "@/layouts/MainLayout.vue";
 // import Pages from "@/main/Pages.vue";
 
@@ -22,17 +22,17 @@ const routes = [
     {
         path: "/",
         name: "Main",
-        component: MainLayout,
-        redirect: "/index",
-        children: [
-            {
-                path: "/index",
-                name: "MainIndex",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "dashboard" */ "@/main/Index.vue"
-                    ),
-            },
+        component: Index,
+        // redirect: "/index",
+        // children: [
+        //     {
+        //         path: "/index",
+        //         name: "MainIndex",
+        //         component: () =>
+        //             import(
+        //                 /* webpackChunkName: "dashboard" */ "@/main/Index.vue"
+        //             ),
+        //     },
             // {
             //     path: '/order-request',
             //     name: 'MainOrderRequest',
@@ -41,15 +41,15 @@ const routes = [
             //             /* webpackChunkName: "dashboard" */ '@/main/Order.vue'
             //         ),
             // },
-            {
-                path: "/likes",
-                name: "MainLikes",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "dashboard" */ "@/main/LikePage.vue"
-                    ),
-            },
-        ],
+            // {
+            //     path: "/likes",
+            //     name: "MainLikes",
+            //     component: () =>
+            //         import(
+            //             /* webpackChunkName: "dashboard" */ "@/main/LikePage.vue"
+            //         ),
+            // },
+        // ],
     },
     {
         path: "/admin",
