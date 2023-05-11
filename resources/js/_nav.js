@@ -25,8 +25,8 @@ export default [
     },
     {
         component: "CNavItem",
-        name: "Страницы",
-        to: "/admin/pages",
+        name: "Преимущества",
+        to: "/admin/regalias",
         icon: "cil-file",
     },
     {

@@ -52,7 +52,7 @@ export default {
     mounted() {
         axios.post("/api/get-admin", {}).then((response) => {
             this.email = response.data.email;
-            this.username = response.data.username;
+            this.username = response.data.name;
             // console.log(response.data);
             // this.password = response.data.password;
         });
