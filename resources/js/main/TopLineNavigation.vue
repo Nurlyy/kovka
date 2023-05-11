@@ -2,9 +2,9 @@
     <div class="top-line-navigation">
         <nav>
             <a href="#" class="contacts-btn">Контакты</a>
-            <span>+7 992 202 57 51</span>
-            <span>malkov.sergey.a@yandex.ru</span>
-            <span>Россия Санкт-Петербург Петровская коса 1</span>
+            <span>{{number}}</span>
+            <span>{{email}}</span>
+            <span>{{address}}</span>
         </nav>
     </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     },
     mounted() {
         axios.post("/api/get-contacts", {}).then((response) => {
-            this.phone_number = response.data.contacts.phone_number;
+            this.number = response.data.contacts.phone_number;
             this.email = response.data.contacts.email;
             this.address = response.data.contacts.address;
         });
