@@ -26,7 +26,7 @@ use App\Http\Controllers\AuthController;
 // Route::post('/contacts', "App\Http\Controllers\ContactController@index")->middleware('custom_auth');
 // Route::post('/login', "App\Http\Controllers\ContactController@index")->middleware('custom_auth');
 
-Route::post('register', [AuthController::class, 'register']);
+// Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('me', [AuthController::class, 'me'])->middleware('auth:api');
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');

@@ -12,7 +12,11 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
+    // 'api' => [
+    //     'driver' => 'passport',
+    //     'provider' => 'users',
+    //     'hash' => true,
+    // ],
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
@@ -40,7 +44,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-    ],
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+            'hash' => false,
+            ]
+        ],
 
     /*
     |--------------------------------------------------------------------------
@@ -98,7 +107,7 @@ return [
             'throttle' => 60,
         ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
