@@ -40,6 +40,7 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')
 // Route::post('delete-page', "App\Http\Controllers\PageController@deletePage")->middleware('auth:api');
 Route::post('save-contacts', "App\Http\Controllers\ContactsController@saveContacts")->middleware('auth:api');
 Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainPage")->middleware('auth:api');
+Route::post('create-regalia', "App\Http\Controllers\RegaliaController@createRegalia")->middleware('auth:api');
 // Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
 
