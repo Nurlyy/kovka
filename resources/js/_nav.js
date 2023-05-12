@@ -1,16 +1,16 @@
 export default [
     {
         component: "CNavItem",
-        name: "Изображения",
-        to: "/admin/images",
+        name: "Вкладки",
+        to: "/admin/pages",
         icon: "cil-image",
     },
-    {
-        component: "CNavItem",
-        name: "Фильтры",
-        to: "/admin/filters",
-        icon: "cilListFilter",
-    },
+    // {
+    //     component: "CNavItem",
+    //     name: "Фильтры",
+    //     to: "/admin/filters",
+    //     icon: "cilListFilter",
+    // },
     {
         component: "CNavItem",
         name: "Контакты",

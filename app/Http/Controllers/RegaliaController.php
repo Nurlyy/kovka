@@ -39,7 +39,7 @@ class RegaliaController extends Controller
         $imageName = $regalia->image;
         if ($request->hasFile('image')) {
 
-            if(file_exists(str_replace('\\', '/', public_path()) . '/' . $regalia->image)){
+            if (file_exists(str_replace('\\', '/', public_path()) . '/' . $regalia->image)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $regalia->image);
             }
             $imageName = time() . '.' . $request->image->getClientOriginalExtension();
@@ -63,11 +63,14 @@ class RegaliaController extends Controller
 
     public function deleteRegalia(Request $request)
     {
-        $regalia = Regalia::find(['id' => $request->id])->first();
-        if(file_exists(str_replace('\\', '/', public_path()) . '/' . $regalia->image)){
-            unlink(str_replace('\\', '/', public_path()) . '/' . $regalia->image);
+        // return $request->id;
+        if ($request->id != null) {
+            $regalia = Regalia::find(['id' => $request->id])->first();
+            if (file_exists(str_replace('\\', '/', public_path()) . '/' . $regalia->image)) {
+                unlink(str_replace('\\', '/', public_path()) . '/' . $regalia->image);
+            }
+            $regalia->delete();
         }
-        $regalia->delete();
     }
 
     public function getRegalia(Request $request)

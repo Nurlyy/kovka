@@ -1,12 +1,12 @@
 <template>
     <AppSidebar />
     <div class="d-flex flex-row justify-content-between">
-        <h1>Страницы</h1>
+        <h1>Вкладки</h1>
         <a
-            href="/admin/images/add-page"
+            href="/admin/pages/create-page"
             class="btn btn-primary"
             style="margin-left: 30px; height: fit-content"
-            ><CIcon icon="cil-plus" size="sm"/> Добавить страницу</a
+            ><CIcon icon="cil-plus" size="sm"/> Создать вкладку</a
         >
     </div>
     <CTable stripedColumns>
@@ -14,20 +14,16 @@
             <tr>
                 <th>№</th>
                 <th>Название</th>
-                <th>URL</th>
-                <th>Ключевые слова</th>
                 <th>Показывать</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="item in items" :key="item.id">
                 <td><div class="table_td">{{ item.id }}</div></td>
-                <td><div class="table_td">{{ item.name }}</div></td>
-                <td><div class="table_td">{{ item.slug }}</div></td>
-                <td><div class="table_td">{{ item.keyword }}</div></td>
-                <td><div class="table_td"><CFormCheck style="margin-left: 15px" :checked='item.show' id="show" disabled /></div></td>
+                <td><div class="table_td">{{ item.title }}</div></td>
+                <td><div class="table_td"><CFormCheck style="margin-left: 15px" :checked='item.is_visible' id="show" disabled /></div></td>
                 <td>
-                    <CButton component="a" color="info" :href="'/admin/pages/' + item.slug" role="button"><CIcon icon="cil-pen" size="sm"/> Изменить</CButton>
+                    <CButton component="a" color="info" :href="'/admin/pages/' + item.id" role="button"><CIcon icon="cil-pen" size="sm"/> Изменить</CButton>
                     <!-- <router-link :to="'/admin/images/' + image.id"
                         >Изменить</router-link
                     > -->
@@ -50,7 +46,7 @@ export default {
     },
     mounted() {
         axios.post("/api/get-pages-admin", {}).then((response) => {
-            this.items = response.data.items;
+            this.items = response.data.pages;
         });
     },
     methods: {

@@ -96,7 +96,7 @@ export default {
                 }
             }
             setTimeout(() => {
-                router.push({name: "MainPage"})
+                router.push({name: "Regalias"})
             }, 500);
             
         },

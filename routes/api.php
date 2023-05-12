@@ -43,6 +43,10 @@ Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainP
 Route::post('create-regalia', "App\Http\Controllers\RegaliaController@createRegalia")->middleware('auth:api');
 Route::post('update-regalia', "App\Http\Controllers\RegaliaController@updateRegalia")->middleware('auth:api');
 Route::post('delete-regalia', "App\Http\Controllers\RegaliaController@deleteRegalia")->middleware('auth:api');
+Route::post('get-pages-admin', "App\Http\Controllers\PagesController@getPagesAdmin")->middleware('auth:api');
+Route::post('create-page', "App\Http\Controllers\PagesController@createPage")->middleware('auth:api');
+Route::post('delete-page', "App\Http\Controllers\PagesController@deletePage")->middleware('auth:api');
+Route::post('update-page', "App\Http\Controllers\PagesController@updatePage")->middleware('auth:api');
 // Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
 

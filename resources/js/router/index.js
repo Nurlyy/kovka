@@ -55,7 +55,7 @@ const routes = [
         path: "/admin",
         name: "Home",
         component: DefaultLayout,
-        redirect: "/admin/images",
+        redirect: "/admin/pages",
         children: [
             {
                 path: "/admin/contacts",
@@ -128,6 +128,43 @@ const routes = [
                     import(
                         /* webpackChunkName: "dashboard" */ "@/pages/Regalias.vue"
                     ),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: "/admin/pages",
+                name: "Pages",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/Pages.vue"
+                    ),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: "/admin/pages/create-page",
+                name: "AddPage",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
+                    ),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: "/admin/pages/:id",
+                name: "UpdatePage",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
+                    ),
+                props: true,
                 meta: { requiresAuth: true },
             },
             // {
