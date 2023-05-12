@@ -2,7 +2,7 @@
     <div class="d-flex flex-row justify-content-between">
         <h1>Преимущества</h1>
         <a
-            href="/admin/images/create-regalia"
+            href="/admin/regalias/create-regalia"
             class="btn btn-primary"
             style="margin-left: 30px; height: fit-content"
             ><CIcon icon="cil-plus" size="sm" /> Добавить преимущество</a

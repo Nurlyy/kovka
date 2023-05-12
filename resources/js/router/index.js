@@ -94,7 +94,7 @@ const routes = [
                 meta: { requiresAuth: true },
             },
             {
-                path: "/admin/create-regalia",
+                path: "/admin/regalias/create-regalia",
                 name: "CreateRegalia",
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route

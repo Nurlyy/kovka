@@ -62,6 +62,7 @@ Route::post('get-main-page', "App\Http\Controllers\MainPageController@getMainPag
 Route::post('get-contacts', "App\Http\Controllers\ContactsController@getContacts");
 Route::post('get-admin', "App\Http\Controllers\AdminController@getAdmin");
 Route::post('get-regalia', "App\Http\Controllers\RegaliaController@getRegalia");
+Route::post('get-pages', "App\Http\Controllers\PagesController@getPages");
 // Route::post('get-page', "App\Http\Controllers\PageController@getPage");
 // Route::post('get-pages', "App\Http\Controllers\PageController@getPages");
 // Route::post('get-pages-admin', "App\Http\Controllers\PageController@getPagesAdmin")->middleware('auth:api');

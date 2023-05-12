@@ -42,6 +42,7 @@ export default {
     padding: var(--nav-padding);
     box-sizing: border-box;
     margin: 10px auto;
+    background: inherit !important;
     .copy {
       float:left;
       height:var(--span-navigation);

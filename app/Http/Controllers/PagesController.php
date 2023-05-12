@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function getPages()
     {
         $pages = Pages::where(['is_visible' => 1])->take(3)->get();
         return response()->json(['pages' => $pages]);
