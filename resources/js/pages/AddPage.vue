@@ -36,7 +36,18 @@
             placeholder="Заголовок"
         />
     </div> -->
-
+        <div class="mb-3">
+            <CFormLabel for="title"
+                >Заголовок вкладки (Отображается вверху)</CFormLabel
+            >
+            <CFormInput
+                type="text"
+                v-model="header"
+                :value="header"
+                id="header"
+                placeholder="HEADER"
+            />
+        </div>
         <div class="mb-3">
             <CFormLabel for="title"
                 >Заголовок вкладки (Отображается на странице)</CFormLabel
@@ -56,6 +67,7 @@
             :value="body"
             id="body"
             rows="3"
+            class="mb-3"
         ></CFormTextarea>
 
         <div class="mb-3">
@@ -274,6 +286,7 @@ export default {
             image4: null,
             image5: null,
             image6: null,
+            header: null,
         };
     },
     methods: {
@@ -293,6 +306,7 @@ export default {
             formData.append("image4", this.image4);
             formData.append("image5", this.image5);
             formData.append("image6", this.image6);
+            formData.append("header", this.header);
             if (this.id != null) {
                 formData.append("id", this.id);
                 axios
@@ -366,12 +380,49 @@ export default {
                 this.is_visible =
                     response.data.pages.is_visible == "1" ? true : false;
                 this.id = response.data.pages.id;
-                this.image1 = response.data.pages.this.image1;
-                this.image2 = response.data.pages.this.image2;
-                this.image3 = response.data.pages.this.image3;
-                this.image4 = response.data.pages.this.image4;
-                this.image5 = response.data.pages.this.image5;
-                this.image6 = response.data.pages.this.image6;
+                this.image1 = response.data.pages.image_1;
+                this.image2 = response.data.pages.image_2;
+                this.image3 = response.data.pages.image_3;
+                this.image4 = response.data.pages.image_4;
+                this.image5 = response.data.pages.image_5;
+                this.image6 = response.data.pages.image_6;
+                this.header = response.data.pages.header;
+                var preview;
+                if (this.image1 != null) {
+                    preview = document.getElementById("imagePreview1");
+                    preview.src = this.image1;
+                    preview.style.display = "block";
+                }
+
+                if (this.image2 != null) {
+                    preview = document.getElementById("imagePreview2");
+                    preview.src = this.image2;
+                    preview.style.display = "block";
+                }
+
+                if (this.image3 != null) {
+                    preview = document.getElementById("imagePreview3");
+                    preview.src = this.image3;
+                    preview.style.display = "block";
+                }
+
+                if (this.image4 != null) {
+                    preview = document.getElementById("imagePreview4");
+                    preview.src = this.image4;
+                    preview.style.display = "block";
+                }
+
+                if (this.image5 != null) {
+                    preview = document.getElementById("imagePreview5");
+                    preview.src = this.image5;
+                    preview.style.display = "block";
+                }
+
+                if (this.image6 != null) {
+                    preview = document.getElementById("imagePreview6");
+                    preview.src = this.image6;
+                    preview.style.display = "block";
+                }
             });
         }
 

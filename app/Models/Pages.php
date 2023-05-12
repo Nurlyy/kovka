@@ -17,6 +17,7 @@ class Pages extends Model
         'image_4',
         'image_5',
         'image_6',
+        'header',
         'body_text',
         'title',
         'is_visible',
