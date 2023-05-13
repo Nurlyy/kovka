@@ -10,11 +10,24 @@
                 {{ page.header }}
             </button>
         </div>
-        <div id='gallery-list-photo' class="gallery-list-photo">
-            <div v-for="(img, index) in images" :key="index"><img :src='img' /></div>
+        <div id="gallery-list-photo" class="gallery-list-photo">
+            <div style="position:relative;" v-for="(image, index) in images" :key="index">
+                <img :src="image" alt="" id="imageImg" />
+                <a
+                    @click="imageClicked(image, $event)"
+                    :href="image"
+                    :data-pswp-width="maxWidth"
+                    :data-pswp-height="maxHeight"
+                    target="_blank"
+                    rel="noreferrer"
+                    id="imageView"
+                >
+                    
+                </a>
+            </div>
         </div>
         <div class="gallery-text" :class="maxheightClass">
-            <h2>{{title}}</h2>
+            <h2>{{ title }}</h2>
             <div class="conteaner-text">
                 {{ body }}
             </div>
@@ -35,6 +48,8 @@
 </template>
 
 <script>
+import PhotoSwipeLightbox from "photoswipe/lightbox";
+import "photoswipe/style.css";
 export default {
     name: "Gallery",
     data() {
@@ -50,12 +65,23 @@ export default {
             pages: null,
             ids: null,
             selectedIndex: -1,
+            classList: ["card_small", "card_medium", "card_large"],
             images: [],
-            title: '',
-            body: '',
+            title: "",
+            body: "",
+            maxWidth: 0,
+            maxHeight: 0,
         };
     },
     mounted() {
+        if (!this.lightbox) {
+            this.lightbox = new PhotoSwipeLightbox({
+                gallery: "#gallery-list-photo",
+                children: "#imageView",
+                pswpModule: () => import("photoswipe"),
+            });
+            this.lightbox.init();
+        }
         this.getPages();
     },
     methods: {
@@ -86,6 +112,14 @@ export default {
             this.images.push(this.pages[index].image_6);
             this.title = this.pages[index].title;
             this.body = this.pages[index].body_text;
+        },
+        imageClicked(path, event) {
+            if (event.target.tagName.toLowerCase() === "a") {
+                const img = new Image();
+                img.src = path;
+                this.maxWidth = img.width;
+                this.maxHeight = img.height;
+            }
         },
         gallery_1() {
             if ((this.gallereActive_1 = true)) {
@@ -166,9 +200,39 @@ export default {
             &.green {
                 background-color: #8bdd3f;
             }
-            img {
-                max-width: 100%;
+            a {
+                position: absolute;
+                z-index: 2;
+                width: 100%;
                 height: auto;
+                object-fit:cover;
+                top: 0;
+                left: 0;
+                right:0;
+                bottom:0;
+                // width: 100%;
+                // height: calc(100% + 50px);
+                background-color: rgba(0, 0, 0, 0);
+                background-image: url(@/assets/maximize.svg);
+                background-repeat: no-repeat;
+                background-position: top calc(50% - 25px) center;
+                background-size: 0;
+                transition: background 0.2s ease;
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.152);
+                    background-image: url(@/assets/maximize.svg);
+                    background-repeat: no-repeat;
+                    background-position: top calc(50% - 25px) center;
+                    background-size: 42px;
+                }
+                @media (max-width: 700px) {
+                    background-color: rgba(0, 0, 0, 0) !important;
+                }
+            }
+            #imageImg {
+                width: 100%;
+                height: 100%;
+                object-fit:cover;
             }
         }
     }
