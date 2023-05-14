@@ -81,19 +81,19 @@
         &::-moz-placeholder {color: #5e4186;opacity: 1;}
         &:-ms-input-placeholder {color: #5e4186;}
         &.user {
-          background-image: url(@/assets/images/user.svg);
+          background-image: url(@/front/assets/images/user.svg);
           background-repeat: no-repeat;
           background-position: right 6px center;
           background-size: 22px;
         }
         &.phone {
-          background-image: url(@/assets/images/phone.svg);
+          background-image: url(@/front/assets/images/phone.svg);
           background-repeat: no-repeat;
           background-position: right 8px center;
           background-size: 20px;
         }
         &.clock {
-          background-image: url(@/assets/images/clock.svg);
+          background-image: url(@/front/assets/images/clock.svg);
           background-repeat: no-repeat;
           background-position: right 8px center;
           background-size: 20px;

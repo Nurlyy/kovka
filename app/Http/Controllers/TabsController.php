@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class TabsController extends Controller
 {
-    public function getPages()
+    public function getTabs()
     {
-        $pages = Pages::where(['is_visible' => 1])->take(3)->get();
-        return response()->json(['pages' => $pages]);
+        $pages = Pages::where(['is_visible' => 1])->get();
+        foreach($pages as &$page){
+            $page->body_text = nl2br($page->body_text);
+        }
+        return response()->json(['tabs' => $pages]);
     }
 
     public function updateTab(Request $request)
@@ -24,7 +27,7 @@ class TabsController extends Controller
         $image5 = $page->image_5;
         $image6 = $page->image_6;
         $header = $request->header;
-        $body_text = nl2br($request->body_text);
+        $body_text = $request->body_text;
         $title = $request->title;
         $is_visible = $request->is_visible;
         
@@ -144,7 +147,7 @@ class TabsController extends Controller
         $image5 = null;
         $image6 = null;
         $header = $request->header;
-        $body_text = nl2br($request->body_text);
+        $body_text = $request->body_text;
         $title = $request->title;
         $is_visible = $request->is_visible;
         if ($request->hasFile('image1')) {
@@ -234,6 +237,7 @@ class TabsController extends Controller
     {
         $page_id = $request->page_id;
         $page = Pages::find(['id' => $page_id])->first();
+        $page->body_text = nl2br($page->body_text);
         return response()->json(['page' => $page]);
     }
 
@@ -322,6 +326,7 @@ class TabsController extends Controller
 
     private function convertImageToWebp($file)
     {
+        ini_set('memory_limit', '256M');
         $directory = str_replace('\\', '/', public_path()) . '/' . "uploads/pages/";
         if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', 'png', "JPG", "JPEG", "PNG"))) {
 
