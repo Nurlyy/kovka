@@ -1,30 +1,35 @@
 <template>
-    <h1 v-if="id==null">Добавить Преимущество</h1>
-    <h1 v-if="id!=null">Изменить Преимущество</h1>
-    <br>
+    <h1 v-if="id == null">Добавить Преимущество</h1>
+    <h1 v-if="id != null">Изменить Преимущество</h1>
+    <br />
     <CForm @submit.prevent="submitForm()">
         <div class="mb-3">
             <h5>Выбранное изображение преимущества</h5>
-            <img id="imagePreview" alt="Preview Image" style="height: 150px; border-radius: 15px; margin-top: 15; display:none;" class="mb-3" />
-            <CFormLabel v-if="id==null" for="image">Изображение преимущества</CFormLabel>
-            <CFormLabel v-if="id!=null" for="image">Изменить изображение преимущества</CFormLabel>
-            <CFormInput
-                @change="saveImage"
-                type="file"
-                id="image"
+            <img
+                id="imagePreview"
+                alt="Preview Image"
+                style="
+                    height: 150px;
+                    border-radius: 15px;
+                    margin-top: 15;
+                    display: none;
+                "
+                class="mb-3"
             />
-            
+            <CFormLabel v-if="id == null" for="image"
+                >Изображение преимущества</CFormLabel
+            >
+            <CFormLabel v-if="id != null" for="image"
+                >Изменить изображение преимущества</CFormLabel
+            >
+            <CFormInput @change="saveImage" type="file" id="image" />
         </div>
-        <br>
+        <br />
         <div class="mb-3">
             <CFormLabel for="title">Заголовок</CFormLabel>
-            <CFormInput
-                v-model="title"
-                :value="title"
-                id="title"
-            ></CFormInput>
+            <CFormInput v-model="title" :value="title" id="title"></CFormInput>
         </div>
-        <br>
+        <br />
         <div class="mb-3">
             <CFormLabel for="body">Тело</CFormLabel>
             <CFormTextarea
@@ -34,8 +39,17 @@
                 rows="3"
             ></CFormTextarea>
         </div>
-        <br>
-        <button :disabled='image==null' class="btn btn-primary mb-5 mt-5"><CIcon icon="cil-save" size="sm"/> Сохранить</button>
+        <br />
+        <div class="mb-3">
+            <CFormSelect v-model="page_id" aria-label="Default select example">
+                <option>Выбрать статическую страницу</option>
+                <option v-for="page, index in pages" :key='index' :selected='page_id == page.id' :value='page.id'>{{ page.name }}</option>
+            </CFormSelect>
+        </div>
+        <br />
+        <button :disabled="image == null" class="btn btn-primary mb-5 mt-5">
+            <CIcon icon="cil-save" size="sm" /> Сохранить
+        </button>
     </CForm>
 </template>
 
@@ -50,9 +64,19 @@ export default {
             title: null,
             body: null,
             id: null,
+            pages: [],
+            page_id: null,
         };
     },
-    mounted() {},
+    mounted() {
+        axios.post("/api/get-pages").then((response) => {
+            if (response.data.items) {
+                response.data.items.forEach((element) => {
+                    this.pages.push(element);
+                });
+            }
+        });
+    },
     methods: {
         submitForm() {
             if (this.id == null) {
@@ -61,16 +85,15 @@ export default {
                     formData.append("image", this.image);
                     formData.append("body", this.body);
                     formData.append("title", this.title);
+                    formData.append('page_id', this.page_id);
                     axios
                         .post("/api/create-regalia", formData)
                         .then((response) => {
-                            // this.saveImagePath(response.data.path);
                             console.log(response.data);
                         })
                         .catch((error) => {
                             console.log(error);
                         });
-                    //   alert("saved");
                 }
             } else {
                 if (this.image != null) {
@@ -78,27 +101,21 @@ export default {
                     formData.append("image", this.image);
                     formData.append("body", this.body);
                     formData.append("title", this.title);
-                    formData.append("id", this.id); 
-                    // formData.append(
-                    //     "imageFilters",
-                    //     JSON.stringify(this.imageFilters)
-                    // );
+                    formData.append("page_id", this.page_id);
+                    formData.append("id", this.id);
                     axios
                         .post("/api/update-regalia", formData)
                         .then((response) => {
-                            // this.saveImagePath(response.data.path);
                             console.log(response.data);
                         })
                         .catch((error) => {
                             console.log(error);
                         });
-                    //   alert("saved");
                 }
             }
             setTimeout(() => {
-                router.push({name: "Regalias"})
+                router.push({ name: "Regalias" });
             }, 500);
-            
         },
         saveImage(event) {
             this.image = event.target.files[0];
@@ -117,16 +134,6 @@ export default {
             // Read the image file as a data URL
             reader.readAsDataURL(event.target.files[0]);
         },
-        // addFilter(index, filter) {
-        //     // filter.selected = true;
-        //     this.imageFilters.push(filter);
-        //     this.availableFilters.splice(index, 1);
-        // },
-        // removeFilter(index, filter) {
-        //     // filter.selected = false;
-        //     this.availableFilters.push(filter);
-        //     this.imageFilters.splice(index, 1);
-        // },
     },
     created() {
         // axios.post("/api/get-filters", {}).then((response) => {
@@ -140,7 +147,7 @@ export default {
                 this.image = response.data.regalia.image;
                 this.body = response.data.regalia.body;
                 this.title = response.data.regalia.title;
-                
+                this.page_id = response.data.regalia.page_id;
                 // this.imageFilters =
                 //     response.data.image_filters.length >= 1
                 //         ? response.data.image_filters
@@ -149,13 +156,13 @@ export default {
                 var preview = document.getElementById("imagePreview");
                 preview.src = this.image;
                 preview.style.display = "block";
-                
-                    // if (this.availableFilters.includes(imageFilter)) {
-                    //     this.availableFilters.splice(
-                    //         this.availableFilters.indexOf(imageFilter),
-                    //         1
-                    //     );
-                    // }
+
+                // if (this.availableFilters.includes(imageFilter)) {
+                //     this.availableFilters.splice(
+                //         this.availableFilters.indexOf(imageFilter),
+                //         1
+                //     );
+                // }
             });
         }
     },

@@ -10,6 +10,6 @@ class Regalia extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ='regalia';
-    protected $fillable = ['title', 'body', 'image'];
+    protected $fillable = ['title', 'body', 'image', 'page_id'];
     
 }

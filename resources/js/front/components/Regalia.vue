@@ -57,11 +57,17 @@ export default {
     data() {
         return {
             regalias: null,
+            pages: [],
         }
     },
     mounted() {
         axios.post('/api/get-regalia').then((response) => {
             this.regalias = response.data.regalia;
+        })
+        axios.post('/api/get-pages').then((response) => {
+            if(response.data.items) {
+                this.pages = response.data.items;
+            }
         })
     },
 };

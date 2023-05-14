@@ -21,13 +21,14 @@ class RegaliaController extends Controller
             $path = '/uploads/regalia/' . $imageName;
             $title = $request->title;
             $body = $request->body;
+            $page_id = $request->page_id;
             // return $description;
 
             // return $imageFilters[1];
 
             if ($path != null && $title != null) {
 
-                $regalia = Regalia::create(['image' => $path, 'title' => $title, 'body' => $body]);
+                $regalia = Regalia::create(['image' => $path, 'title' => $title, 'body' => $body, 'page_id' => $page_id]);
                 return response()->json(['regalia' => $regalia]);
             }
         }
@@ -55,8 +56,9 @@ class RegaliaController extends Controller
         }
         $title = $request->title;
         $body = $request->body;
+        $page_id = $request->page_id;
         if ($imageName != null && $title != null) {
-            $regalia->update(['image' => $imageName, 'title' => $title, 'body' => $body]);
+            $regalia->update(['image' => $imageName, 'title' => $title, 'body' => $body, 'page_id' => $page_id]);
             return response()->json(['regalia' => $regalia]);
         }
     }

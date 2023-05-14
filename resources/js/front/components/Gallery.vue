@@ -90,7 +90,7 @@ export default {
     },
     methods: {
         getPages() {
-            axios.post("/api/get-pages").then((response) => {
+            axios.post("/api/get-tabs").then((response) => {
                 this.pages = response.data.pages;
                 // console.log(this.pages[0]);
                 this.selectedIndex = 0;

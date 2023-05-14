@@ -57,8 +57,7 @@ class PageController extends Controller
         $page = Page::where('id', intval($id))->first();
         $slug_page = Page::select('slug', 'id')->where('slug', $slug)->first();
         // return response()->json($slug_page, 200);
-        if ($slug_page->slug == $slug && $slug_page->id == $id || $slug_page == null || $slug_page == []) {
-
+        if ($slug_page == null || $slug_page->slug == $slug && $slug_page->id == $id || $slug_page == null || $slug_page == []) {
             $page->update([
                 'name' => $name,
                 'slug' => $slug,
