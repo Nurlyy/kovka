@@ -38,7 +38,7 @@ class PagesController extends Controller
                 $image1 = $path;
             }
             // var_dump($image1);exit;
-                
+
         }
         if ($request->hasFile('image2')) {
             if ($page->image2 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image2)) {
@@ -135,7 +135,6 @@ class PagesController extends Controller
             if ($path != null) {
                 $image1 = $path;
             }
-            
         }
         if ($request->hasFile('image2')) {
             $imageName = time() . '-image-2-' . '.' . $request->image2->getClientOriginalExtension();
@@ -210,7 +209,77 @@ class PagesController extends Controller
         return response()->json(['pages' => $pages]);
     }
 
-    public function deletePage(){
+    public function deletePage(Request $request)
+    {
+        $page = Pages::find(['id' => $request->id])->first();
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image1)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image1);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image2)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image2);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image3)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image3);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image4)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image4);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image5)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image5);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image6)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image6);
+        }
 
+        $page->delete();
+    }
+
+    public function convertAllImagesToWebp()
+    {
+        ini_set('memory_limit', '256M');
+        // Set the directory path
+        $directory = str_replace('\\', '/', public_path()) . '/' . 'uploads/pages/';
+
+        // Get all files in the directory
+        $files = scandir($directory);
+
+        // Loop through each file
+        foreach ($files as $file) {
+            // Check if the file is a JPG or PNG
+            if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', 'png', "JPG", "JPEG", "PNG"))) {
+
+                if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', "JPG", "JPEG"))) {
+                    // Load the original image
+                    $original_image = imagecreatefromjpeg($directory . $file);
+
+                    // Create a new WebP image
+                    $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
+                    imagepalettetotruecolor($new_image);
+
+                    // Convert the original image to the WebP format
+                    imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+
+                    // Clean up the resources
+                    imagedestroy($original_image);
+                    imagedestroy($new_image);
+                }
+                elseif(in_array(pathinfo($file, PATHINFO_EXTENSION), array('png', 'PNG'))){
+                    // Load the original image
+                    $original_image = imagecreatefrompng($directory . $file);
+
+                    // Create a new WebP image
+                    $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
+                    imagepalettetotruecolor($new_image);
+
+                    // Convert the original image to the WebP format
+                    imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+
+                    // Clean up the resources
+                    imagedestroy($original_image);
+                    imagedestroy($new_image);
+                }
+                
+            }
+        }
     }
 }
