@@ -24,16 +24,19 @@ class PagesController extends Controller
         $image5 = $page->image_5;
         $image6 = $page->image_6;
         $header = $request->header;
-        $body_text = $request->body_text;
+        $body_text = nl2br($request->body_text);
         $title = $request->title;
         $is_visible = $request->is_visible;
         if ($request->hasFile('image1')) {
             if ($page->image1 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image1)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $page->image1);
             }
-            $imageName = time() . '-image-1' . '.' . $request->image1->getClientOriginalExtension();
-            $request->image1->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-1';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image1 = $path;
             }
@@ -44,9 +47,12 @@ class PagesController extends Controller
             if ($page->image2 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image2)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $page->image2);
             }
-            $imageName = time() . '-image-2' . '.' . $request->image2->getClientOriginalExtension();
-            $request->image2->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-2';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image2 = $path;
             }
@@ -55,9 +61,12 @@ class PagesController extends Controller
             if ($page->image3 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image3)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $page->image3);
             }
-            $imageName = time() . '-image-3' . '.' . $request->image3->getClientOriginalExtension();
-            $request->image3->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-3';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image3 = $path;
             }
@@ -66,9 +75,12 @@ class PagesController extends Controller
             if ($page->image4 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image4)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $page->image4);
             }
-            $imageName = time() . '-image-4' . '.' . $request->image4->getClientOriginalExtension();
-            $request->image4->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-4';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image4 = $path;
             }
@@ -77,9 +89,12 @@ class PagesController extends Controller
             if ($page->image5 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image5)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $page->image5);
             }
-            $imageName = time() . '-image-5' . '.' . $request->image5->getClientOriginalExtension();
-            $request->image5->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-5';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image5 = $path;
             }
@@ -88,9 +103,12 @@ class PagesController extends Controller
             if ($page->image6 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image6)) {
                 unlink(str_replace('\\', '/', public_path()) . '/' . $page->image6);
             }
-            $imageName = time() . '-image-6' . '.' . $request->image6->getClientOriginalExtension();
-            $request->image6->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-6';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image6 = $path;
             }
@@ -125,53 +143,71 @@ class PagesController extends Controller
         $image5 = null;
         $image6 = null;
         $header = $request->header;
-        $body_text = $request->body_text;
+        $body_text = nl2br($request->body_text);
         $title = $request->title;
         $is_visible = $request->is_visible;
         if ($request->hasFile('image1')) {
-            $imageName = time() . '-image-1-' . '.' . $request->image1->getClientOriginalExtension();
-            $request->image1->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-1';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image1 = $path;
             }
         }
         if ($request->hasFile('image2')) {
-            $imageName = time() . '-image-2-' . '.' . $request->image2->getClientOriginalExtension();
-            $request->image2->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-2';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image2 = $path;
             }
         }
         if ($request->hasFile('image3')) {
-            $imageName = time() . '-image-3-' . '.' . $request->image3->getClientOriginalExtension();
-            $request->image3->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-3';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image3 = $path;
             }
         }
         if ($request->hasFile('image4')) {
-            $imageName = time() . '-image-4-' . '.' . $request->image4->getClientOriginalExtension();
-            $request->image4->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-4';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image4 = $path;
             }
         }
         if ($request->hasFile('image5')) {
-            $imageName = time() . '-image-5-' . '.' . $request->image5->getClientOriginalExtension();
-            $request->image5->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-5';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image5 = $path;
             }
         }
         if ($request->hasFile('image6')) {
-            $imageName = time() . '-image-6-' . '.' . $request->image6->getClientOriginalExtension();
-            $request->image6->move(public_path('uploads/pages'), $imageName);
-            $path = '/uploads/pages/' . $imageName;
+            $imageName = time() . '-image-6';
+            $ext = $request->image3->getClientOriginalExtension();
+            $request->image3->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image6 = $path;
             }
@@ -238,7 +274,7 @@ class PagesController extends Controller
     {
         ini_set('memory_limit', '256M');
         // Set the directory path
-        $directory = str_replace('\\', '/', public_path()) . '/' . 'uploads/pages/';
+        $directory = str_replace('\\', '/', public_path()) . '/' . 'uploads/regalia/';
 
         // Get all files in the directory
         $files = scandir($directory);
@@ -262,8 +298,7 @@ class PagesController extends Controller
                     // Clean up the resources
                     imagedestroy($original_image);
                     imagedestroy($new_image);
-                }
-                elseif(in_array(pathinfo($file, PATHINFO_EXTENSION), array('png', 'PNG'))){
+                } elseif (in_array(pathinfo($file, PATHINFO_EXTENSION), array('png', 'PNG'))) {
                     // Load the original image
                     $original_image = imagecreatefrompng($directory . $file);
 
@@ -278,8 +313,45 @@ class PagesController extends Controller
                     imagedestroy($original_image);
                     imagedestroy($new_image);
                 }
-                
             }
         }
+    }
+
+    private function convertImageToWebp($file)
+    {
+        $directory = str_replace('\\', '/', public_path()) . '/' . "uploads/pages/";
+        if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', 'png', "JPG", "JPEG", "PNG"))) {
+
+            if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', "JPG", "JPEG"))) {
+                // Load the original image
+                $original_image = imagecreatefromjpeg($directory . $file);
+
+                // Create a new WebP image
+                $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
+                imagepalettetotruecolor($new_image);
+
+                // Convert the original image to the WebP format
+                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+
+                // Clean up the resources
+                imagedestroy($original_image);
+                imagedestroy($new_image);
+            } elseif (in_array(pathinfo($file, PATHINFO_EXTENSION), array('png', 'PNG'))) {
+                // Load the original image
+                $original_image = imagecreatefrompng($directory . $file);
+
+                // Create a new WebP image
+                $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
+                imagepalettetotruecolor($new_image);
+
+                // Convert the original image to the WebP format
+                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+
+                // Clean up the resources
+                imagedestroy($original_image);
+                imagedestroy($new_image);
+            }
+        }
+        unlink($directory.$file);
     }
 }

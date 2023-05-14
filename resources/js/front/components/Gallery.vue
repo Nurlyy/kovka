@@ -29,7 +29,12 @@
         <div class="gallery-text" :class="maxheightClass">
             <h2>{{ title }}</h2>
             <div class="conteaner-text">
-                {{ body }}
+                <p v-html="body">
+
+                    
+
+                </p>
+                
             </div>
             <div class="conteaner-hidden-botton" :class="dnoneActive">
                 <div class="conteaner-gradient">
@@ -98,6 +103,7 @@ export default {
                 this.images.push(this.pages[0].image_6);
                 this.title = this.pages[0].title;
                 this.body = this.pages[0].body_text;
+                
             });
         },
         galleryClick(index) {
@@ -112,6 +118,8 @@ export default {
             this.images.push(this.pages[index].image_6);
             this.title = this.pages[index].title;
             this.body = this.pages[index].body_text;
+            this.maxheightClass = '';
+                this.dnoneActive = '';
         },
         imageClicked(path, event) {
             if (event.target.tagName.toLowerCase() === "a") {
