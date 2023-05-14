@@ -7,9 +7,9 @@
             >
                 <CIcon icon="cil-menu" size="lg" />
             </CHeaderToggler>
-            <CHeaderBrand class="mx-auto d-lg-none" to="/">
+            <!-- <CHeaderBrand class="mx-auto d-lg-none" to="/">
                 <img src="@/admin/assets/logo.svg" alt="" />
-            </CHeaderBrand>
+            </CHeaderBrand> -->
             <CHeaderNav>
                 <CButton color="warning" @click="logout()"
                     ><CIcon icon="cilAccountLogout" size="sm" /> Выход</CButton

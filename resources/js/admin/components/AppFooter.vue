@@ -1,7 +1,7 @@
 <template>
   <CFooter>
     <div>
-      <a href="/" target="_blank">PROPAKO</a>
+      <a href="/" target="_blank">Ковка и дерево</a>
     </div>
   </CFooter>
 </template>

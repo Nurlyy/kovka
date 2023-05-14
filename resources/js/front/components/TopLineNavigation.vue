@@ -1,7 +1,7 @@
 <template>
     <div class="top-line-navigation">
         <nav>
-            <a href="#" class="contacts-btn">Контакты</a>
+            <a href="/page/contact" class="contacts-btn">Контакты</a>
             <span>{{number}}</span>
             <span>{{email}}</span>
             <span>{{address}}</span>
