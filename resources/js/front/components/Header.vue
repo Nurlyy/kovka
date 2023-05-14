@@ -62,6 +62,12 @@ export default {
     line-height: 44px;
     margin:0;
     font-weight: var(--font-weight-btn-navigation);
+    @media (max-width: 830px) {
+      margin: 0 0 20px 0;
+    }
+    @media (max-width: 420px) {
+      font-size: 37px;
+    }
   }
   p {
     width:100%;

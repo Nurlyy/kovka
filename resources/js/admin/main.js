@@ -21,6 +21,7 @@ import  { cilLockLocked,
     cilFile,
     cilFeaturedPlaylist,
     cilAccountLogout,
+    cilAlignCenter,
      } from '@coreui/icons'
 // import VueEasyLightbox from 'vue-easy-lightbox';
 
@@ -34,7 +35,7 @@ const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(CoreuiVue)
-app.provide('icons', {cilContact, cilListFilter, cilLockLocked, cilSave, cilTrash, cilPen, cilPlus, cilSave, cilSearch, cilImage, cilUser, cilFeaturedPlaylist, cilFile, cilAccountLogout});
+app.provide('icons', {cilContact, cilListFilter, cilLockLocked, cilSave, cilTrash, cilPen, cilPlus, cilSave, cilSearch, cilImage, cilUser, cilFeaturedPlaylist, cilFile, cilAccountLogout,cilAlignCenter});
 app.component('CIcon', CIcon)
 
 app.mount('#app')

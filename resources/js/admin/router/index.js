@@ -9,11 +9,11 @@ import Pages from "@/front/components/Pages.vue";
 // import Pages from "@/main/Pages.vue";
 
 const routes = [
-    {
-        path: "/page/:slug", // slug is the dynamic parameter
-        component: Pages,
-        props: true, // allows passing slug as a prop to the component
-    },
+    // {
+    //     path: "/page/:slug", // slug is the dynamic parameter
+    //     component: Pages,
+    //     props: true, // allows passing slug as a prop to the component
+    // },
     {
         path: "/admin",
         name: "Home",

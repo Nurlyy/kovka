@@ -1,8 +1,14 @@
 export default [
     {
         component: "CNavItem",
-        name: "Вкладки",
+        name: "Страницы",
         to: "/admin/pages",
+        icon: "cil-align-center",
+    },
+    {
+        component: "CNavItem",
+        name: "Вкладки",
+        to: "/admin/tabs",
         icon: "cil-image",
     },
     // {

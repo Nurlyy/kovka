@@ -6,19 +6,30 @@
         </a>
       </div>
       <h1>
-        Наше производство
+        {{ page.title }}
       </h1>
       <div class="conteaner-page">
-        Сюда выводим редактор
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div v-html="page.body"></div>
       </div>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'Page'
+    name: 'Page',
+    data(){
+        return{
+            page:null,
+        }
+    },
+    mounted(){
+        const slug = this.$route.params.slug;
+        axios.post("/api/get-page", { slug: slug }).then((response) => {
+            this.page = response.data.page;
+            document.title = this.page.header_title;
+            console.log(response.data);
+        });
+    }
   }
   </script>
   
