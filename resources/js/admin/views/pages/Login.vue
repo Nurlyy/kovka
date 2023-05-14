@@ -78,6 +78,16 @@ export default {
             alertVisible: false,
         };
     },
+    mounted(){
+        const token = localStorage.getItem(
+                            "access_token"
+                        );
+        axios.post('/api/me').then((response) => {
+            if(response.status != 403) {
+                router.push({ name: "Tabs" });
+            }
+        })
+    },
     methods: {
         login() {
             console.log("clicked");

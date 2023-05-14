@@ -15,10 +15,10 @@ const routes = [
     //     props: true, // allows passing slug as a prop to the component
     // },
     {
-        path: "/admin",
+        path: "/admin/",
         name: "Home",
         component: DefaultLayout,
-        redirect: "/admin/tabs",
+        redirect: "/admin/login",
         children: [
             {
                 path: "/admin/images/add-page",
