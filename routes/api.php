@@ -43,10 +43,10 @@ Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainP
 Route::post('create-regalia', "App\Http\Controllers\RegaliaController@createRegalia")->middleware('auth:api');
 Route::post('update-regalia', "App\Http\Controllers\RegaliaController@updateRegalia")->middleware('auth:api');
 Route::post('delete-regalia', "App\Http\Controllers\RegaliaController@deleteRegalia")->middleware('auth:api');
-Route::post('get-pages-admin', "App\Http\Controllers\PagesController@getPagesAdmin")->middleware('auth:api');
-Route::post('create-page', "App\Http\Controllers\PagesController@createPage")->middleware('auth:api');
-Route::post('delete-page', "App\Http\Controllers\PagesController@deletePage")->middleware('auth:api');
-Route::post('update-page', "App\Http\Controllers\PagesController@updatePage")->middleware('auth:api');
+Route::post('get-tabs-admin', "App\Http\Controllers\PagesController@getTabsAdmin")->middleware('auth:api');
+Route::post('create-tab', "App\Http\Controllers\TabsController@createTab")->middleware('auth:api');
+Route::post('delete-tab', "App\Http\Controllers\TabsController@deleteTab")->middleware('auth:api');
+Route::post('update-tab', "App\Http\Controllers\TabsController@updateTab")->middleware('auth:api');
 // Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
 
@@ -62,7 +62,7 @@ Route::post('get-main-page', "App\Http\Controllers\MainPageController@getMainPag
 Route::post('get-contacts', "App\Http\Controllers\ContactsController@getContacts");
 Route::post('get-admin', "App\Http\Controllers\AdminController@getAdmin");
 Route::post('get-regalia', "App\Http\Controllers\RegaliaController@getRegalia");
-Route::post('get-pages', "App\Http\Controllers\PagesController@getPages");
+Route::post('get-tabs', "App\Http\Controllers\TabsController@getTabs");
 Route::post("cv", "App\Http\Controllers\PagesController@convertAllImagesToWebp");
 // Route::post('get-page', "App\Http\Controllers\PageController@getPage");
 // Route::post('get-pages', "App\Http\Controllers\PageController@getPages");

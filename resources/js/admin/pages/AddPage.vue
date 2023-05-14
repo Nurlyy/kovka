@@ -1,8 +1,8 @@
 <template>
-    <h1 v-if="id == null">Добавить Вкладку</h1>
-    <h1 v-if="id != null">Изменить Вкладку</h1>
+    <h1 v-if="id==null">Добавить Страницу</h1>
+    <h1 v-if="id!=null">Изменить Страницу</h1>
     <CForm @submit.prevent="submitForm()">
-        <!-- <div class="mb-3">
+    <div class="mb-3">
         <CFormLabel for="name">Придумайте URL (латинскими буквами)</CFormLabel>
         <CFormInput
             type="text"
@@ -24,9 +24,11 @@
             :value="slug"
             disabled
         />
-    </div> -->
+    </div>
 
-        <!-- <div class="mb-3">
+    
+
+    <div class="mb-3">
         <CFormLabel for="header_title">SEO - title</CFormLabel>
         <CFormInput
             type="text"
@@ -35,205 +37,30 @@
             id="header_title"
             placeholder="Заголовок"
         />
-    </div> -->
-        <div class="mb-3">
-            <CFormLabel for="title"
-                >Заголовок вкладки (Отображается вверху)</CFormLabel
-            >
-            <CFormInput
-                type="text"
-                v-model="header"
-                :value="header"
-                id="header"
-                placeholder="HEADER"
-            />
-        </div>
-        <div class="mb-3">
-            <CFormLabel for="title"
-                >Заголовок вкладки (Отображается на странице)</CFormLabel
-            >
-            <CFormInput
-                type="text"
-                v-model="title"
-                :value="title"
-                id="title"
-                placeholder="TITLE"
-            />
-        </div>
+    </div>
 
-        <CFormLabel for="title">Текст вкладки</CFormLabel>
-        <CFormTextarea
-            v-model="body"
-            :value="body"
-            id="body"
-            rows="3"
-            class="mb-3"
-        ></CFormTextarea>
+    <div class="mb-3">
+        <CFormLabel for="title">Заголовок страницы (Отображается на странице)</CFormLabel>
+        <CFormInput
+            type="text"
+            v-model="title"
+            :value="title"
+            id="title"
+            placeholder="TITLE"
+        />
+    </div>
 
-        <div class="mb-3">
-            <h5 v-if="image1 != null">Выбранное изображение №1 для вкладки</h5>
-            <img
-                id="imagePreview1"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image1"
-                >Изображение №1</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image1"
-                >Изменить изображение №1</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 1)"
-                type="file"
-                id="image1"
-            />
-        </div>
+    <CFormLabel for="title">Текст страницы</CFormLabel>
+    <QuillEditor  v-model:value="body" v-model:content="body" contentType="html" theme="snow"/>
 
-        <div class="mb-3">
-            <h5 v-if="image2 != null">Выбранное изображение №2 для вкладки</h5>
-            <img
-                id="imagePreview2"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image2"
-                >Изображение №2</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image2"
-                >Изменить изображение №2</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 2)"
-                type="file"
-                id="image2"
-            />
-        </div>
-
-        <div class="mb-3">
-            <h5 v-if="image3 != null">Выбранное изображение №3 для вкладки</h5>
-            <img
-                id="imagePreview3"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image3"
-                >Изображение №3</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image3"
-                >Изменить изображение №3</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 3)"
-                type="file"
-                id="image3"
-            />
-        </div>
-
-        <div class="mb-3">
-            <h5 v-if="image4 != null">Выбранное изображение №4 для вкладки</h5>
-            <img
-                id="imagePreview4"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image4"
-                >Изображение №4</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image4"
-                >Изменить изображение №4</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 4)"
-                type="file"
-                id="image4"
-            />
-        </div>
-
-        <div class="mb-3">
-            <h5 v-if="image5 != null">Выбранное изображение №5 для вкладки</h5>
-            <img
-                id="imagePreview5"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image5"
-                >Изображение №5</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image5"
-                >Изменить изображение №5</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 5)"
-                type="file"
-                id="image5"
-            />
-        </div>
-
-        <div class="mb-3">
-            <h5 v-if="image6 != null">Выбранное изображение №6 для вкладки</h5>
-            <img
-                id="imagePreview6"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image6"
-                >Изображение №6</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image6"
-                >Изменить изображение №6</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 6)"
-                type="file"
-                id="image6"
-            />
-        </div>
-
-        <!-- <div class="mb-3">
+    <!-- <div class="mb-3">
             <CFormLabel for="body">Body</CFormLabedl>
             <CFormTextarea id="body" v-model="body" rows="3">{{
                 this.body
             }}</CFormTextarea>
         </div> -->
 
-        <!-- <div class="mb-3">
+    <div class="mb-3">
         <CFormLabel for="keyword">SEO - Ключевые слова (Укажите через запятую)</CFormLabel>
         <CFormInput
             type="text"
@@ -242,9 +69,9 @@
             id="keyword"
             placeholder="Keyword"
         />
-    </div> -->
+    </div>
 
-        <!-- <div class="mb-3">
+    <div class="mb-3">
         <CFormLabel for="description">SEO - Description (Описание)</CFormLabel>
         <CFormTextarea
             id="description"
@@ -252,177 +79,100 @@
             :value="description"
             rows="3"
         ></CFormTextarea>
-    </div> -->
+    </div>
 
-        <div class="mb-3">
-            <CFormLabel for="show">Показывать вкладку? </CFormLabel>
-            <CFormCheck
-                style="margin-left: 15px"
-                @change="changeVisibility"
-                :checked="is_visible"
-                id="show"
-            />
-        </div>
+    <div class="mb-3">
+        <CFormLabel for="show">Показывать ссылку на страницу в меню? </CFormLabel>
+        <CFormCheck style="margin-left: 15px" @change="changeVisibility" :checked='visibility' id="show" />
+    </div>
 
-        <button class="btn btn-primary mb-5">
-            <CIcon icon="cil-save" size="sm" /> Сохранить
-        </button>
+    <button class="btn btn-primary mb-5"><CIcon icon="cil-save" size="sm"/> Сохранить</button>
     </CForm>
 </template>
 
 <script>
-import router from "@/admin/router/index.js";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import router from "@/router/index.js";
 export default {
     name: "AddPage",
+    components: {
+        QuillEditor,
+    },
     data() {
         return {
+            name: "",
+            slug: "",
             title: "",
+            header_title: "",
             body: "",
-            is_visible: false,
+            keyword: "",
+            description: "",
+            visibility: false,
             id: null,
-            image1: null,
-            image2: null,
-            image3: null,
-            image4: null,
-            image5: null,
-            image6: null,
-            header: null,
         };
     },
     methods: {
-        changeVisibility() {
-            this.is_visible = !this.is_visible;
+        changeVisibility(){
+            this.visibility = !this.visibility;
+        },
+        slugify_name() {
+            this.slug = this.slugify(this.name);
         },
         submitForm() {
             // console.log(this.body);
-            const is_visible = this.is_visible == true ? "1" : "0";
-            let formData = new FormData();
-            formData.append("body_text", this.body);
-            formData.append("title", this.title);
-            formData.append("is_visible", is_visible);
-            formData.append("image1", this.image1);
-            formData.append("image2", this.image2);
-            formData.append("image3", this.image3);
-            formData.append("image4", this.image4);
-            formData.append("image5", this.image5);
-            formData.append("image6", this.image6);
-            formData.append("header", this.header);
+            const visibility = this.visibility == true ? "1" : "0";
             if (this.id != null) {
-                formData.append("id", this.id);
-                axios
-                    .post("/api/update-page", formData)
+                axios.post("/api/update-page", { name: this.name, slug: this.slug, title: this.title, header_title: this.header_title, body: this.body, keyword: this.keyword, description: this.description, visibility: visibility, id: this.id})
                     .then(function (response) {
                         console.log(response.data);
                     });
             } else {
                 axios
-                    .post("/api/create-page", formData)
+                    .post("/api/add-page", {
+                        name: this.name,
+                        slug: this.slug,
+                        title: this.title,
+                        header_title: this.header_title,
+                        body: this.body,
+                        keyword: this.keyword,
+                        description: this.description,
+                        visibility: this.visibility,
+                    })
                     .then(function (response) {
                         console.log(response.data);
                     });
                 // alert("saved");
             }
             setTimeout(() => {
-                router.push({ name: "Pages" });
+                router.push({name: "Pages"})
             }, 500);
         },
-        saveImage(event, number) {
-            var preview;
-            switch (number) {
-                case 1:
-                    this.image1 = event.target.files[0];
-                    preview = document.getElementById("imagePreview1");
-                    break;
-                case 2:
-                    this.image2 = event.target.files[0];
-                    preview = document.getElementById("imagePreview2");
-                    break;
-                case 3:
-                    this.image3 = event.target.files[0];
-                    preview = document.getElementById("imagePreview3");
-                    break;
-                case 4:
-                    this.image4 = event.target.files[0];
-                    preview = document.getElementById("imagePreview4");
-                    break;
-                case 5:
-                    this.image5 = event.target.files[0];
-                    preview = document.getElementById("imagePreview5");
-                    break;
-                case 6:
-                    this.image6 = event.target.files[0];
-                    preview = document.getElementById("imagePreview6");
-                    break;
-            }
-
-            // Create a new FileReader instance
-            var reader = new FileReader();
-
-            // Set the image preview source
-            reader.onload = function (event) {
-                preview.src = event.target.result;
-            };
-
-            preview.style.display = "block";
-
-            // Read the image file as a data URL
-            reader.readAsDataURL(event.target.files[0]);
+        slugify(str) {
+            return str
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, "")
+                .replace(/[\s_-]+/g, "-")
+                .replace(/^-+|-+$/g, "");
         },
     },
     created() {
-        const id = this.$route.params.id;
-        if (id) {
-            axios.post("/api/get-pages-admin", { id: id }).then((response) => {
+        const slug = this.$route.params.slug;
+        if (slug) {
+            axios.post("/api/get-page-admin", { slug: slug }).then((response) => {
                 // this.page = response.data.page;
                 // console.log(reponse.data);
-                this.title = response.data.pages.title;
-                this.body = response.data.pages.body_text;
-                this.is_visible =
-                    response.data.pages.is_visible == "1" ? true : false;
-                this.id = response.data.pages.id;
-                this.image1 = response.data.pages.image_1;
-                this.image2 = response.data.pages.image_2;
-                this.image3 = response.data.pages.image_3;
-                this.image4 = response.data.pages.image_4;
-                this.image5 = response.data.pages.image_5;
-                this.image6 = response.data.pages.image_6;
-                this.header = response.data.pages.header;
-                var preview;
-                if (this.image1 != null) {
-                    preview = document.getElementById("imagePreview1");
-                    preview.src = this.image1;
-                    preview.style.display = "block";
-                }
-
-                if (this.image2 != null) {
-                    preview = document.getElementById("imagePreview2");
-                    preview.src = this.image2;
-                    preview.style.display = "block";
-                }
-
-                if (this.image3 != null) {
-                    preview = document.getElementById("imagePreview3");
-                    preview.src = this.image3;
-                    preview.style.display = "block";
-                }
-
-                if (this.image4 != null) {
-                    preview = document.getElementById("imagePreview4");
-                    preview.src = this.image4;
-                    preview.style.display = "block";
-                }
-
-                if (this.image5 != null) {
-                    preview = document.getElementById("imagePreview5");
-                    preview.src = this.image5;
-                    preview.style.display = "block";
-                }
-
-                if (this.image6 != null) {
-                    preview = document.getElementById("imagePreview6");
-                    preview.src = this.image6;
-                    preview.style.display = "block";
-                }
+                this.update = true;
+                this.name = response.data.page.name;
+                this.slug = response.data.page.slug;
+                this.title = response.data.page.title;
+                this.header_title = response.data.page.header_title;
+                this.body = response.data.page.body;
+                this.keyword = response.data.page.keyword;
+                this.description = response.data.page.description;
+                this.visibility = response.data.page.show == '1' ? true : false;
+                this.id = response.data.page.id;
             });
         }
 

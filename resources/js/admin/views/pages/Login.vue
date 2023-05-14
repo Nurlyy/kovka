@@ -128,7 +128,7 @@ export default {
                             response.data.access_token
                         );
                         // Redirect to admin index page
-                        router.push({ name: "Pages" });
+                        router.push({ name: "Tabs" });
                     }
                     console.log(response.data);
                 })

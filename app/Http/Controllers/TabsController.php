@@ -13,7 +13,7 @@ class PagesController extends Controller
         return response()->json(['pages' => $pages]);
     }
 
-    public function updatePage(Request $request)
+    public function updateTab(Request $request)
     {
         $page_id = $request->id;
         $page = Pages::where(['id' => $page_id])->first();
@@ -130,7 +130,7 @@ class PagesController extends Controller
         ]);
     }
 
-    public function createPage(Request $request)
+    public function createTab(Request $request)
     {
         // if ($request->hasFile('image1')) {return 'fuck';}
         // else{
@@ -227,7 +227,7 @@ class PagesController extends Controller
         ]);
     }
 
-    public function getPage(Request $request)
+    public function getTab(Request $request)
     {
         $page_id = $request->page_id;
         $page = Pages::find(['id' => $page_id])->first();
@@ -245,7 +245,7 @@ class PagesController extends Controller
         return response()->json(['pages' => $pages]);
     }
 
-    public function deletePage(Request $request)
+    public function deleteTab(Request $request)
     {
         $page = Pages::find(['id' => $request->id])->first();
         if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image1)) {

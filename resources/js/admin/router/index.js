@@ -3,60 +3,56 @@ import { createRouter, createWebHistory } from "vue-router";
 import createStore from "../store/index.js";
 
 import DefaultLayout from "@/admin/layouts/DefaultLayout.vue";
+import Pages from "@/front/components/Pages.vue";
 // import Index from "@/admin/main/Index.vue";
 // import MainLayout from "@/layouts/MainLayout.vue";
 // import Pages from "@/main/Pages.vue";
 
 const routes = [
-    // {
-    //     path: "/page/:slug", // slug is the dynamic parameter
-    //     component: Pages,
-    //     props: true, // allows passing slug as a prop to the component
-    // },
-    // {
-    //     path: "/category/:id", // slug is the dynamic parameter
-    //     component: () =>
-    //         import(/* webpackChunkName: "dashboard" */ "@/main/Index.vue"),
-    //     props: true, // allows passing slug as a prop to the component
-    // },
-    // {
-    //     path: "/",
-    //     name: "Main",
-    //     component: Index,
-    //     // redirect: "/index",
-    //     // children: [
-    //     //     {
-    //     //         path: "/index",
-    //     //         name: "MainIndex",
-    //     //         component: () =>
-    //     //             import(
-    //     //                 /* webpackChunkName: "dashboard" */ "@/main/Index.vue"
-    //     //             ),
-    //     //     },
-    //     // {
-    //     //     path: '/order-request',
-    //     //     name: 'MainOrderRequest',
-    //     //     component: () =>
-    //     //         import(
-    //     //             /* webpackChunkName: "dashboard" */ '@/main/Order.vue'
-    //     //         ),
-    //     // },
-    //     // {
-    //     //     path: "/likes",
-    //     //     name: "MainLikes",
-    //     //     component: () =>
-    //     //         import(
-    //     //             /* webpackChunkName: "dashboard" */ "@/main/LikePage.vue"
-    //     //         ),
-    //     // },
-    //     // ],
-    // },
+    {
+        path: "/page/:slug", // slug is the dynamic parameter
+        component: Pages,
+        props: true, // allows passing slug as a prop to the component
+    },
     {
         path: "/admin",
         name: "Home",
         component: DefaultLayout,
-        redirect: "/admin/pages",
+        redirect: "/admin/tabs",
         children: [
+            {
+                path: "/admin/images/add-page",
+                name: "AddPage",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
+                    ),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: "/admin/pages",
+                name: "Pages",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/Pages.vue"
+                    ),
+                meta: { requiresAuth: true },
+            },
+            {
+                path: "/admin/pages/:slug", // slug is the dynamic parameter
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
+                    ),
+                props: true, // allows passing slug as a prop to the component
+                meta: { requiresAuth: true },
+            },
             {
                 path: "/admin/contacts",
                 name: "Contacts",
@@ -131,119 +127,42 @@ const routes = [
                 meta: { requiresAuth: true },
             },
             {
-                path: "/admin/pages",
-                name: "Pages",
+                path: "/admin/tabs",
+                name: "Tabs",
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import(
-                        /* webpackChunkName: "dashboard" */ "@/admin/pages/Pages.vue"
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/Tabs.vue"
                     ),
                 meta: { requiresAuth: true },
             },
             {
-                path: "/admin/pages/create-page",
-                name: "AddPage",
+                path: "/admin/tabs/create-tab",
+                name: "AddTab",
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import(
-                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddPage.vue"
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddTab.vue"
                     ),
                 meta: { requiresAuth: true },
             },
             {
-                path: "/admin/pages/:id",
-                name: "UpdatePage",
+                path: "/admin/tabs/:id",
+                name: "UpdateTab",
                 // route level code-splitting
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import(
-                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddPage.vue"
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddTab.vue"
                     ),
                 props: true,
                 meta: { requiresAuth: true },
             },
-            // {
-            //     path: "/admin/images/add-image",
-            //     name: "AddImage",
-            //     // route level code-splitting
-            //     // this generates a separate chunk (about.[hash].js) for this route
-            //     // which is lazy-loaded when the route is visited.
-            //     component: () =>
-            //         import(
-            //             /* webpackChunkName: "dashboard" */ "@/pages/AddImage.vue"
-            //         ),
-            //     meta: { requiresAuth: true },
-            // },
-            // {
-            //     path: "/admin/images/add-filter",
-            //     name: "AddFilter",
-            //     // route level code-splitting
-            //     // this generates a separate chunk (about.[hash].js) for this route
-            //     // which is lazy-loaded when the route is visited.
-            //     component: () =>
-            //         import(
-            //             /* webpackChunkName: "dashboard" */ "@/pages/AddFilter.vue"
-            //         ),
-            //     meta: { requiresAuth: true },
-            // },
-            // {
-            //     path: "/admin/images/add-page",
-            //     name: "AddPage",
-            //     // route level code-splitting
-            //     // this generates a separate chunk (about.[hash].js) for this route
-            //     // which is lazy-loaded when the route is visited.
-            //     component: () =>
-            //         import(
-            //             /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
-            //         ),
-            //     meta: { requiresAuth: true },
-            // },
-            // {
-            //     path: "/admin/pages",
-            //     name: "Pages",
-            //     // route level code-splitting
-            //     // this generates a separate chunk (about.[hash].js) for this route
-            //     // which is lazy-loaded when the route is visited.
-            //     component: () =>
-            //         import(
-            //             /* webpackChunkName: "dashboard" */ "@/pages/Pages.vue"
-            //         ),
-            //     meta: { requiresAuth: true },
-            // },
-            // {
-            //     path: "/admin/pages/:slug", // slug is the dynamic parameter
-            //     component: () =>
-            //         import(
-            //             /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
-            //         ),
-            //     props: true, // allows passing slug as a prop to the component
-            //     meta: { requiresAuth: true },
-            // },
-            // {
-            //     path: "/admin/images/:id", // slug is the dynamic parameter
-            //     component: () =>
-            //     import(
-            //         /* webpackChunkName: "dashboard" */ "@/pages/AddImage.vue"
-            //     ),
-            //     // redirect: "/admin/images",
-            //     props: true, // allows passing slug as a prop to the component
-            //     meta: { requiresAuth: true },
-            // },
-            // {
-            //     path: "/admin/filters/:id", // slug is the dynamic parameter
-            //     component: () =>
-            //     import(
-            //         /* webpackChunkName: "dashboard" */ "@/pages/AddFilter.vue"
-            //     ),
-            //     // redirect: "/admin/images",
-            //     props: true, // allows passing slug as a prop to the component
-            //     meta: { requiresAuth: true },
-            // },
         ],
     },
 
