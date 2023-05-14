@@ -310,20 +310,20 @@ export default {
             if (this.id != null) {
                 formData.append("id", this.id);
                 axios
-                    .post("/api/update-page", formData)
+                    .post("/api/update-tab", formData)
                     .then(function (response) {
                         console.log(response.data);
                     });
             } else {
                 axios
-                    .post("/api/create-page", formData)
+                    .post("/api/create-tab", formData)
                     .then(function (response) {
                         console.log(response.data);
                     });
                 // alert("saved");
             }
             setTimeout(() => {
-                router.push({ name: "Pages" });
+                router.push({ name: "Tabs" });
             }, 500);
         },
         saveImage(event, number) {
@@ -372,21 +372,21 @@ export default {
     created() {
         const id = this.$route.params.id;
         if (id) {
-            axios.post("/api/get-pages-admin", { id: id }).then((response) => {
+            axios.post("/api/get-tabs-admin", { id: id }).then((response) => {
                 // this.page = response.data.page;
                 // console.log(reponse.data);
-                this.title = response.data.pages.title;
-                this.body = response.data.pages.body_text;
+                this.title = response.data.tabs.title;
+                this.body = response.data.tabs.body_text;
                 this.is_visible =
-                    response.data.pages.is_visible == "1" ? true : false;
-                this.id = response.data.pages.id;
-                this.image1 = response.data.pages.image_1;
-                this.image2 = response.data.pages.image_2;
-                this.image3 = response.data.pages.image_3;
-                this.image4 = response.data.pages.image_4;
-                this.image5 = response.data.pages.image_5;
-                this.image6 = response.data.pages.image_6;
-                this.header = response.data.pages.header;
+                    response.data.tabs.is_visible == "1" ? true : false;
+                this.id = response.data.tabs.id;
+                this.image1 = response.data.tabs.image_1;
+                this.image2 = response.data.tabs.image_2;
+                this.image3 = response.data.tabs.image_3;
+                this.image4 = response.data.tabs.image_4;
+                this.image5 = response.data.tabs.image_5;
+                this.image6 = response.data.tabs.image_6;
+                this.header = response.data.tabs.header;
                 var preview;
                 if (this.image1 != null) {
                     preview = document.getElementById("imagePreview1");

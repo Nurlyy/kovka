@@ -28,7 +28,7 @@ const routes = [
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import(
-                        /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddPage.vue"
                     ),
                 meta: { requiresAuth: true },
             },
@@ -40,7 +40,7 @@ const routes = [
                 // which is lazy-loaded when the route is visited.
                 component: () =>
                     import(
-                        /* webpackChunkName: "dashboard" */ "@/pages/Pages.vue"
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/Pages.vue"
                     ),
                 meta: { requiresAuth: true },
             },
@@ -48,7 +48,7 @@ const routes = [
                 path: "/admin/pages/:slug", // slug is the dynamic parameter
                 component: () =>
                     import(
-                        /* webpackChunkName: "dashboard" */ "@/pages/AddPage.vue"
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddPage.vue"
                     ),
                 props: true, // allows passing slug as a prop to the component
                 meta: { requiresAuth: true },
