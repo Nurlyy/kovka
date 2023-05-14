@@ -81,35 +81,66 @@ export default {
     methods: {
         login() {
             console.log("clicked");
+            // axios
+            //     .post("/api/login", {
+            //         email: this.email,
+            //         password: this.password,
+            //     })
+            //     .then((response) => {
+            //         console.log(response);
+            //         if (response.data.status == 401) {
+            //             this.alertVisible = true;
+            //             setTimeout(() => {
+            //                 this.alertVisible = false;
+            //             }, 2500);
+            //         }
+            //         // Save access token to local storage
+            //         localStorage.setItem(
+            //             "access_token",
+            //             response.data.access_token
+            //         );
+            //         // Redirect to admin index page
+            //         router.push({ name: "Images" });
+            //     })
+            //     .catch((error) => {
+            //         if (error) {
+            //             console.log(error.message);
+            //             console.log("error");
+            //             this.alertVisible = true;
+            //             setTimeout(() => {
+            //                 this.alertVisible = false;
+            //             }, 2500);
+            //         }
+            //     });
+
             axios
                 .post("/api/login", {
                     email: this.email,
                     password: this.password,
                 })
                 .then((response) => {
-                    console.log(response);
-                    if (response.status == 401) {
-                        this.alertVisible = true;
-                        setTimeout(() => {
-                            this.alertVisible = false;
-                        }, 2500);
+                    if (response.data.status == 401) {
+                        throw new Error('unauthorized');
+                    } else {
+                        // Save access token to local storage
+                        localStorage.setItem(
+                            "access_token",
+                            response.data.access_token
+                        );
+                        // Redirect to admin index page
+                        router.push({ name: "Pages" });
                     }
-                    // Save access token to local storage
-                    localStorage.setItem(
-                        "access_token",
-                        response.data.access_token
-                    );
-                    // Redirect to admin index page
-                    router.push({ name: "Images" });
+                    console.log(response.data);
                 })
                 .catch((error) => {
-                    // Handle login error
-                    if (error.response.status == 401) {
-                        this.alertVisible = true;
-                        setTimeout(() => {
-                            this.alertVisible = false;
-                        }, 2500);
+                    console.log(error.message);
+                    if (error) {
+                        console.log(error);
                     }
+                    this.alertVisible = true;
+                    setTimeout(() => {
+                        this.alertVisible = false;
+                    }, 2500);
                 });
         },
     },

@@ -43,10 +43,10 @@ class AuthController extends Controller
             ], 422);
         }
         if(! auth()->attempt($requestData)){
-            return response()->json(['error' => 'UnAuthorised Access'], 401);
+            return response()->json(['error' => 'UnAuthorised Access', 'status' => 401], 401);
         }
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
-        return response(['user' => auth()->user(), 'access_token' => $accessToken], 200);
+        return response(['success' => true, 'user' => auth()->user(), 'access_token' => $accessToken, 'status' => 200], 200);
     }
     public function me(Request $request)
     {

@@ -22,7 +22,6 @@
                     rel="noreferrer"
                     id="imageView"
                 >
-                    
                 </a>
             </div>
         </div>
