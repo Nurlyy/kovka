@@ -16,7 +16,7 @@
                 v-for="(image, index) in images"
                 :key="index"
             >
-                <img :src="image" alt="" id="imageImg" />
+                <img :src="image" alt="" class="imageImg" :id="'imageImg_' + index" />
                 <a
                     @click="imageClicked(image, $event)"
                     :href="image"
@@ -63,6 +63,7 @@
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 import { PinturaEditor } from "@pqina/vue-pintura";
+import applyFilter from '../assets/pixels/script';
 // import pixelsJs from "../assets/pixels/pixels";
 // import pixelsJS from "pixelsJS";
 export default {
@@ -121,6 +122,9 @@ export default {
                 this.title = this.pages[0].title;
                 this.body = this.pages[0].body_text;
             });
+            setTimeout(function() {
+                applyFilter("imageImg_0")
+            }, 2500);
         },
         galleryClick(index) {
             // document.getElementById("gallery-list-photo").innerHTML = '';
@@ -282,7 +286,7 @@ export default {
                     background-color: rgba(0, 0, 0, 0) !important;
                 }
             }
-            #imageImg {
+            .imageImg {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
