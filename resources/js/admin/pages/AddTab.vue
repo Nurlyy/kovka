@@ -27,169 +27,938 @@
             />
         </div>
 
-        <CFormLabel for="title">Текст вкладки</CFormLabel>
-        <CFormTextarea
-            v-model="body"
-            :value="body"
-            id="body"
-            rows="3"
-            class="mb-3"
-        ></CFormTextarea>
-
         <div class="mb-3">
-            <h5 v-if="image1 != null">Выбранное изображение №1 для вкладки</h5>
-            <img
-                id="imagePreview1"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image1"
-                >Изображение №1</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image1"
-                >Изменить изображение №1</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 1)"
-                type="file"
-                id="image1"
-            />
+            <CFormLabel for="title">Текст вкладки</CFormLabel>
+            <CFormTextarea
+                v-model="body"
+                :value="body"
+                id="body"
+                rows="3"
+            ></CFormTextarea>
         </div>
 
         <div class="mb-3">
-            <h5 v-if="image2 != null">Выбранное изображение №2 для вкладки</h5>
-            <img
-                id="imagePreview2"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image2"
-                >Изображение №2</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image2"
-                >Изменить изображение №2</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 2)"
-                type="file"
-                id="image2"
-            />
+            <CCard>
+                <CCardBody>
+                    <CContainer>
+                        <CRow>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="image1 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview1"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>Оригинал</p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="filterValue1 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview1_filtered_selected"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>
+                                                <strong>Фильтр: </strong
+                                                >{{ filterValue1 }}
+                                            </p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="12" v-show="image1 != null">
+                                <div
+                                    style="
+                                        display: flex;
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 15px;
+                                    "
+                                >
+                                    <CButton
+                                        color="light"
+                                        href="#"
+                                        @click="visible1 = !visible1"
+                                        >Доступные фильтры</CButton
+                                    >
+                                </div>
+                                <CCollapse :visible="visible1">
+                                    <CCard
+                                        v-show="image1 != null"
+                                        style="text-align: center"
+                                    >
+                                        <CCardBody>
+                                            <CRow>
+                                                <div
+                                                    v-for="(
+                                                        filter, index
+                                                    ) in filters"
+                                                    :key="index"
+                                                    style="
+                                                        background-color: lightgray;
+                                                        border-radius: 15px;
+                                                        padding: 5px;
+                                                        width: fit-content;
+                                                        margin: 5px;
+                                                    "
+                                                >
+                                                    <img
+                                                        :id="
+                                                            'imagePreview1_filtered_' +
+                                                            index
+                                                        "
+                                                        style="
+                                                            height: 100px;
+                                                            border-radius: 15px;
+                                                            margin-top: 15;
+                                                            display: none;
+                                                        "
+                                                        @click="
+                                                            selectFilter(
+                                                                'imagePreview1',
+                                                                filter
+                                                            );
+                                                            filterValue1 =
+                                                                filter;
+                                                        "
+                                                    />
+                                                    <p>{{ filter }}</p>
+                                                </div>
+                                            </CRow>
+                                        </CCardBody>
+                                    </CCard>
+                                </CCollapse>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+
+                    <CFormLabel v-if="id == null" for="image1"
+                        >Изображение №1</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image1"
+                        >Изменить изображение №1</CFormLabel
+                    >
+                    <CFormInput
+                        @change="
+                            saveImage($event, 1);
+                            filterValue1 = null;
+                        "
+                        type="file"
+                        id="image1"
+                    />
+                </CCardBody>
+            </CCard>
         </div>
 
         <div class="mb-3">
-            <h5 v-if="image3 != null">Выбранное изображение №3 для вкладки</h5>
-            <img
-                id="imagePreview3"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image3"
-                >Изображение №3</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image3"
-                >Изменить изображение №3</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 3)"
-                type="file"
-                id="image3"
-            />
+            <CCard>
+                <CCardBody>
+                    <CContainer>
+                        <CRow>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="image2 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview2"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>Оригинал</p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="filterValue2 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview2_filtered_selected"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>
+                                                <strong>Фильтр: </strong
+                                                >{{ filterValue1 }}
+                                            </p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="12" v-show="image2 != null">
+                                <div
+                                    style="
+                                        display: flex;
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 15px;
+                                    "
+                                >
+                                    <CButton
+                                        color="light"
+                                        href="#"
+                                        @click="visible2 = !visible2"
+                                        >Доступные фильтры</CButton
+                                    >
+                                </div>
+                                <CCollapse :visible="visible2">
+                                    <CCard
+                                        v-show="image2 != null"
+                                        style="text-align: center"
+                                    >
+                                        <CCardBody>
+                                            <CRow>
+                                                <div
+                                                    v-for="(
+                                                        filter, index
+                                                    ) in filters"
+                                                    :key="index"
+                                                    style="
+                                                        background-color: lightgray;
+                                                        border-radius: 15px;
+                                                        padding: 5px;
+                                                        width: fit-content;
+                                                        margin: 5px;
+                                                    "
+                                                >
+                                                    <img
+                                                        :id="
+                                                            'imagePreview2_filtered_' +
+                                                            index
+                                                        "
+                                                        style="
+                                                            height: 100px;
+                                                            border-radius: 15px;
+                                                            margin-top: 15;
+                                                            display: none;
+                                                        "
+                                                        @click="
+                                                            selectFilter(
+                                                                'imagePreview2',
+                                                                filter
+                                                            );
+                                                            filterValue2 =
+                                                                filter;
+                                                        "
+                                                    />
+                                                    <p>{{ filter }}</p>
+                                                </div>
+                                            </CRow>
+                                        </CCardBody>
+                                    </CCard>
+                                </CCollapse>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+
+                    <CFormLabel v-if="id == null" for="image2"
+                        >Изображение №2</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image2"
+                        >Изменить изображение №2</CFormLabel
+                    >
+                    <CFormInput
+                        @change="
+                            saveImage($event, 2);
+                            filterValue2 = null;
+                        "
+                        type="file"
+                        id="image2"
+                    />
+                </CCardBody>
+            </CCard>
         </div>
 
         <div class="mb-3">
-            <h5 v-if="image4 != null">Выбранное изображение №4 для вкладки</h5>
-            <img
-                id="imagePreview4"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image4"
-                >Изображение №4</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image4"
-                >Изменить изображение №4</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 4)"
-                type="file"
-                id="image4"
-            />
+            <CCard>
+                <CCardBody>
+                    <CContainer>
+                        <CRow>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="image3 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview3"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>Оригинал</p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="filterValue3 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview3_filtered_selected"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>
+                                                <strong>Фильтр: </strong
+                                                >{{ filterValue3 }}
+                                            </p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="12" v-show="image3 != null">
+                                <div
+                                    style="
+                                        display: flex;
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 15px;
+                                    "
+                                >
+                                    <CButton
+                                        color="light"
+                                        href="#"
+                                        @click="visible3 = !visible3"
+                                        >Доступные фильтры</CButton
+                                    >
+                                </div>
+                                <CCollapse :visible="visible3">
+                                    <CCard
+                                        v-show="image3 != null"
+                                        style="text-align: center"
+                                    >
+                                        <CCardBody>
+                                            <CRow>
+                                                <div
+                                                    v-for="(
+                                                        filter, index
+                                                    ) in filters"
+                                                    :key="index"
+                                                    style="
+                                                        background-color: lightgray;
+                                                        border-radius: 15px;
+                                                        padding: 5px;
+                                                        width: fit-content;
+                                                        margin: 5px;
+                                                    "
+                                                >
+                                                    <img
+                                                        :id="
+                                                            'imagePreview3_filtered_' +
+                                                            index
+                                                        "
+                                                        style="
+                                                            height: 100px;
+                                                            border-radius: 15px;
+                                                            margin-top: 15;
+                                                            display: none;
+                                                        "
+                                                        @click="
+                                                            selectFilter(
+                                                                'imagePreview3',
+                                                                filter
+                                                            );
+                                                            filterValue3 =
+                                                                filter;
+                                                        "
+                                                    />
+                                                    <p>{{ filter }}</p>
+                                                </div>
+                                            </CRow>
+                                        </CCardBody>
+                                    </CCard>
+                                </CCollapse>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+
+                    <CFormLabel v-if="id == null" for="image1"
+                        >Изображение №3</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image1"
+                        >Изменить изображение №3</CFormLabel
+                    >
+                    <CFormInput
+                        @change="
+                            saveImage($event, 3);
+                            filterValue3 = null;
+                        "
+                        type="file"
+                        id="image3"
+                    />
+                </CCardBody>
+            </CCard>
         </div>
 
         <div class="mb-3">
-            <h5 v-if="image5 != null">Выбранное изображение №5 для вкладки</h5>
-            <img
-                id="imagePreview5"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image5"
-                >Изображение №5</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image5"
-                >Изменить изображение №5</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 5)"
-                type="file"
-                id="image5"
-            />
+            <CCard>
+                <CCardBody>
+                    <CContainer>
+                        <CRow>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="image4 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview4"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>Оригинал</p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="filterValue4 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview4_filtered_selected"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>
+                                                <strong>Фильтр: </strong
+                                                >{{ filterValue4 }}
+                                            </p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="12" v-show="image4 != null">
+                                <div
+                                    style="
+                                        display: flex;
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 15px;
+                                    "
+                                >
+                                    <CButton
+                                        color="light"
+                                        href="#"
+                                        @click="visible4 = !visible4"
+                                        >Доступные фильтры</CButton
+                                    >
+                                </div>
+                                <CCollapse :visible="visible4">
+                                    <CCard
+                                        v-show="image4 != null"
+                                        style="text-align: center"
+                                    >
+                                        <CCardBody>
+                                            <CRow>
+                                                <div
+                                                    v-for="(
+                                                        filter, index
+                                                    ) in filters"
+                                                    :key="index"
+                                                    style="
+                                                        background-color: lightgray;
+                                                        border-radius: 15px;
+                                                        padding: 5px;
+                                                        width: fit-content;
+                                                        margin: 5px;
+                                                    "
+                                                >
+                                                    <img
+                                                        :id="
+                                                            'imagePreview4_filtered_' +
+                                                            index
+                                                        "
+                                                        style="
+                                                            height: 100px;
+                                                            border-radius: 15px;
+                                                            margin-top: 15;
+                                                            display: none;
+                                                        "
+                                                        @click="
+                                                            selectFilter(
+                                                                'imagePreview4',
+                                                                filter
+                                                            );
+                                                            filterValue4 =
+                                                                filter;
+                                                        "
+                                                    />
+                                                    <p>{{ filter }}</p>
+                                                </div>
+                                            </CRow>
+                                        </CCardBody>
+                                    </CCard>
+                                </CCollapse>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+
+                    <CFormLabel v-if="id == null" for="image4"
+                        >Изображение №4</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image4"
+                        >Изменить изображение №4</CFormLabel
+                    >
+                    <CFormInput
+                        @change="
+                            saveImage($event, 4);
+                            filterValue4 = null;
+                        "
+                        type="file"
+                        id="image4"
+                    />
+                </CCardBody>
+            </CCard>
         </div>
 
         <div class="mb-3">
-            <h5 v-if="image6 != null">Выбранное изображение №6 для вкладки</h5>
-            <img
-                id="imagePreview6"
-                alt="Preview Image"
-                style="
-                    height: 150px;
-                    border-radius: 15px;
-                    margin-top: 15;
-                    display: none;
-                "
-                class="mb-3"
-            />
-            <CFormLabel v-if="id == null" for="image6"
-                >Изображение №6</CFormLabel
-            >
-            <CFormLabel v-if="id != null" for="image6"
-                >Изменить изображение №6</CFormLabel
-            >
-            <CFormInput
-                @change="saveImage($event, 6)"
-                type="file"
-                id="image6"
-            />
+            <CCard>
+                <CCardBody>
+                    <CContainer>
+                        <CRow>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="image5 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview5"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>Оригинал</p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="filterValue5 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview5_filtered_selected"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>
+                                                <strong>Фильтр: </strong
+                                                >{{ filterValue5 }}
+                                            </p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="12" v-show="image5 != null">
+                                <div
+                                    style="
+                                        display: flex;
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 15px;
+                                    "
+                                >
+                                    <CButton
+                                        color="light"
+                                        href="#"
+                                        @click="visible5 = !visible5"
+                                        >Доступные фильтры</CButton
+                                    >
+                                </div>
+                                <CCollapse :visible="visible5">
+                                    <CCard
+                                        v-show="image5 != null"
+                                        style="text-align: center"
+                                    >
+                                        <CCardBody>
+                                            <CRow>
+                                                <div
+                                                    v-for="(
+                                                        filter, index
+                                                    ) in filters"
+                                                    :key="index"
+                                                    style="
+                                                        background-color: lightgray;
+                                                        border-radius: 15px;
+                                                        padding: 5px;
+                                                        width: fit-content;
+                                                        margin: 5px;
+                                                    "
+                                                >
+                                                    <img
+                                                        :id="
+                                                            'imagePreview5_filtered_' +
+                                                            index
+                                                        "
+                                                        style="
+                                                            height: 100px;
+                                                            border-radius: 15px;
+                                                            margin-top: 15;
+                                                            display: none;
+                                                        "
+                                                        @click="
+                                                            selectFilter(
+                                                                'imagePreview5',
+                                                                filter
+                                                            );
+                                                            filterValue5 =
+                                                                filter;
+                                                        "
+                                                    />
+                                                    <p>{{ filter }}</p>
+                                                </div>
+                                            </CRow>
+                                        </CCardBody>
+                                    </CCard>
+                                </CCollapse>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+
+                    <CFormLabel v-if="id == null" for="image5"
+                        >Изображение №5</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image5"
+                        >Изменить изображение №5</CFormLabel
+                    >
+                    <CFormInput
+                        @change="
+                            saveImage($event, 5);
+                            filterValue5 = null;
+                        "
+                        type="file"
+                        id="image5"
+                    />
+                </CCardBody>
+            </CCard>
+        </div>
+
+        <div class="mb-3">
+            <CCard>
+                <CCardBody>
+                    <CContainer>
+                        <CRow>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="image6 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview6"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>Оригинал</p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="6">
+                                <CCard
+                                    v-show="filterValue6 != null"
+                                    style="
+                                        text-align: center;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <CCardBody
+                                        style="
+                                            display: flex;
+                                            justify-content: center;
+                                        "
+                                    >
+                                        <div>
+                                            <img
+                                                id="imagePreview6_filtered_selected"
+                                                alt="Preview Image"
+                                                style="
+                                                    height: 150px;
+                                                    border-radius: 15px;
+                                                    margin-top: 15;
+                                                    display: none;
+                                                "
+                                                class="mb-3"
+                                            />
+                                            <p>
+                                                <strong>Фильтр: </strong
+                                                >{{ filterValue6 }}
+                                            </p>
+                                        </div>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol xs="12" v-show="image6 != null">
+                                <div
+                                    style="
+                                        display: flex;
+                                        width: 100%;
+                                        justify-content: center;
+                                        margin: 15px;
+                                    "
+                                >
+                                    <CButton
+                                        color="light"
+                                        href="#"
+                                        @click="visible6 = !visible6"
+                                        >Доступные фильтры</CButton
+                                    >
+                                </div>
+                                <CCollapse :visible="visible6">
+                                    <CCard
+                                        v-show="image6 != null"
+                                        style="text-align: center"
+                                    >
+                                        <CCardBody>
+                                            <CRow>
+                                                <div
+                                                    v-for="(
+                                                        filter, index
+                                                    ) in filters"
+                                                    :key="index"
+                                                    style="
+                                                        background-color: lightgray;
+                                                        border-radius: 15px;
+                                                        padding: 5px;
+                                                        width: fit-content;
+                                                        margin: 5px;
+                                                    "
+                                                >
+                                                    <img
+                                                        :id="
+                                                            'imagePreview6_filtered_' +
+                                                            index
+                                                        "
+                                                        style="
+                                                            height: 100px;
+                                                            border-radius: 15px;
+                                                            margin-top: 15;
+                                                            display: none;
+                                                        "
+                                                        @click="
+                                                            selectFilter(
+                                                                'imagePreview6',
+                                                                filter
+                                                            );
+                                                            filterValue6 =
+                                                                filter;
+                                                        "
+                                                    />
+                                                    <p>{{ filter }}</p>
+                                                </div>
+                                            </CRow>
+                                        </CCardBody>
+                                    </CCard>
+                                </CCollapse>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+
+                    <CFormLabel v-if="id == null" for="image6"
+                        >Изображение №6</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image6"
+                        >Изменить изображение №6</CFormLabel
+                    >
+                    <CFormInput
+                        @change="
+                            saveImage($event, 6);
+                            filterValue6 = null;
+                        "
+                        type="file"
+                        id="image6"
+                    />
+                </CCardBody>
+            </CCard>
         </div>
 
         <div class="mb-3">
@@ -210,7 +979,7 @@
 
 <script>
 import router from "@/admin/router/index.js";
-import applyFilter from '../assets/pixels/script';
+import applyFilter from "../assets/pixels/script";
 export default {
     name: "AddPage",
     data() {
@@ -226,6 +995,19 @@ export default {
             image5: null,
             image6: null,
             header: null,
+            filterValue1: null,
+            filterValue2: null,
+            filterValue3: null,
+            filterValue4: null,
+            filterValue5: null,
+            filterValue6: null,
+            filters: ["darkify", "pane"],
+            visible1: false,
+            visible2: false,
+            visible3: false,
+            visible4: false,
+            visible5: false,
+            visible6: false,
         };
     },
     methods: {
@@ -267,7 +1049,7 @@ export default {
         },
         saveImage(event, number) {
             var preview;
-            var image_id = '';
+            var image_id = "";
             switch (number) {
                 case 1:
                     this.image1 = event.target.files[0];
@@ -314,16 +1096,22 @@ export default {
             // Read the image file as a data URL
             reader.readAsDataURL(event.target.files[0]);
 
-            setTimeout(function() {
-                
+            setTimeout(() => {
                 // preview.src = applyFilter(image_id)
-                applyFilter(image_id)
+                this.filters.forEach((filter, index) => {
+                    applyFilter(
+                        image_id,
+                        image_id + "_filtered_" + index,
+                        filter
+                    );
+                });
 
                 // preview.width = preview.naturalWidth;
                 // preview.height = preview.naturalHeight;
-
-                
             }, 500);
+        },
+        selectFilter(id, filter) {
+            applyFilter(id, id + "_filtered_selected", filter);
         },
     },
     created() {

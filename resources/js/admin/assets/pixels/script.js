@@ -1,7 +1,9 @@
-export default function applyFilter(Image_id) {
+export default function applyFilter(Image_id, put_to, filter) {
     console.log("init");
 
     var imgElement = document.getElementById(Image_id);
+
+    var putImg = document.getElementById(put_to);
 
     var canvas = document.createElement("canvas");
 
@@ -14,7 +16,7 @@ export default function applyFilter(Image_id) {
 
     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-    var newImgData = pixelsJS.filterImgData(imageData, "neue");
+    var newImgData = pixelsJS.filterImgData(imageData, filter);
     context.putImageData(newImgData, 0, 0);
 
     // context.putImageData(imageData, 0, 0);
@@ -23,7 +25,8 @@ export default function applyFilter(Image_id) {
 
     var dataUrl = canvas.toDataURL();
 
-    imgElement.src = dataUrl;
+    putImg.src = dataUrl;
+    putImg.style.display = 'block';
 
     // canvas.remove();
 
