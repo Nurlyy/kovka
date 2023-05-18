@@ -2,40 +2,6 @@
     <h1 v-if="id == null">Добавить Вкладку</h1>
     <h1 v-if="id != null">Изменить Вкладку</h1>
     <CForm @submit.prevent="submitForm()">
-        <!-- <div class="mb-3">
-        <CFormLabel for="name">Придумайте URL (латинскими буквами)</CFormLabel>
-        <CFormInput
-            type="text"
-            v-model="name"
-            :value="name"
-            @change="slugify_name()"
-            id="name"
-            placeholder="NAME"
-        />
-    </div>
-    <div class="mb-3">
-        <CFormLabel for="slug">URL</CFormLabel>
-        <CFormInput
-            id="slug"
-            type="text"
-            placeholder="SLUG"
-            aria-label="Disabled input example"
-            v-model="slug"
-            :value="slug"
-            disabled
-        />
-    </div> -->
-
-        <!-- <div class="mb-3">
-        <CFormLabel for="header_title">SEO - title</CFormLabel>
-        <CFormInput
-            type="text"
-            v-model="header_title"
-            :value="header_title"
-            id="header_title"
-            placeholder="Заголовок"
-        />
-    </div> -->
         <div class="mb-3">
             <CFormLabel for="title"
                 >Заголовок вкладки (Отображается вверху)</CFormLabel
@@ -226,34 +192,6 @@
             />
         </div>
 
-        <!-- <div class="mb-3">
-            <CFormLabel for="body">Body</CFormLabedl>
-            <CFormTextarea id="body" v-model="body" rows="3">{{
-                this.body
-            }}</CFormTextarea>
-        </div> -->
-
-        <!-- <div class="mb-3">
-        <CFormLabel for="keyword">SEO - Ключевые слова (Укажите через запятую)</CFormLabel>
-        <CFormInput
-            type="text"
-            v-model="keyword"
-            :value="keyword"
-            id="keyword"
-            placeholder="Keyword"
-        />
-    </div> -->
-
-        <!-- <div class="mb-3">
-        <CFormLabel for="description">SEO - Description (Описание)</CFormLabel>
-        <CFormTextarea
-            id="description"
-            v-model="description"
-            :value="description"
-            rows="3"
-        ></CFormTextarea>
-    </div> -->
-
         <div class="mb-3">
             <CFormLabel for="show">Показывать вкладку? </CFormLabel>
             <CFormCheck
@@ -272,6 +210,7 @@
 
 <script>
 import router from "@/admin/router/index.js";
+import applyFilter from '../assets/pixels/script';
 export default {
     name: "AddPage",
     data() {
@@ -328,30 +267,37 @@ export default {
         },
         saveImage(event, number) {
             var preview;
+            var image_id = '';
             switch (number) {
                 case 1:
                     this.image1 = event.target.files[0];
                     preview = document.getElementById("imagePreview1");
+                    image_id = "imagePreview1";
                     break;
                 case 2:
                     this.image2 = event.target.files[0];
                     preview = document.getElementById("imagePreview2");
+                    image_id = "imagePreview2";
                     break;
                 case 3:
                     this.image3 = event.target.files[0];
                     preview = document.getElementById("imagePreview3");
+                    image_id = "imagePreview3";
                     break;
                 case 4:
                     this.image4 = event.target.files[0];
                     preview = document.getElementById("imagePreview4");
+                    image_id = "imagePreview4";
                     break;
                 case 5:
                     this.image5 = event.target.files[0];
                     preview = document.getElementById("imagePreview5");
+                    image_id = "imagePreview5";
                     break;
                 case 6:
                     this.image6 = event.target.files[0];
                     preview = document.getElementById("imagePreview6");
+                    image_id = "imagePreview6";
                     break;
             }
 
@@ -367,6 +313,17 @@ export default {
 
             // Read the image file as a data URL
             reader.readAsDataURL(event.target.files[0]);
+
+            setTimeout(function() {
+                
+                // preview.src = applyFilter(image_id)
+                applyFilter(image_id)
+
+                // preview.width = preview.naturalWidth;
+                // preview.height = preview.naturalHeight;
+
+                
+            }, 500);
         },
     },
     created() {

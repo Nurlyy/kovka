@@ -2,12 +2,12 @@ export default function applyFilter (Image_id) {
 
     // document.addEventListener('DOMContentLoaded', init, false);
         console.log("init")
-        var img = document.getElementById("imageImg_0");
+        var img = document.getElementById(Image_id);
         // img.crossOrigin = "Anonymous";
         // img.onload = function () {
         //     pixelsJS.filterImg(img, "neue");
         // }
-        var filtered_img = pixelsJS.filterImg(img, "cosmic")
+        var filtered_img = pixelsJS.filterImg(img, "ocean")
 
         // var img2 = document.getElementById("img2");
         // img2.crossOrigin = "Anonymous";
