@@ -157,7 +157,7 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview1',
-                                                                filter
+                                                                filter, 1
                                                             );
                                                             filterValue1 =
                                                                 filter;
@@ -311,7 +311,7 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview2',
-                                                                filter
+                                                                filter, 2
                                                             );
                                                             filterValue2 =
                                                                 filter;
@@ -465,7 +465,7 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview3',
-                                                                filter
+                                                                filter, 3
                                                             );
                                                             filterValue3 =
                                                                 filter;
@@ -619,7 +619,7 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview4',
-                                                                filter
+                                                                filter, 4
                                                             );
                                                             filterValue4 =
                                                                 filter;
@@ -773,7 +773,7 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview5',
-                                                                filter
+                                                                filter, 5
                                                             );
                                                             filterValue5 =
                                                                 filter;
@@ -927,7 +927,7 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview6',
-                                                                filter
+                                                                filter, 6
                                                             );
                                                             filterValue6 =
                                                                 filter;
@@ -1110,8 +1110,32 @@ export default {
                 // preview.height = preview.naturalHeight;
             }, 500);
         },
-        selectFilter(id, filter) {
-            applyFilter(id, id + "_filtered_selected", filter);
+        selectFilter(id, filter, number) {
+            var dataUrl = applyFilter(id, id + "_filtered_selected", filter);
+            // var reader = new FileReader();
+            // console.log(dataUrl);
+            // var readDataUrl = reader.readAsDataURL(dataUrl);
+            var readDataUrl = dataUrl;
+            switch (number) {
+                case 1:
+                    this.image1 = readDataUrl;
+                    break;
+                case 2:
+                    this.image2 = readDataUrl;
+                    break;
+                case 3:
+                    this.image3 = readDataUrl;
+                    break;
+                case 4:
+                    this.image4 = readDataUrl;
+                    break;
+                case 5:
+                    this.image5 = readDataUrl;
+                    break;
+                case 6:
+                    this.image6 = readDataUrl;
+                    break;
+            }
         },
     },
     created() {

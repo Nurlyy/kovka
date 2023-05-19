@@ -151,6 +151,7 @@ class TabsController extends Controller
         $title = $request->title;
         $is_visible = $request->is_visible;
         if ($request->hasFile('image1')) {
+            // var_dump('hasfile');exit;
             $imageName = time() . '-image-1';
             $ext = $request->image1->getClientOriginalExtension();
             $request->image1->move(public_path('uploads/pages/'), $imageName . "." . $ext);
@@ -163,6 +164,7 @@ class TabsController extends Controller
             }
             
         }
+        // var_dump('hasnt');exit;
         if ($request->hasFile('image2')) {
             $imageName = time() . '-image-2';
             $ext = $request->image2->getClientOriginalExtension();

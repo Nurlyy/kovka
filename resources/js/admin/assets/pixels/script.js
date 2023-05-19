@@ -26,17 +26,33 @@ export default function applyFilter(Image_id, put_to, filter) {
     var dataUrl = canvas.toDataURL();
 
     putImg.src = dataUrl;
-    putImg.style.display = 'block';
+    putImg.style.display = "block";
 
     // canvas.remove();
+    // var blobb = null;
+    // fetch(dataUrl)
+    //     .then(response => response.blob())
+    //     .then((blob) => {
+    //     // Handle the Blob object here
+    //     blobb = blob;
+    // })
 
-    // return dataUrl;
+    // return typeof(blobb);
+
+    const base64Data = dataUrl.split(",")[1]; // Remove the data URL prefix
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteArrays.push(byteCharacters.charCodeAt(i));
+    }
+    const blob = new Blob([new Uint8Array(byteArrays)], { type: "image/png" });
+    const file = new File([blob], "image_"+Math.floor(Math.random() * (10000 - 1 + 1)) + 1+".png", { type: blob.type });
+    return file;
 }
 
-
-    // var img = document.getElementById(Image_id);
-    // // img.crossOrigin = "Anonymous";
-    // // img.onload = function () {
-    // //     pixelsJS.filterImg(img, "neue");
-    // // }
-    // var filtered_img = pixelsJS.filterImg(img, "cosmic")
+// var img = document.getElementById(Image_id);
+// // img.crossOrigin = "Anonymous";
+// // img.onload = function () {
+// //     pixelsJS.filterImg(img, "neue");
+// // }
+// var filtered_img = pixelsJS.filterImg(img, "cosmic")
