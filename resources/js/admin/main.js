@@ -26,6 +26,9 @@ import  { cilLockLocked,
      } from '@coreui/icons'
 // import VueEasyLightbox from 'vue-easy-lightbox';
 
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 const app = createApp(App)
 // app.use(VueEasyLightbox, {
     // maxZoom: 1.5,
@@ -34,6 +37,7 @@ const app = createApp(App)
     // zIndex: 9999
 //   });
 app.use(store)
+app.use(mavonEditor)
 app.use(router)
 app.use(CoreuiVue)
 app.provide('icons', {cilContact, cilListFilter, cilLockLocked, cilSave, cilTrash, cilPen, cilPlus, cilSave, cilSearch, cilImage, cilUser, cilFeaturedPlaylist, cilFile, cilAccountLogout,cilAlignCenter,cilMenu});
