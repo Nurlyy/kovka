@@ -63,21 +63,12 @@ import "photoswipe/style.css";
 // import pixelsJS from "pixelsJS";
 export default {
     name: "Gallery",
+
     data() {
         return {
-            inlineResult: undefined,
-            gallereActive_1: true,
-            gallereActive_2: false,
-            gallereActive_3: false,
-            active: "active",
-            active2: "",
-            active3: "",
-            maxheightClass: "",
-            dnoneActive: "",
             pages: null,
             ids: null,
             selectedIndex: -1,
-            classList: ["card_small", "card_medium", "card_large"],
             images: [],
             title: "",
             body: "",
@@ -97,20 +88,48 @@ export default {
         this.getPages();
     },
     methods: {
-        handleInlineProcess: function (event) {
-            this.inlineResult = URL.createObjectURL(event.detail.dest);
+        imageClicked(path, event) {
+            if (event.target.tagName.toLowerCase() === "a") {
+                const img = new Image();
+                img.src = path;
+                // img.onload = () => {
+                    this.maxWidth = img.width;
+                    this.maxHeight = img.height;
+                // };
+
+                console.log("maxWidth: " + this.maxWidth);
+                console.log("maxHeight: " + this.maxHeight);
+            }
         },
         getPages() {
             axios.post("/api/get-tabs").then((response) => {
                 this.pages = response.data.tabs;
                 // console.log(this.pages[0]);
                 this.selectedIndex = 0;
-                this.images.push({image: this.pages[0].image_1, preview: this.pages[0].image_1_preview });
-                this.images.push({image: this.pages[0].image_2, preview: this.pages[0].image_2_preview });
-                this.images.push({image: this.pages[0].image_3, preview: this.pages[0].image_3_preview });
-                this.images.push({image: this.pages[0].image_4, preview: this.pages[0].image_4_preview });
-                this.images.push({image: this.pages[0].image_5, preview: this.pages[0].image_5_preview });
-                this.images.push({image: this.pages[0].image_6, preview: this.pages[0].image_6_preview });
+                this.images.push({
+                    image: this.pages[0].image_1,
+                    preview: this.pages[0].image_1_preview,
+                });
+                this.images.push({
+                    image: this.pages[0].image_2,
+                    preview: this.pages[0].image_2_preview,
+                });
+                this.images.push({
+                    image: this.pages[0].image_3,
+                    preview: this.pages[0].image_3_preview,
+                });
+                this.images.push({
+                    image: this.pages[0].image_4,
+                    preview: this.pages[0].image_4_preview,
+                });
+                this.images.push({
+                    image: this.pages[0].image_5,
+                    preview: this.pages[0].image_5_preview,
+                });
+                this.images.push({
+                    image: this.pages[0].image_6,
+                    preview: this.pages[0].image_6_preview,
+                });
 
                 this.title = this.pages[0].title;
                 this.body = this.pages[0].body_text;
@@ -119,56 +138,38 @@ export default {
         galleryClick(index) {
             this.images = [];
             this.selectedIndex = index;
-            this.images.push({image: this.pages[index].image_1, preview: this.pages[index].image_1_preview });
-            this.images.push({image: this.pages[index].image_2, preview: this.pages[index].image_2_preview });
-            this.images.push({image: this.pages[index].image_3, preview: this.pages[index].image_3_preview });
-            this.images.push({image: this.pages[index].image_4, preview: this.pages[index].image_4_preview });
-            this.images.push({image: this.pages[index].image_5, preview: this.pages[index].image_5_preview });
-            this.images.push({image: this.pages[index].image_6, preview: this.pages[index].image_6_preview });
+            this.images.push({
+                image: this.pages[index].image_1,
+                preview: this.pages[index].image_1_preview,
+            });
+            this.images.push({
+                image: this.pages[index].image_2,
+                preview: this.pages[index].image_2_preview,
+            });
+            this.images.push({
+                image: this.pages[index].image_3,
+                preview: this.pages[index].image_3_preview,
+            });
+            this.images.push({
+                image: this.pages[index].image_4,
+                preview: this.pages[index].image_4_preview,
+            });
+            this.images.push({
+                image: this.pages[index].image_5,
+                preview: this.pages[index].image_5_preview,
+            });
+            this.images.push({
+                image: this.pages[index].image_6,
+                preview: this.pages[index].image_6_preview,
+            });
 
             this.title = this.pages[index].title;
             this.body = this.pages[index].body_text;
             this.maxheightClass = "";
             this.dnoneActive = "";
         },
-        imageClicked(path, event) {
-            if (event.target.tagName.toLowerCase() === "a") {
-                const img = new Image();
-                img.src = path;
-                this.maxWidth = img.width;
-                this.maxHeight = img.height;
-            }
-        },
-        gallery_1() {
-            if ((this.gallereActive_1 = true)) {
-                this.gallereActive_2 = false;
-                this.gallereActive_3 = false;
-            }
-            if ((this.active = "active")) {
-                this.active2 = "";
-                this.active3 = "";
-            }
-        },
-        gallery_2() {
-            if ((this.gallereActive_2 = true)) {
-                this.gallereActive_1 = false;
-                this.gallereActive_3 = false;
-            }
-            if ((this.active2 = "active")) {
-                this.active = "";
-                this.active3 = "";
-            }
-        },
-        gallery_3() {
-            if ((this.gallereActive_3 = true)) {
-                this.gallereActive_1 = false;
-                this.gallereActive_2 = false;
-            }
-            if ((this.active3 = "active")) {
-                this.active2 = "";
-                this.active1 = "";
-            }
-        },
+
+        
     },
 };
 </script>
