@@ -17,14 +17,14 @@
                 :key="index"
             >
                 <img
-                    :src="image"
+                    :src="image.preview"
                     alt=""
                     class="imageImg"
                     :id="'imageImg_' + index"
                 />
                 <a
-                    @click="imageClicked(image, $event)"
-                    :href="image"
+                    @click="imageClicked(image.image, $event)"
+                    :href="image.image"
                     :data-pswp-width="maxWidth"
                     :data-pswp-height="maxHeight"
                     target="_blank"
@@ -33,15 +33,6 @@
                 >
                 </a>
             </div>
-        </div>
-        <div v-for="(image, index) in images" :key="index">
-            <PinturaEditor
-                src="image"
-                @pintura:process="handleInlineProcess($event)"
-            >
-            </PinturaEditor>
-
-            <img v-if="inlineResult" :src="inlineResult" alt="" />
         </div>
         <div class="gallery-text" :class="maxheightClass">
             <h2>{{ title }}</h2>
@@ -67,15 +58,11 @@
 <script>
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
-import { PinturaEditor } from "@pqina/vue-pintura";
-import applyFilter from "../assets/pixels/script";
+// import applyFilter from "../assets/pixels/script";
 // import pixelsJs from "../assets/pixels/pixels";
 // import pixelsJS from "pixelsJS";
 export default {
     name: "Gallery",
-    components: {
-        PinturaEditor,
-    },
     data() {
         return {
             inlineResult: undefined,
@@ -96,7 +83,6 @@ export default {
             body: "",
             maxWidth: 0,
             maxHeight: 0,
-            previews: [],
         };
     },
     mounted() {
@@ -119,44 +105,26 @@ export default {
                 this.pages = response.data.tabs;
                 // console.log(this.pages[0]);
                 this.selectedIndex = 0;
-                this.images.push(this.pages[0].image_1);
-                this.images.push(this.pages[0].image_2);
-                this.images.push(this.pages[0].image_3);
-                this.images.push(this.pages[0].image_4);
-                this.images.push(this.pages[0].image_5);
-                this.images.push(this.pages[0].image_6);
-
-                this.previews.push(this.pages[0].image_1_preview);
-                this.previews.push(this.pages[0].image_2_preview);
-                this.previews.push(this.pages[0].image_3_preview);
-                this.previews.push(this.pages[0].image_4_preview);
-                this.previews.push(this.pages[0].image_5_preview);
-                this.previews.push(this.pages[0].image_6_preview);
+                this.images.push({image: this.pages[0].image_1, preview: this.pages[0].image_1_preview });
+                this.images.push({image: this.pages[0].image_2, preview: this.pages[0].image_2_preview });
+                this.images.push({image: this.pages[0].image_3, preview: this.pages[0].image_3_preview });
+                this.images.push({image: this.pages[0].image_4, preview: this.pages[0].image_4_preview });
+                this.images.push({image: this.pages[0].image_5, preview: this.pages[0].image_5_preview });
+                this.images.push({image: this.pages[0].image_6, preview: this.pages[0].image_6_preview });
 
                 this.title = this.pages[0].title;
                 this.body = this.pages[0].body_text;
             });
-            setTimeout(function () {
-                applyFilter("imageImg_0");
-            }, 2500);
         },
         galleryClick(index) {
-            // document.getElementById("gallery-list-photo").innerHTML = '';
             this.images = [];
             this.selectedIndex = index;
-            this.images.push(this.pages[index].image_1);
-            this.images.push(this.pages[index].image_2);
-            this.images.push(this.pages[index].image_3);
-            this.images.push(this.pages[index].image_4);
-            this.images.push(this.pages[index].image_5);
-            this.images.push(this.pages[index].image_6);
-
-            this.previews.push(this.pages[0].image_1_preview);
-            this.previews.push(this.pages[0].image_2_preview);
-            this.previews.push(this.pages[0].image_3_preview);
-            this.previews.push(this.pages[0].image_4_preview);
-            this.previews.push(this.pages[0].image_5_preview);
-            this.previews.push(this.pages[0].image_6_preview);
+            this.images.push({image: this.pages[index].image_1, preview: this.pages[index].image_1_preview });
+            this.images.push({image: this.pages[index].image_2, preview: this.pages[index].image_2_preview });
+            this.images.push({image: this.pages[index].image_3, preview: this.pages[index].image_3_preview });
+            this.images.push({image: this.pages[index].image_4, preview: this.pages[index].image_4_preview });
+            this.images.push({image: this.pages[index].image_5, preview: this.pages[index].image_5_preview });
+            this.images.push({image: this.pages[index].image_6, preview: this.pages[index].image_6_preview });
 
             this.title = this.pages[index].title;
             this.body = this.pages[index].body_text;
