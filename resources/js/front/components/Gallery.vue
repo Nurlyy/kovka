@@ -16,7 +16,12 @@
                 v-for="(image, index) in images"
                 :key="index"
             >
-                <img :src="image" alt="" class="imageImg" :id="'imageImg_' + index" />
+                <img
+                    :src="image"
+                    alt=""
+                    class="imageImg"
+                    :id="'imageImg_' + index"
+                />
                 <a
                     @click="imageClicked(image, $event)"
                     :href="image"
@@ -29,7 +34,7 @@
                 </a>
             </div>
         </div>
-        <div v-for='image, index in images' :key='index'>
+        <div v-for="(image, index) in images" :key="index">
             <PinturaEditor
                 src="image"
                 @pintura:process="handleInlineProcess($event)"
@@ -63,7 +68,7 @@
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 import { PinturaEditor } from "@pqina/vue-pintura";
-import applyFilter from '../assets/pixels/script';
+import applyFilter from "../assets/pixels/script";
 // import pixelsJs from "../assets/pixels/pixels";
 // import pixelsJS from "pixelsJS";
 export default {
@@ -91,6 +96,7 @@ export default {
             body: "",
             maxWidth: 0,
             maxHeight: 0,
+            previews: [],
         };
     },
     mounted() {
@@ -119,11 +125,19 @@ export default {
                 this.images.push(this.pages[0].image_4);
                 this.images.push(this.pages[0].image_5);
                 this.images.push(this.pages[0].image_6);
+
+                this.previews.push(this.pages[0].image_1_preview);
+                this.previews.push(this.pages[0].image_2_preview);
+                this.previews.push(this.pages[0].image_3_preview);
+                this.previews.push(this.pages[0].image_4_preview);
+                this.previews.push(this.pages[0].image_5_preview);
+                this.previews.push(this.pages[0].image_6_preview);
+
                 this.title = this.pages[0].title;
                 this.body = this.pages[0].body_text;
             });
-            setTimeout(function() {
-                applyFilter("imageImg_0")
+            setTimeout(function () {
+                applyFilter("imageImg_0");
             }, 2500);
         },
         galleryClick(index) {
@@ -136,6 +150,14 @@ export default {
             this.images.push(this.pages[index].image_4);
             this.images.push(this.pages[index].image_5);
             this.images.push(this.pages[index].image_6);
+
+            this.previews.push(this.pages[0].image_1_preview);
+            this.previews.push(this.pages[0].image_2_preview);
+            this.previews.push(this.pages[0].image_3_preview);
+            this.previews.push(this.pages[0].image_4_preview);
+            this.previews.push(this.pages[0].image_5_preview);
+            this.previews.push(this.pages[0].image_6_preview);
+
             this.title = this.pages[index].title;
             this.body = this.pages[index].body_text;
             this.maxheightClass = "";

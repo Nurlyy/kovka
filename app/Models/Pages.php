@@ -12,11 +12,17 @@ class Pages extends Model
     protected $table="pages";
     protected $fillable = [
         'image_1',
+        'image_1_preview',
         'image_2',
+        'image_2_preview',
         'image_3',
+        'image_3_preview',
         'image_4',
+        'image_4_preview',
         'image_5',
+        'image_5_preview',
         'image_6',
+        'image_6_preview',
         'header',
         'body_text',
         'title',
