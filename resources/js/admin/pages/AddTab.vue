@@ -173,6 +173,11 @@
                         </CRow>
                     </CContainer>
 
+                    <cropper v-if='image1 != null'
+                        :src="image1"
+                        @change="change"
+                    />
+
                     <CFormLabel v-if="id == null" for="image1"
                         >Изображение №1</CFormLabel
                     >
@@ -980,8 +985,13 @@
 <script>
 import router from "@/admin/router/index.js";
 import applyFilter from "../assets/pixels/script";
+import { Cropper } from 'vue-advanced-cropper';
+import 'vue-advanced-cropper/dist/style.css';
 export default {
     name: "AddPage",
+    components: {
+		Cropper,
+	},
     data() {
         return {
             title: "",
@@ -1110,6 +1120,9 @@ export default {
                 // preview.height = preview.naturalHeight;
             }, 500);
         },
+        change({ coordinates, canvas }) {
+			console.log(coordinates, canvas);
+		},
         selectFilter(id, filter, number) {
             var dataUrl = applyFilter(id, id + "_filtered_selected", filter);
             // var reader = new FileReader();

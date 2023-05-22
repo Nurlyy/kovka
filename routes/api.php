@@ -68,6 +68,7 @@ Route::post('get-page', "App\Http\Controllers\PageController@getPage");
 Route::post('get-pages', "App\Http\Controllers\PageController@getPages");
 Route::post('get-pages-admin', "App\Http\Controllers\PageController@getPagesAdmin")->middleware('auth:api');
 Route::post('get-page-admin', "App\Http\Controllers\PageController@getPageAdmin")->middleware('auth:api');
+Route::post("upload-image", "App\Http\Controllers\PageController@uploadImage");
 
 // Route::post("cv", "App\Http\Controllers\ContactsController@cve");
 // Route::post('get-image-admin', "App\Http\Controllers\ImageController@getImageAdmin");

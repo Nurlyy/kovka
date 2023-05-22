@@ -114,4 +114,57 @@ class PageController extends Controller
         $page->delete();
         return response()->json(['items' => Page::all()], 204);
     }
+
+    public function uploadImage(Request $request){
+        if($request->hasFile("image")){
+            $imageName = time();
+            $ext = $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/editor/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/editor/' . $imageName . '.' . 'webp';
+            if ($path != null) {
+                $image = $path;
+            }
+            return $path;
+        }
+    }
+    private function convertImageToWebp($file)
+    {
+        ini_set('memory_limit', '256M');
+        $directory = str_replace('\\', '/', public_path()) . '/' . "uploads/editor/";
+        if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', 'png', "JPG", "JPEG", "PNG"))) {
+
+            if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', "JPG", "JPEG"))) {
+                // Load the original image
+                $original_image = imagecreatefromjpeg($directory . $file);
+
+                // Create a new WebP image
+                $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
+                imagepalettetotruecolor($new_image);
+
+                // Convert the original image to the WebP format
+                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+
+                // Clean up the resources
+                imagedestroy($original_image);
+                imagedestroy($new_image);
+            } elseif (in_array(pathinfo($file, PATHINFO_EXTENSION), array('png', 'PNG'))) {
+                // Load the original image
+                $original_image = imagecreatefrompng($directory . $file);
+
+                // Create a new WebP image
+                $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
+                imagepalettetotruecolor($new_image);
+
+                // Convert the original image to the WebP format
+                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+
+                // Clean up the resources
+                imagedestroy($original_image);
+                imagedestroy($new_image);
+            }
+        }
+        unlink($directory . $file);
+    }
 }

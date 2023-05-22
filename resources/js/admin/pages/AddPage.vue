@@ -59,7 +59,18 @@
             contentType="html"
             theme="snow"
         /> -->
-        <mavon-editor v-model="body" :language='"ru"' ref="editor"/>
+        <mavon-editor
+            v-model="body"
+            :language="'ru'"
+            :html="true"
+            @htmlCode="htmlCode"
+            :htmlValue="htmlValueFromEditor"
+            @save="change"
+            @imgAdd="imgUpload"
+            ref='mavoneditor'
+        />
+
+        <!-- <editor-content :editor="editor" /> -->
 
         <!-- <div class="mb-3">
             <CFormLabel for="body">Body</CFormLabedl>
@@ -112,14 +123,16 @@
 </template>
 
 <script>
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
-
+// import { QuillEditor } from "@vueup/vue-quill";
+// import "@vueup/vue-quill/dist/vue-quill.snow.css";
+// import { Editor, EditorContent } from "@tiptap/vue-3";
+// import StarterKit from "@tiptap/starter-kit";
 import router from "@/admin/router/index.js";
 export default {
     name: "AddPage",
     components: {
-        QuillEditor,
+        // QuillEditor,
+        // EditorContent,
     },
     data() {
         return {
@@ -132,9 +145,19 @@ export default {
             description: "",
             visibility: false,
             id: null,
+            htmlValueFromEditor: "",
+            editor: null,
         };
     },
     methods: {
+        change(v, html) {
+            console.log(v);
+            console.log(html);
+            this.body = html;
+        },
+        htmlCode(status, value) {
+            this.htmlValueFromEditor = value;
+        },
         changeVisibility() {
             this.visibility = !this.visibility;
         },
@@ -142,46 +165,46 @@ export default {
             this.slug = this.slugify(this.name);
         },
         submitForm() {
-            const editor = this.$refs.editor;
-            const renderedHtml = editor.$refs.textarea.innerHTML;
-            console.log(renderedHtml);
-            // const visibility = this.visibility == true ? "1" : "0";
-            // if (this.id != null) {
-            //     axios
-            //         .post("/api/update-page", {
-            //             name: this.name,
-            //             slug: this.slug,
-            //             title: this.title,
-            //             header_title: this.header_title,
-            //             body: this.body,
-            //             keyword: this.keyword,
-            //             description: this.description,
-            //             visibility: visibility,
-            //             id: this.id,
-            //         })
-            //         .then(function (response) {
-            //             console.log(response.data);
-            //         });
-            // } else {
-            //     axios
-            //         .post("/api/add-page", {
-            //             name: this.name,
-            //             slug: this.slug,
-            //             title: this.title,
-            //             header_title: this.header_title,
-            //             body: this.body,
-            //             keyword: this.keyword,
-            //             description: this.description,
-            //             visibility: this.visibility,
-            //         })
-            //         .then(function (response) {
-            //             console.log(response.data);
-            //         });
-            //     // alert("saved");
-            // }
-            // setTimeout(() => {
-            //     router.push({ name: "Pages" });
-            // }, 500);
+            // console.log(
+            //     "HTML VALUE FROM EDITOR: \n" + this.body
+            // );
+            const visibility = this.visibility == true ? "1" : "0";
+            if (this.id != null) {
+                axios
+                    .post("/api/update-page", {
+                        name: this.name,
+                        slug: this.slug,
+                        title: this.title,
+                        header_title: this.header_title,
+                        body: this.body,
+                        keyword: this.keyword,
+                        description: this.description,
+                        visibility: visibility,
+                        id: this.id,
+                    })
+                    .then(function (response) {
+                        console.log(response.data);
+                    });
+            } else {
+                axios
+                    .post("/api/add-page", {
+                        name: this.name,
+                        slug: this.slug,
+                        title: this.title,
+                        header_title: this.header_title,
+                        body: this.body,
+                        keyword: this.keyword,
+                        description: this.description,
+                        visibility: this.visibility,
+                    })
+                    .then(function (response) {
+                        console.log(response.data);
+                    });
+                // alert("saved");
+            }
+            setTimeout(() => {
+                router.push({ name: "Pages" });
+            }, 500);
         },
         slugify(str) {
             return str
@@ -190,6 +213,51 @@ export default {
                 .replace(/[^\w\s-]/g, "")
                 .replace(/[\s_-]+/g, "-")
                 .replace(/^-+|-+$/g, "");
+        },
+        // imgUpload(pos, file, $vm) {
+        //     const formdata = new FormData();
+        //     formdata.append("text", "text");
+        //     formdata.append("image", file);
+        //     console.log(pos, file, formdata);
+
+        //     // ajax 上传
+        //     // const _this = this;
+        //     axios
+        //         .post("/api/upload-image", { formdata })
+        //         .then((res) => {
+        //             // const { data } = res;
+        //             // // data 就是img 的 url 地址
+        //             // $vm.$img2Url(pos, data);
+        //             console.log(res);
+        //         })
+        //         .catch((err) => {
+        //             console.log(err);
+        //         });
+
+        //     // $vm.$img2Url(
+        //     //     pos,
+        //     //     "http://uploads.liqingsong.cc/20210430/f62d2436-8d92-407d-977f-35f1e4b891fc.png"
+        //     // );
+        // },
+        imgUpload(pos, $file, $vm) {
+            var formdata = new FormData();
+            formdata.append("image", $file);
+            // console.log(pos);
+            // ajax上传
+            axios({
+                url: "/api/upload-image",
+                method: "post",
+                data: formdata,
+                headers: { "Content-Type": "multipart/form-data" },
+            })
+                .then((res) => {
+                    console.log(res);
+                    const { data } = res;
+                    this.$refs.mavoneditor.$img2Url(pos, data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
     },
     created() {
@@ -216,6 +284,9 @@ export default {
 
         // Fetch page data from database using slug
         // Set page data to this.page
+    },
+    beforeUnmount() {
+        this.editor.destroy();
     },
 };
 </script>
