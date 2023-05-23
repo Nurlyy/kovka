@@ -435,7 +435,7 @@ class TabsController extends Controller
         $height = imagesy($image);
 
         // Calculate the new dimensions
-        $new_width = 400; // 50% of the original height or minimum 400 pixels
+        $new_width = 390; // 50% of the original height or minimum 400 pixels
         $new_height = $new_width * $height / $width; // Maintain the aspect ratio
 
         // Create a new image with the new dimensions

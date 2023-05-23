@@ -13,42 +13,6 @@
             <hr />
             <p>{{ regalia.body }}</p>
         </a>
-        <!-- <a href="#" class="conteaner-card">
-        <div class="conteanet-ico card-2-ico">
-          <img src="@/assets/images/card-2.png" alt="">
-        </div>
-        <h4>
-          Удобное местоположение
-        </h4>
-        <hr>
-        <p>
-          Найти нас очень просто, мы находимся в сам центре Санкт-Петербурга
-        </p>
-      </a>
-      <a href="#" class="conteaner-card">
-        <div class="conteanet-ico card-3-ico">
-          <img src="@/assets/images/card-3.png" alt="">
-        </div>
-        <h4>
-          Современный станочный парк
-        </h4>
-        <hr>
-        <p>
-          Для производства мебели из массива дерева и художественного паркета.
-        </p>
-      </a>
-      <a href="#" class="conteaner-card">
-        <div class="conteanet-ico card-4-ico">
-          <img src="@/assets/images/card-4.png" alt="">
-        </div>
-        <h4>
-          Услуги
-        </h4>
-        <hr>
-        <p>
-          Мы всегда рады сотрудничать с дизайнерами и архитекторами
-        </p>
-      </a> -->
     </div>
 </template>
 
@@ -65,10 +29,9 @@ export default {
     mounted() {
         axios.post("/api/get-regalia").then((response) => {
             this.regalias = response.data.regalia;
-        });
-        axios.post("/api/get-pages").then((response) => {
-            if (response.data.items) {
-                this.pages = response.data.items;
+            axios.post("/api/get-pages").then((res) => {
+            if (res.data.items) {
+                this.pages = res.data.items;
                 this.regalias.forEach(regalia => {
                     this.pages_slugs[regalia.id] = this.pages.map(function (page) {
                         if(page.id == regalia.page_id){
@@ -81,6 +44,8 @@ export default {
                 
             }
         });
+        });
+        
     },
 };
 </script>

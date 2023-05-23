@@ -24,6 +24,7 @@ class PersonalController extends Controller
             $request->image->move(public_path('uploads/personal/'), $imageName . "." . $ext);
             $file =  $imageName . '.' . $ext;
             $this->convertImageToWebp($file);
+            $this->createPreview($imageName . ".webp");
             $path = '/uploads/personal/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image = $path;
@@ -58,6 +59,7 @@ class PersonalController extends Controller
             $request->image->move(public_path('uploads/personal/'), $imageName . "." . $ext);
             $file =  $imageName . '.' . $ext;
             $this->convertImageToWebp($file);
+            $this->createPreview($imageName . ".webp");
             $path = '/uploads/personal/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image = $path;
@@ -143,5 +145,33 @@ class PersonalController extends Controller
             }
         }
         unlink($directory . $file);
+    }
+
+    private function createPreview($file)
+    {
+        ini_set('memory_limit', '256M');
+        $directory = str_replace('\\', '/', public_path()) . '/' . "uploads/personal/";
+        $image = imagecreatefromwebp($directory . $file);
+
+        // Get the current dimensions of the image
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        // Calculate the new dimensions
+        $new_width = 320; // 50% of the original height or minimum 400 pixels
+        $new_height = $new_width * $height / $width; // Maintain the aspect ratio
+
+        // Create a new image with the new dimensions
+        $new_image = imagecreatetruecolor($new_width, $new_height);
+
+        // Squeeze the original image into the new image
+        imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+        // Save the new image as a .webp file
+        imagewebp($new_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp', 80); // 80 is the quality parameter, which can be set between 0 and 100
+
+        // Free up memory
+        imagedestroy($image);
+        imagedestroy($new_image);
     }
 }

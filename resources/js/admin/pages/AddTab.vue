@@ -43,14 +43,14 @@
             :width="1000"
             :height="1000"
             :params="params"
-            :langType='ru'
+            :langType="ru"
             :headers="headers"
             img-format="png"
         ></my-upload>
 
         <div class="mb-3">
             <CCard>
-                <CCardBody>
+                <CCardBody class="mb-3">
                     <CCardTitle>1 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
@@ -147,12 +147,28 @@
                                                         filter, index
                                                     ) in filters"
                                                     :key="index"
+                                                    @click="
+                                                        selectFilter(
+                                                            'imagePreview1',
+                                                            filter,
+                                                            1
+                                                        );
+                                                        filterValue1 = filter;
+                                                    "
+                                                    :style="{
+                                                        border:
+                                                            filterValue1 ===
+                                                            filter
+                                                                ? '1px solid'
+                                                                : 'none',
+                                                    }"
                                                     style="
-                                                        background-color: lightgray;
+                                                        background-color: #e5e5e5;
                                                         border-radius: 15px;
                                                         padding: 5px;
                                                         width: fit-content;
                                                         margin: 5px;
+                                                        cursor: pointer;
                                                     "
                                                 >
                                                     <img
@@ -166,15 +182,6 @@
                                                             margin-top: 15;
                                                             display: none;
                                                         "
-                                                        @click="
-                                                            selectFilter(
-                                                                'imagePreview1',
-                                                                filter,
-                                                                1
-                                                            );
-                                                            filterValue1 =
-                                                                filter;
-                                                        "
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -186,9 +193,13 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton color="light" href="#" @click="toggleShow(1)">{{
-                        buttonText
-                    }}</CButton>
+                    <CButton
+                        class="mt-3"
+                        color="light"
+                        href="#"
+                        @click="toggleShow(1)"
+                        >{{ buttonText }}</CButton
+                    >
                 </CCardBody>
             </CCard>
         </div>
@@ -292,12 +303,29 @@
                                                         filter, index
                                                     ) in filters"
                                                     :key="index"
+                                                    @click="
+                                                            selectFilter(
+                                                                'imagePreview2',
+                                                                filter,
+                                                                2
+                                                            );
+                                                            filterValue2 =
+                                                                filter;
+                                                        "
+                                                    :style="{
+                                                        border:
+                                                            filterValue2 ===
+                                                            filter
+                                                                ? '1px solid'
+                                                                : 'none',
+                                                    }"
                                                     style="
-                                                        background-color: lightgray;
+                                                        background-color: #e5e5e5;
                                                         border-radius: 15px;
                                                         padding: 5px;
                                                         width: fit-content;
                                                         margin: 5px;
+                                                        cursor: pointer;
                                                     "
                                                 >
                                                     <img
@@ -311,15 +339,7 @@
                                                             margin-top: 15;
                                                             display: none;
                                                         "
-                                                        @click="
-                                                            selectFilter(
-                                                                'imagePreview2',
-                                                                filter,
-                                                                2
-                                                            );
-                                                            filterValue2 =
-                                                                filter;
-                                                        "
+                                                        
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -331,7 +351,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton color="light" href="#" @click="toggleShow(2)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(2)">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -437,12 +457,29 @@
                                                         filter, index
                                                     ) in filters"
                                                     :key="index"
+                                                    @click="
+                                                            selectFilter(
+                                                                'imagePreview3',
+                                                                filter,
+                                                                3
+                                                            );
+                                                            filterValue3 =
+                                                                filter;
+                                                        "
+                                                    :style="{
+                                                        border:
+                                                            filterValue3 ===
+                                                            filter
+                                                                ? '1px solid'
+                                                                : 'none',
+                                                    }"
                                                     style="
-                                                        background-color: lightgray;
+                                                        background-color: #e5e5e5;
                                                         border-radius: 15px;
                                                         padding: 5px;
                                                         width: fit-content;
                                                         margin: 5px;
+                                                        cursor: pointer;
                                                     "
                                                 >
                                                     <img
@@ -456,15 +493,6 @@
                                                             margin-top: 15;
                                                             display: none;
                                                         "
-                                                        @click="
-                                                            selectFilter(
-                                                                'imagePreview3',
-                                                                filter,
-                                                                3
-                                                            );
-                                                            filterValue3 =
-                                                                filter;
-                                                        "
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -476,7 +504,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton color="light" href="#" @click="toggleShow(3)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(3)">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -582,12 +610,29 @@
                                                         filter, index
                                                     ) in filters"
                                                     :key="index"
+                                                    @click="
+                                                            selectFilter(
+                                                                'imagePreview4',
+                                                                filter,
+                                                                4
+                                                            );
+                                                            filterValue4 =
+                                                                filter;
+                                                        "
+                                                    :style="{
+                                                        border:
+                                                            filterValue4 ===
+                                                            filter
+                                                                ? '1px solid'
+                                                                : 'none',
+                                                    }"
                                                     style="
-                                                        background-color: lightgray;
+                                                        background-color: #e5e5e5;
                                                         border-radius: 15px;
                                                         padding: 5px;
                                                         width: fit-content;
                                                         margin: 5px;
+                                                        cursor: pointer;
                                                     "
                                                 >
                                                     <img
@@ -601,15 +646,7 @@
                                                             margin-top: 15;
                                                             display: none;
                                                         "
-                                                        @click="
-                                                            selectFilter(
-                                                                'imagePreview4',
-                                                                filter,
-                                                                4
-                                                            );
-                                                            filterValue4 =
-                                                                filter;
-                                                        "
+                                                        
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -621,7 +658,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton color="light" href="#" @click="toggleShow(4)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(4)">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -727,12 +764,29 @@
                                                         filter, index
                                                     ) in filters"
                                                     :key="index"
+                                                    @click="
+                                                            selectFilter(
+                                                                'imagePreview5',
+                                                                filter,
+                                                                5
+                                                            );
+                                                            filterValue5 =
+                                                                filter;
+                                                        "
+                                                    :style="{
+                                                        border:
+                                                            filterValue5 ===
+                                                            filter
+                                                                ? '1px solid'
+                                                                : 'none',
+                                                    }"
                                                     style="
-                                                        background-color: lightgray;
+                                                        background-color: #e5e5e5;
                                                         border-radius: 15px;
                                                         padding: 5px;
                                                         width: fit-content;
                                                         margin: 5px;
+                                                        cursor: pointer;
                                                     "
                                                 >
                                                     <img
@@ -746,15 +800,7 @@
                                                             margin-top: 15;
                                                             display: none;
                                                         "
-                                                        @click="
-                                                            selectFilter(
-                                                                'imagePreview5',
-                                                                filter,
-                                                                5
-                                                            );
-                                                            filterValue5 =
-                                                                filter;
-                                                        "
+                                                        
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -766,7 +812,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton color="light" href="#" @click="toggleShow(5)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(5)">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -872,12 +918,29 @@
                                                         filter, index
                                                     ) in filters"
                                                     :key="index"
+                                                    @click="
+                                                            selectFilter(
+                                                                'imagePreview6',
+                                                                filter,
+                                                                6
+                                                            );
+                                                            filterValue6 =
+                                                                filter;
+                                                        "
+                                                    :style="{
+                                                        border:
+                                                            filterValue6 ===
+                                                            filter
+                                                                ? '1px solid'
+                                                                : 'none',
+                                                    }"
                                                     style="
-                                                        background-color: lightgray;
+                                                        background-color: #e5e5e5;
                                                         border-radius: 15px;
                                                         padding: 5px;
                                                         width: fit-content;
                                                         margin: 5px;
+                                                        cursor: pointer;
                                                     "
                                                 >
                                                     <img
@@ -891,15 +954,7 @@
                                                             margin-top: 15;
                                                             display: none;
                                                         "
-                                                        @click="
-                                                            selectFilter(
-                                                                'imagePreview6',
-                                                                filter,
-                                                                6
-                                                            );
-                                                            filterValue6 =
-                                                                filter;
-                                                        "
+                                                        
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -911,7 +966,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton color="light" href="#" @click="toggleShow(6)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(6)">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -979,7 +1034,6 @@ export default {
             visible4: false,
             visible5: false,
             visible6: false,
-            visibleLiveDemo: false,
             image_id: null,
         };
     },
