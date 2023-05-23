@@ -157,7 +157,8 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview1',
-                                                                filter, 1
+                                                                filter,
+                                                                1
                                                             );
                                                             filterValue1 =
                                                                 filter;
@@ -173,25 +174,34 @@
                         </CRow>
                     </CContainer>
 
-                    <cropper v-if='image1 != null'
-                        :src="image1"
+                    <!-- <cropper
+                        v-if="image1 != null"
+                        :src="image.src"
                         @change="change"
-                    />
+                    /> -->
 
-                    <CFormLabel v-if="id == null" for="image1"
-                        >Изображение №1</CFormLabel
-                    >
-                    <CFormLabel v-if="id != null" for="image1"
-                        >Изменить изображение №1</CFormLabel
-                    >
-                    <CFormInput
-                        @change="
-                            saveImage($event, 1);
-                            filterValue1 = null;
-                        "
-                        type="file"
-                        id="image1"
-                    />
+                    <!-- <VueCropper
+                    v-show="image1 != null"
+                        ref="cropper"
+                        :img="image.src"
+                        :output-type="'png'"
+                        :full='true'
+                        :autoCrop='true'
+                        
+                    ></VueCropper> -->
+                    <CButton color="light" href="#" @click="toggleShow">{{
+                        buttonText
+                    }}</CButton>
+                    <my-upload
+                        field="img"
+                        @crop-success="cropSuccess(img, field, 1)"
+                        v-model="show"
+                        :width="300"
+                        :height="300"
+                        :params="params"
+                        :headers="headers"
+                        img-format="png"
+                    ></my-upload>
                 </CCardBody>
             </CCard>
         </div>
@@ -316,7 +326,8 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview2',
-                                                                filter, 2
+                                                                filter,
+                                                                2
                                                             );
                                                             filterValue2 =
                                                                 filter;
@@ -470,7 +481,8 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview3',
-                                                                filter, 3
+                                                                filter,
+                                                                3
                                                             );
                                                             filterValue3 =
                                                                 filter;
@@ -624,7 +636,8 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview4',
-                                                                filter, 4
+                                                                filter,
+                                                                4
                                                             );
                                                             filterValue4 =
                                                                 filter;
@@ -778,7 +791,8 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview5',
-                                                                filter, 5
+                                                                filter,
+                                                                5
                                                             );
                                                             filterValue5 =
                                                                 filter;
@@ -932,7 +946,8 @@
                                                         @click="
                                                             selectFilter(
                                                                 'imagePreview6',
-                                                                filter, 6
+                                                                filter,
+                                                                6
                                                             );
                                                             filterValue6 =
                                                                 filter;
@@ -983,17 +998,31 @@
 </template>
 
 <script>
+// import myUpload from 'vue-image-crop-upload';
+// import 'vue-cropper/dist/index.css'
+// import { VueCropper }  from "vue-cropper";
 import router from "@/admin/router/index.js";
 import applyFilter from "../assets/pixels/script";
-import { Cropper } from 'vue-advanced-cropper';
-import 'vue-advanced-cropper/dist/style.css';
+import myUpload from "vue-image-crop-upload";
+// import { Cropper } from "vue-advanced-cropper";
+// import "vue-advanced-cropper/dist/style.css";
 export default {
     name: "AddPage",
     components: {
-		Cropper,
-	},
+        "my-upload": myUpload,
+        //  VueCropper
+    },
     data() {
         return {
+            show: false,
+            params: {
+                token: "123456798",
+                name: "avatar",
+            },
+            headers: {
+                smail: "*_~",
+            },
+            imgDataUrl: "",
             title: "",
             body: "",
             is_visible: false,
@@ -1018,9 +1047,29 @@ export default {
             visible4: false,
             visible5: false,
             visible6: false,
+            visibleLiveDemo: false,
+            image: {
+                src: null,
+                type: null,
+            },
         };
     },
     methods: {
+        toggleShow() {
+            this.show = !this.show;
+        },
+        /**
+         * crop success
+         *
+         * [param] imgDataUrl
+         * [param] field
+         */
+        cropSuccess(imgDataUrl, field, id) {
+            console.log("-------- crop success --------");
+            this.imgDataUrl = imgDataUrl;
+            // this.preview.src = imgDataUrl;
+            this.saveImage(imgDataUrl, id);
+        },
         changeVisibility() {
             this.is_visible = !this.is_visible;
         },
@@ -1062,7 +1111,7 @@ export default {
             var image_id = "";
             switch (number) {
                 case 1:
-                    this.image1 = event.target.files[0];
+                    this.image1 = event;
                     preview = document.getElementById("imagePreview1");
                     image_id = "imagePreview1";
                     break;
@@ -1094,17 +1143,17 @@ export default {
             }
 
             // Create a new FileReader instance
-            var reader = new FileReader();
+            // var reader = new FileReader();
 
             // Set the image preview source
-            reader.onload = function (event) {
-                preview.src = event.target.result;
-            };
-
+            // reader.onload = function (event) {
+            // preview.src = event.target.result;
+            // };
+            preview.src = event;
             preview.style.display = "block";
 
             // Read the image file as a data URL
-            reader.readAsDataURL(event.target.files[0]);
+            // reader.readAsDataURL(event.target.files[0]);
 
             setTimeout(() => {
                 // preview.src = applyFilter(image_id)
@@ -1121,8 +1170,8 @@ export default {
             }, 500);
         },
         change({ coordinates, canvas }) {
-			console.log(coordinates, canvas);
-		},
+            console.log(coordinates, canvas);
+        },
         selectFilter(id, filter, number) {
             var dataUrl = applyFilter(id, id + "_filtered_selected", filter);
             // var reader = new FileReader();
@@ -1211,7 +1260,22 @@ export default {
         // Fetch page data from database using slug
         // Set page data to this.page
     },
+    computed: {
+        buttonText: function () {
+            if (this.id === null) {
+                return "Добавить изображение";
+            } else {
+                return "Изменить изображение";
+            }
+        },
+    },
 };
 </script>
 
-<style></style>
+<style>
+/* .cropper {
+    height: 600px;
+    width: 600px;
+    background: #ddd;
+} */
+</style>
