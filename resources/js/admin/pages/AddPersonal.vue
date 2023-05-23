@@ -63,6 +63,11 @@
         </div>
 
         <div class="mb-3">
+            <CFormLabel for="body">Описание</CFormLabel>
+            <CFormTextarea v-model="body" :value='body'  type="text" id="body" />
+        </div>
+
+        <div class="mb-3">
             <CFormLabel for="show"
                 >Показывать человека на сайте?
             </CFormLabel>
@@ -133,23 +138,23 @@ export default {
             formData.append("position", this.position);
             formData.append("name", this.name);
             formData.append("body", this.body);
-            formData.append("visibility", this.visibility);
+            formData.append("visibility", visibility);
             formData.append("image", this.image);
             formData.append("email", this.email);
             if (this.id != null) {
-                formData.append("id", this.is);
+                formData.append("id", this.id);
                 axios
-                    .post("/api/update-personal", {
+                    .post("/api/update-personal", 
                         formData
-                    })
+                    )
                     .then(function (response) {
                         console.log(response.data);
                     });
             } else {
                 axios
-                    .post("/api/add-personal", {
+                    .post("/api/add-personal", 
                         formData
-                    })
+                    )
                     .then(function (response) {
                         console.log(response.data);
                     });
@@ -183,7 +188,7 @@ export default {
                     this.email = response.data.personal.email;
                     this.visibility =
                         response.data.personal.show == "1" ? true : false;
-                    this.id = response.data.personal.id;
+                    this.id = id;
                 });
         }
 

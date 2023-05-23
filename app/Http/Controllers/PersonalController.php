@@ -18,7 +18,7 @@ class PersonalController extends Controller
         $image = null;
         $email = $request->email;
 
-        if($request->hasFile("image")){
+        if ($request->hasFile("image")) {
             $imageName = time();
             $ext = $request->image->getClientOriginalExtension();
             $request->image->move(public_path('uploads/personal/'), $imageName . "." . $ext);
@@ -31,14 +31,14 @@ class PersonalController extends Controller
         }
 
         // return response()->json($slug_page, 200);
-            $personal = Personal::create([
-                "position" => $position,
-                "name" => $name,
-                "body" => $body,
-                "visibility" => $visibility,
-                "image" => $image,
-                "email" => $email,
-            ]);
+        $personal = Personal::create([
+            "position" => $position,
+            "name" => $name,
+            "body" => $body,
+            "visibility" => $visibility,
+            "image" => $image,
+            "email" => $email,
+        ]);
     }
 
     public function updatePersonal(Request $request)
@@ -52,7 +52,7 @@ class PersonalController extends Controller
         $email = $request->email;
         $id = $request->id;
 
-        if($request->hasFile("image")){
+        if ($request->hasFile("image")) {
             $imageName = time();
             $ext = $request->image->getClientOriginalExtension();
             $request->image->move(public_path('uploads/personal/'), $imageName . "." . $ext);
@@ -64,16 +64,16 @@ class PersonalController extends Controller
             }
         }
         // return $body;
-        $personal = Personal::where('id', intval($id))->first();
-        // return response()->json($slug_page, 200);
-            $personal->update([
-                "position" => $position,
-                "name" => $name,
-                "body" => $body,
-                "visibility" => $visibility,
-                "image" => $image,
-                "email" => $email,
-            ]);
+        $personal = Personal::where('id', $id)->first();
+        // return response()->json($personal, 200);
+        $personal->update([
+            "position" => $position,
+            "name" => $name,
+            "body" => $body,
+            "visibility" => $visibility,
+            "image" => $image,
+            "email" => $email,
+        ]);
 
         return response()->json(['personal' => $personal], 201);
     }
