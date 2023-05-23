@@ -21,6 +21,18 @@ const routes = [
         redirect: "/admin/login",
         children: [
             {
+                path: "/admin/personal",
+                name: "Personal",
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/Personal.vue"
+                    ),
+                meta: { requiresAuth: true },
+            },
+            {
                 path: "/admin/personal/add-personal",
                 name: "AddPersonal",
                 // route level code-splitting

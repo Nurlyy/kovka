@@ -37,6 +37,12 @@ export default [
     },
     {
         component: "CNavItem",
+        name: "Персонал",
+        to: "/admin/personal",
+        icon: "cil-address-book",
+    },
+    {
+        component: "CNavItem",
         name: "Главная",
         to: "/admin/main-page",
         icon: "cilFeaturedPlaylist",

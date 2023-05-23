@@ -22,6 +22,7 @@ import  { cilLockLocked,
     cilFeaturedPlaylist,
     cilAccountLogout,
     cilAlignCenter,
+    cilAddressBook,
     cilMenu,
      } from '@coreui/icons'
 // import VueEasyLightbox from 'vue-easy-lightbox';
@@ -44,7 +45,7 @@ app.use(mavonEditor)
 app.use(router)
 app.use(VueCropper)
 app.use(CoreuiVue)
-app.provide('icons', {cilContact, cilListFilter, cilLockLocked, cilSave, cilTrash, cilPen, cilPlus, cilSave, cilSearch, cilImage, cilUser, cilFeaturedPlaylist, cilFile, cilAccountLogout,cilAlignCenter,cilMenu});
+app.provide('icons', {cilContact, cilAddressBook, cilListFilter, cilLockLocked, cilSave, cilTrash, cilPen, cilPlus, cilSave, cilSearch, cilImage, cilUser, cilFeaturedPlaylist, cilFile, cilAccountLogout,cilAlignCenter,cilMenu});
 app.component('CIcon', CIcon)
 
 app.mount('#app')

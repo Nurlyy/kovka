@@ -15,9 +15,20 @@ class PersonalController extends Controller
         $name = $request->name;
         $body = $request->body;
         $visibility = $request->visibility;
-        $image = $request->image;
+        $image = null;
         $email = $request->email;
 
+        if($request->hasFile("image")){
+            $imageName = time();
+            $ext = $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/personal/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/personal/' . $imageName . '.' . 'webp';
+            if ($path != null) {
+                $image = $path;
+            }
+        }
 
         // return response()->json($slug_page, 200);
             $personal = Personal::create([
@@ -40,10 +51,22 @@ class PersonalController extends Controller
         $image = $request->image;
         $email = $request->email;
         $id = $request->id;
+
+        if($request->hasFile("image")){
+            $imageName = time();
+            $ext = $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/personal/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file);
+            $path = '/uploads/personal/' . $imageName . '.' . 'webp';
+            if ($path != null) {
+                $image = $path;
+            }
+        }
         // return $body;
-        $page = Personal::where('id', intval($id))->first();
+        $personal = Personal::where('id', intval($id))->first();
         // return response()->json($slug_page, 200);
-            $page->update([
+            $personal->update([
                 "position" => $position,
                 "name" => $name,
                 "body" => $body,
@@ -52,7 +75,7 @@ class PersonalController extends Controller
                 "email" => $email,
             ]);
 
-        return response()->json(['page' => $page], 201);
+        return response()->json(['personal' => $personal], 201);
     }
 
 

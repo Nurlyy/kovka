@@ -37,6 +37,8 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')
 // Route::post('delete-image', "App\Http\Controllers\ImageController@deleteImage")->middleware('auth:api');
 Route::post('add-page', "App\Http\Controllers\PageController@addPage")->middleware('auth:api');
 Route::post('update-page', "App\Http\Controllers\PageController@updatePage")->middleware('auth:api');
+Route::post('add-personal', "App\Http\Controllers\PersonalController@addPersonal")->middleware('auth:api');
+Route::post('update-personal', "App\Http\Controllers\PersonalController@updatePersonal")->middleware('auth:api');
 Route::post('delete-page', "App\Http\Controllers\PageController@deletePage")->middleware('auth:api');
 Route::post('save-contacts', "App\Http\Controllers\ContactsController@saveContacts")->middleware('auth:api');
 Route::post('save-main-page', "App\Http\Controllers\MainPageController@saveMainPage")->middleware('auth:api');
@@ -68,6 +70,9 @@ Route::post('get-page', "App\Http\Controllers\PageController@getPage");
 Route::post('get-pages', "App\Http\Controllers\PageController@getPages");
 Route::post('get-pages-admin', "App\Http\Controllers\PageController@getPagesAdmin")->middleware('auth:api');
 Route::post('get-page-admin', "App\Http\Controllers\PageController@getPageAdmin")->middleware('auth:api');
+Route::post('get-personals-admin', "App\Http\Controllers\PersonalController@getPersonalsAdmin")->middleware('auth:api');
+Route::post('get-personal-admin', "App\Http\Controllers\PersonalController@getPersonalAdmin")->middleware('auth:api');
+Route::post('get-personal', "App\Http\Controllers\PersonalController@getPersonal");
 Route::post("upload-image", "App\Http\Controllers\PageController@uploadImage");
 
 // Route::post("cv", "App\Http\Controllers\ContactsController@cve");

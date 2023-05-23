@@ -1,6 +1,6 @@
 <template>
-    <h1 v-if="id == null">Добавить Работника</h1>
-    <h1 v-if="id != null">Изменить Работника</h1>
+    <h1 v-if="id == null">Добавить Человека</h1>
+    <h1 v-if="id != null">Изменить Человека</h1>
     <CForm @submit.prevent="submitForm()">
         <div>
             <img
@@ -35,9 +35,8 @@
                 type="text"
                 v-model="name"
                 :value="name"
-                @change="slugify_name()"
                 id="name"
-                placeholder="NAME"
+                placeholder="Имя"
             />
         </div>
 
@@ -65,7 +64,7 @@
 
         <div class="mb-3">
             <CFormLabel for="show"
-                >Показывать ссылку на страницу в меню?
+                >Показывать человека на сайте?
             </CFormLabel>
             <CFormCheck
                 style="margin-left: 15px"
@@ -160,7 +159,7 @@ export default {
                 // alert("saved");
             }
             setTimeout(() => {
-                router.push({ name: "Pages" });
+                router.push({ name: "Personal" });
             }, 500);
         },
         slugify(str) {
@@ -221,7 +220,7 @@ export default {
         const id = this.$route.params.id;
         if (id) {
             axios
-                .post("/api/get-page-admin", { id: id })
+                .post("/api/get-personal-admin", { id: id })
                 .then((response) => {
                     // this.page = response.data.page;
                     // console.log(reponse.data);

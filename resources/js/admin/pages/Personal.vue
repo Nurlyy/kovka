@@ -1,21 +1,20 @@
 <template>
     <AppSidebar />
     <div class="d-flex flex-row justify-content-between">
-        <h1>Страницы</h1>
+        <h1>Персонал</h1>
         <a
-            href="/admin/images/add-page"
+            href="/admin/personal/add-personal"
             class="btn btn-primary"
             style="margin-left: 30px; height: fit-content"
-            ><CIcon icon="cil-plus" size="sm"/> Добавить страницу</a
+            ><CIcon icon="cil-plus" size="sm"/> Добавить человека</a
         >
     </div>
     <CTable stripedColumns>
         <thead>
             <tr>
                 <th>№</th>
-                <th>Название</th>
-                <th>URL</th>
-                <th>Ключевые слова</th>
+                <th>Имя</th>
+                <th>Должность</th>
                 <th>Показывать</th>
             </tr>
         </thead>
@@ -23,11 +22,10 @@
             <tr v-for="item in items" :key="item.id">
                 <td><div class="table_td">{{ item.id }}</div></td>
                 <td><div class="table_td">{{ item.name }}</div></td>
-                <td><div class="table_td">{{ item.slug }}</div></td>
-                <td><div class="table_td">{{ item.keyword }}</div></td>
-                <td><div class="table_td"><CFormCheck style="margin-left: 15px" :checked='item.show' id="show" disabled /></div></td>
+                <td><div class="table_td">{{ item.position }}</div></td>
+                <td><div class="table_td"><CFormCheck style="margin-left: 15px" :checked='item.visibility' id="show" disabled /></div></td>
                 <td>
-                    <CButton component="a" color="info" :href="'/admin/pages/' + item.slug" role="button"><CIcon icon="cil-pen" size="sm"/> Изменить</CButton>
+                    <CButton component="a" color="info" :href="'/admin/personal/' + item.id" role="button"><CIcon icon="cil-pen" size="sm"/> Изменить</CButton>
                     <!-- <router-link :to="'/admin/images/' + image.id"
                         >Изменить</router-link
                     > -->
@@ -42,21 +40,21 @@
 <script>
 import router from "@/admin/router/index.js";
 export default {
-    name: "Pages",
+    name: "Personal",
     data() {
         return {
             items: [],
         };
     },
     mounted() {
-        axios.post("/api/get-pages-admin", {}).then((response) => {
+        axios.post("/api/get-personals-admin", {}).then((response) => {
             this.items = response.data.items;
         });
     },
     methods: {
         deletePage(id) {
             if (confirm("Are you sure you want to delete this?")) {
-                axios.post("/api/delete-page", { id: id }).then((response) => {
+                axios.post("/api/delete-personal", { id: id }).then((response) => {
                 window.location.reload();
                 // router.push({ name: "Pages" });
             });
