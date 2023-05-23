@@ -81,13 +81,8 @@ class PersonalController extends Controller
 
     public function getPersonal(Request $request)
     {
-        $id = $request->id;
-        $personal = Personal::where('id', $id)->first();
-        if ($personal->visibility == 1) {
-            return response()->json(['personal' => $personal]);
-        } else {
-            return response()->json(['message' => 'Person is not available']);
-        }
+        $personal = Personal::where('visibility', 1)->get();
+        return response()->json(['personal' => $personal]);
     }
 
     public function getPersonalsAdmin()

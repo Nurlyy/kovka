@@ -204,6 +204,11 @@ const routes = [
         name: "Login",
         component: () => import("@/admin/views/pages/Login.vue"),
     },
+    {
+        path: "/:catchAll(.*)", // Catch-all route
+        name: "NotFound",
+        component: () => import("@/admin/pages/NotFound.vue"), // Import the component for your 404 page
+    },
 ];
 
 const router = createRouter({

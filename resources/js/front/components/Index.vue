@@ -3,8 +3,10 @@
     <div class="mine-conteaner">
         <Header />
         <Gallery />
+        <Team />
         <CallMe />
         <Regalia />
+        
     </div>
     <Footer />
 </template>
@@ -16,6 +18,7 @@ import Gallery from "./Gallery.vue";
 import CallMe from "./CallMe.vue";
 import Regalia from "./Regalia.vue";
 import Footer from "./Footer.vue";
+import Team from './Team.vue';
 
 export default {
     name: "Index",
@@ -26,6 +29,7 @@ export default {
         CallMe,
         Regalia,
         Footer,
+        Team,
     },
 };
 </script>

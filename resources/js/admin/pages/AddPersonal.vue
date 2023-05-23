@@ -18,7 +18,7 @@
 
         <CFormLabel v-if="id == null" for="image">Изображение</CFormLabel>
         <CFormLabel v-if="id != null" for="image"
-            >Изменить изображение №1</CFormLabel
+            >Изменить изображение</CFormLabel
         >
         <CFormInput
             @change="
@@ -187,16 +187,19 @@ export default {
                     this.image = response.data.personal.image;
                     this.email = response.data.personal.email;
                     this.visibility =
-                        response.data.personal.show == "1" ? true : false;
+                        response.data.personal.visibility == "1" ? true : false;
                     this.id = id;
+                    var preview;
+                    if (this.image != null) {
+                        preview = document.getElementById("imagePreview");
+                        preview.src = this.image;
+                        preview.style.display = "block";
+                    }
                 });
         }
 
         // Fetch personal data from database using id
         // Set personal data 
-    },
-    beforeUnmount() {
-        this.editor.destroy();
     },
 };
 </script>
