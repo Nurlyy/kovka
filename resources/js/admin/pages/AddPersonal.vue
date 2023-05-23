@@ -129,16 +129,18 @@ export default {
             //     "HTML VALUE FROM EDITOR: \n" + this.body
             // );
             const visibility = this.visibility == true ? "1" : "0";
+            let formData = new FormData();
+            formData.append("position", this.position);
+            formData.append("name", this.name);
+            formData.append("body", this.body);
+            formData.append("visibility", this.visibility);
+            formData.append("image", this.image);
+            formData.append("email", this.email);
             if (this.id != null) {
+                formData.append("id", this.is);
                 axios
                     .post("/api/update-personal", {
-                        position : this.position,
-                        name : this.name,
-                        body : this.body,
-                        visibility : this.visibility,
-                        id : this.id,
-                        image : this.image,
-                        email : this.email,
+                        formData
                     })
                     .then(function (response) {
                         console.log(response.data);
@@ -146,12 +148,7 @@ export default {
             } else {
                 axios
                     .post("/api/add-personal", {
-                        position : this.position,
-                        name : this.name,
-                        body : this.body,
-                        visibility : this.visibility,
-                        image : this.image,
-                        email : this.email,
+                        formData
                     })
                     .then(function (response) {
                         console.log(response.data);
@@ -169,51 +166,6 @@ export default {
                 .replace(/[^\w\s-]/g, "")
                 .replace(/[\s_-]+/g, "-")
                 .replace(/^-+|-+$/g, "");
-        },
-        // imgUpload(pos, file, $vm) {
-        //     const formdata = new FormData();
-        //     formdata.append("text", "text");
-        //     formdata.append("image", file);
-        //     console.log(pos, file, formdata);
-
-        //     // ajax 上传
-        //     // const _this = this;
-        //     axios
-        //         .post("/api/upload-image", { formdata })
-        //         .then((res) => {
-        //             // const { data } = res;
-        //             // // data 就是img 的 url 地址
-        //             // $vm.$img2Url(pos, data);
-        //             console.log(res);
-        //         })
-        //         .catch((err) => {
-        //             console.log(err);
-        //         });
-
-        //     // $vm.$img2Url(
-        //     //     pos,
-        //     //     "http://uploads.liqingsong.cc/20210430/f62d2436-8d92-407d-977f-35f1e4b891fc.png"
-        //     // );
-        // },
-        imgUpload(pos, $file, $vm) {
-            var formdata = new FormData();
-            formdata.append("image", $file);
-            // console.log(pos);
-            // ajax上传
-            axios({
-                url: "/api/upload-image",
-                method: "post",
-                data: formdata,
-                headers: { "Content-Type": "multipart/form-data" },
-            })
-                .then((res) => {
-                    console.log(res);
-                    const { data } = res;
-                    this.$refs.mavoneditor.$img2Url(pos, data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
         },
     },
     created() {
@@ -235,8 +187,8 @@ export default {
                 });
         }
 
-        // Fetch page data from database using slug
-        // Set page data to this.page
+        // Fetch personal data from database using id
+        // Set personal data 
     },
     beforeUnmount() {
         this.editor.destroy();
