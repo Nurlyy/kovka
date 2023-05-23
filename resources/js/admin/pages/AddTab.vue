@@ -36,6 +36,16 @@
                 rows="3"
             ></CFormTextarea>
         </div>
+        <my-upload
+            field="img"
+            @crop-success="(img, field) => cropSuccess(img, field, image_id)"
+            v-model="show"
+            :width="1000"
+            :height="1000"
+            :params="params"
+            :headers="headers"
+            img-format="png"
+        ></my-upload>
 
         <div class="mb-3">
             <CCard>
@@ -174,34 +184,9 @@
                         </CRow>
                     </CContainer>
 
-                    <!-- <cropper
-                        v-if="image1 != null"
-                        :src="image.src"
-                        @change="change"
-                    /> -->
-
-                    <!-- <VueCropper
-                    v-show="image1 != null"
-                        ref="cropper"
-                        :img="image.src"
-                        :output-type="'png'"
-                        :full='true'
-                        :autoCrop='true'
-                        
-                    ></VueCropper> -->
-                    <CButton color="light" href="#" @click="toggleShow">{{
+                    <CButton color="light" href="#" @click="toggleShow(1)">{{
                         buttonText
                     }}</CButton>
-                    <my-upload
-                        field="img"
-                        @crop-success="cropSuccess(img, field, 1)"
-                        v-model="show"
-                        :width="300"
-                        :height="300"
-                        :params="params"
-                        :headers="headers"
-                        img-format="png"
-                    ></my-upload>
                 </CCardBody>
             </CCard>
         </div>
@@ -343,20 +328,19 @@
                         </CRow>
                     </CContainer>
 
-                    <CFormLabel v-if="id == null" for="image2"
-                        >Изображение №2</CFormLabel
-                    >
-                    <CFormLabel v-if="id != null" for="image2"
-                        >Изменить изображение №2</CFormLabel
-                    >
-                    <CFormInput
-                        @change="
-                            saveImage($event, 2);
-                            filterValue2 = null;
-                        "
-                        type="file"
-                        id="image2"
-                    />
+                    <CButton color="light" href="#" @click="toggleShow(2)">{{
+                        buttonText
+                    }}</CButton>
+                    <!-- <my-upload
+                        field="img"
+                        @crop-success="(img, field) => cropSuccess(img, field, 2)"
+                        v-model="show"
+                        :width="300"
+                        :height="300"
+                        :params="params"
+                        :headers="headers"
+                        img-format="png"
+                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -498,20 +482,19 @@
                         </CRow>
                     </CContainer>
 
-                    <CFormLabel v-if="id == null" for="image1"
-                        >Изображение №3</CFormLabel
-                    >
-                    <CFormLabel v-if="id != null" for="image1"
-                        >Изменить изображение №3</CFormLabel
-                    >
-                    <CFormInput
-                        @change="
-                            saveImage($event, 3);
-                            filterValue3 = null;
-                        "
-                        type="file"
-                        id="image3"
-                    />
+                    <CButton color="light" href="#" @click="toggleShow(3)">{{
+                        buttonText
+                    }}</CButton>
+                    <!-- <my-upload
+                        field="img"
+                        @crop-success="(img, field) => cropSuccess(img, field, 3)"
+                        v-model="show"
+                        :width="300"
+                        :height="300"
+                        :params="params"
+                        :headers="headers"
+                        img-format="png"
+                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -653,20 +636,19 @@
                         </CRow>
                     </CContainer>
 
-                    <CFormLabel v-if="id == null" for="image4"
-                        >Изображение №4</CFormLabel
-                    >
-                    <CFormLabel v-if="id != null" for="image4"
-                        >Изменить изображение №4</CFormLabel
-                    >
-                    <CFormInput
-                        @change="
-                            saveImage($event, 4);
-                            filterValue4 = null;
-                        "
-                        type="file"
-                        id="image4"
-                    />
+                    <CButton color="light" href="#" @click="toggleShow(4)">{{
+                        buttonText
+                    }}</CButton>
+                    <!-- <my-upload
+                        field="img"
+                        @crop-success="(img, field) => cropSuccess(img, field, 4)"
+                        v-model="show"
+                        :width="300"
+                        :height="300"
+                        :params="params"
+                        :headers="headers"
+                        img-format="png"
+                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -808,20 +790,19 @@
                         </CRow>
                     </CContainer>
 
-                    <CFormLabel v-if="id == null" for="image5"
-                        >Изображение №5</CFormLabel
-                    >
-                    <CFormLabel v-if="id != null" for="image5"
-                        >Изменить изображение №5</CFormLabel
-                    >
-                    <CFormInput
-                        @change="
-                            saveImage($event, 5);
-                            filterValue5 = null;
-                        "
-                        type="file"
-                        id="image5"
-                    />
+                    <CButton color="light" href="#" @click="toggleShow(5)">{{
+                        buttonText
+                    }}</CButton>
+                    <!-- <my-upload
+                        field="img"
+                        @crop-success="(img, field) => cropSuccess(img, field, 5)"
+                        v-model="show"
+                        :width="300"
+                        :height="300"
+                        :params="params"
+                        :headers="headers"
+                        img-format="png"
+                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -963,20 +944,19 @@
                         </CRow>
                     </CContainer>
 
-                    <CFormLabel v-if="id == null" for="image6"
-                        >Изображение №6</CFormLabel
-                    >
-                    <CFormLabel v-if="id != null" for="image6"
-                        >Изменить изображение №6</CFormLabel
-                    >
-                    <CFormInput
-                        @change="
-                            saveImage($event, 6);
-                            filterValue6 = null;
-                        "
-                        type="file"
-                        id="image6"
-                    />
+                    <CButton color="light" href="#" @click="toggleShow(6)">{{
+                        buttonText
+                    }}</CButton>
+                    <!-- <my-upload
+                        field="img"
+                        @crop-success="(img, field) => cropSuccess(img, field, 6)"
+                        v-model="show"
+                        :width="300"
+                        :height="300"
+                        :params="params"
+                        :headers="headers"
+                        img-format="png"
+                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -998,14 +978,9 @@
 </template>
 
 <script>
-// import myUpload from 'vue-image-crop-upload';
-// import 'vue-cropper/dist/index.css'
-// import { VueCropper }  from "vue-cropper";
 import router from "@/admin/router/index.js";
 import applyFilter from "../assets/pixels/script";
 import myUpload from "vue-image-crop-upload";
-// import { Cropper } from "vue-advanced-cropper";
-// import "vue-advanced-cropper/dist/style.css";
 export default {
     name: "AddPage",
     components: {
@@ -1048,14 +1023,12 @@ export default {
             visible5: false,
             visible6: false,
             visibleLiveDemo: false,
-            image: {
-                src: null,
-                type: null,
-            },
+            image_id: null,
         };
     },
     methods: {
-        toggleShow() {
+        toggleShow(id) {
+            this.image_id = id;
             this.show = !this.show;
         },
         /**
@@ -1065,7 +1038,7 @@ export default {
          * [param] field
          */
         cropSuccess(imgDataUrl, field, id) {
-            console.log("-------- crop success --------");
+            console.log("-------- crop success with id=" + id + " --------");
             this.imgDataUrl = imgDataUrl;
             // this.preview.src = imgDataUrl;
             this.saveImage(imgDataUrl, id);
@@ -1109,51 +1082,58 @@ export default {
         saveImage(event, number) {
             var preview;
             var image_id = "";
+
+            const base64Data = dataUrl.split(",")[1]; // Remove the data URL prefix
+            const byteCharacters = atob(base64Data);
+            const byteArrays = [];
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteArrays.push(byteCharacters.charCodeAt(i));
+            }
+            const blob = new Blob([new Uint8Array(byteArrays)], {
+                type: "image/png",
+            });
+            const file = new File(
+                [blob],
+                "image_" +
+                    Math.floor(Math.random() * (10000 - 1 + 1)) +
+                    1 +
+                    ".png",
+                { type: blob.type }
+            );
             switch (number) {
                 case 1:
-                    this.image1 = event;
+                    this.image1 = this.convertSrcToFile(event);
                     preview = document.getElementById("imagePreview1");
                     image_id = "imagePreview1";
                     break;
                 case 2:
-                    this.image2 = event.target.files[0];
+                    this.image2 = this.convertSrcToFile(event);
                     preview = document.getElementById("imagePreview2");
                     image_id = "imagePreview2";
                     break;
                 case 3:
-                    this.image3 = event.target.files[0];
+                    this.image3 = this.convertSrcToFile(event);
                     preview = document.getElementById("imagePreview3");
                     image_id = "imagePreview3";
                     break;
                 case 4:
-                    this.image4 = event.target.files[0];
+                    this.image4 = this.convertSrcToFile(event);
                     preview = document.getElementById("imagePreview4");
                     image_id = "imagePreview4";
                     break;
                 case 5:
-                    this.image5 = event.target.files[0];
+                    this.image5 = this.convertSrcToFile(event);
                     preview = document.getElementById("imagePreview5");
                     image_id = "imagePreview5";
                     break;
                 case 6:
-                    this.image6 = event.target.files[0];
+                    this.image6 = this.convertSrcToFile(event);
                     preview = document.getElementById("imagePreview6");
                     image_id = "imagePreview6";
                     break;
             }
-
-            // Create a new FileReader instance
-            // var reader = new FileReader();
-
-            // Set the image preview source
-            // reader.onload = function (event) {
-            // preview.src = event.target.result;
-            // };
             preview.src = event;
             preview.style.display = "block";
-
-            // Read the image file as a data URL
-            // reader.readAsDataURL(event.target.files[0]);
 
             setTimeout(() => {
                 // preview.src = applyFilter(image_id)
@@ -1175,7 +1155,7 @@ export default {
         selectFilter(id, filter, number) {
             var dataUrl = applyFilter(id, id + "_filtered_selected", filter);
             // var reader = new FileReader();
-            // console.log(dataUrl);
+            console.log(dataUrl);
             // var readDataUrl = reader.readAsDataURL(dataUrl);
             var readDataUrl = dataUrl;
             switch (number) {
@@ -1198,6 +1178,33 @@ export default {
                     this.image6 = readDataUrl;
                     break;
             }
+        },
+        convertSrcToFile(src) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", src, true);
+                xhr.responseType = "blob";
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const blob = xhr.response;
+                        const file = new File([blob], "image.png", {
+                            type: "image/png",
+                        });
+                        resolve(file);
+                    } else {
+                        reject(
+                            new Error("Failed to convert image src to file")
+                        );
+                    }
+                };
+
+                xhr.onerror = () => {
+                    reject(new Error("Failed to convert image src to file"));
+                };
+
+                xhr.send();
+            });
         },
     },
     created() {
