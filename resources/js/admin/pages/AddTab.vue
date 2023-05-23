@@ -1083,7 +1083,7 @@ export default {
             var preview;
             var image_id = "";
 
-            const base64Data = dataUrl.split(",")[1]; // Remove the data URL prefix
+            const base64Data = event.split(",")[1]; // Remove the data URL prefix
             const byteCharacters = atob(base64Data);
             const byteArrays = [];
             for (let i = 0; i < byteCharacters.length; i++) {
@@ -1102,32 +1102,32 @@ export default {
             );
             switch (number) {
                 case 1:
-                    this.image1 = this.convertSrcToFile(event);
+                    this.image1 = file;
                     preview = document.getElementById("imagePreview1");
                     image_id = "imagePreview1";
                     break;
                 case 2:
-                    this.image2 = this.convertSrcToFile(event);
+                    this.image2 = file;
                     preview = document.getElementById("imagePreview2");
                     image_id = "imagePreview2";
                     break;
                 case 3:
-                    this.image3 = this.convertSrcToFile(event);
+                    this.image3 = file;
                     preview = document.getElementById("imagePreview3");
                     image_id = "imagePreview3";
                     break;
                 case 4:
-                    this.image4 = this.convertSrcToFile(event);
+                    this.image4 = file;
                     preview = document.getElementById("imagePreview4");
                     image_id = "imagePreview4";
                     break;
                 case 5:
-                    this.image5 = this.convertSrcToFile(event);
+                    this.image5 = file;
                     preview = document.getElementById("imagePreview5");
                     image_id = "imagePreview5";
                     break;
                 case 6:
-                    this.image6 = this.convertSrcToFile(event);
+                    this.image6 = file;
                     preview = document.getElementById("imagePreview6");
                     image_id = "imagePreview6";
                     break;
