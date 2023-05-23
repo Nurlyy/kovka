@@ -147,14 +147,12 @@ export default {
             } else {
                 axios
                     .post("/api/add-personal", {
-                        name: this.name,
-                        slug: this.slug,
-                        title: this.title,
-                        header_title: this.header_title,
-                        body: this.body,
-                        keyword: this.keyword,
-                        description: this.description,
-                        visibility: this.visibility,
+                        position : this.position,
+                        name : this.name,
+                        body : this.body,
+                        visibility : this.visibility,
+                        image : this.image,
+                        email : this.email,
                     })
                     .then(function (response) {
                         console.log(response.data);
@@ -220,24 +218,21 @@ export default {
         },
     },
     created() {
-        const slug = this.$route.params.slug;
-        if (slug) {
+        const id = this.$route.params.id;
+        if (id) {
             axios
-                .post("/api/get-page-admin", { slug: slug })
+                .post("/api/get-page-admin", { id: id })
                 .then((response) => {
                     // this.page = response.data.page;
                     // console.log(reponse.data);
-                    this.update = true;
-                    this.name = response.data.page.name;
-                    this.slug = response.data.page.slug;
-                    this.title = response.data.page.title;
-                    this.header_title = response.data.page.header_title;
-                    this.body = response.data.page.body;
-                    this.keyword = response.data.page.keyword;
-                    this.description = response.data.page.description;
+                    this.position = response.data.personal.position;
+                    this.name = response.data.personal.name;
+                    this.body = response.data.personal.body;
+                    this.image = response.data.personal.image;
+                    this.email = response.data.personal.email;
                     this.visibility =
-                        response.data.page.show == "1" ? true : false;
-                    this.id = response.data.page.id;
+                        response.data.personal.show == "1" ? true : false;
+                    this.id = response.data.personal.id;
                 });
         }
 

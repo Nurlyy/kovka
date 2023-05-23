@@ -33,6 +33,15 @@ const routes = [
                 meta: { requiresAuth: true },
             },
             {
+                path: "/admin/personal/:id", // id is the dynamic parameter
+                component: () =>
+                    import(
+                        /* webpackChunkName: "dashboard" */ "@/admin/pages/AddPersonal.vue"
+                    ),
+                props: true, // allows passing id as a prop to the component
+                meta: { requiresAuth: true },
+            },
+            {
                 path: "/admin/images/add-page",
                 name: "AddPage",
                 // route level code-splitting
