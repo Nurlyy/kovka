@@ -114,15 +114,23 @@ class ContactsController extends Controller
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Select all rows from the image table
-            $stmt = $conn->query('SELECT * FROM contact');
-    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    foreach ($contacts as $contact) {
-        var_dump($contact);
-    }
-} catch (PDOException $e) {
-    die('Query failed: ' . $e->getMessage());
-}
+            $stmt = 'create table personal (id int not null auto_increment, name VARCHAR(255),
+            position VARCHAR(255),
+            body TEXT,
+            visibility SMALLINT,
+            image VARCHAR(255),
+            email VARCHAR(255), primary key(id));';
+            $conn->exec($stmt);
+            echo "tb created";
+
+            // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // foreach ($contacts as $contact) {
+            // var_dump($contact);
+
+        } catch (PDOException $e) {
+            die('Query failed: ' . $e->getMessage());
+        }
 
 
 

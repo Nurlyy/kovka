@@ -43,6 +43,7 @@
             :width="1000"
             :height="1000"
             :params="params"
+            :langType='ru'
             :headers="headers"
             img-format="png"
         ></my-upload>
@@ -50,6 +51,7 @@
         <div class="mb-3">
             <CCard>
                 <CCardBody>
+                    <CCardTitle>1 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
                             <CCol xs="6">
@@ -194,6 +196,7 @@
         <div class="mb-3">
             <CCard>
                 <CCardBody>
+                    <CCardTitle>2 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
                             <CCol xs="6">
@@ -331,16 +334,6 @@
                     <CButton color="light" href="#" @click="toggleShow(2)">{{
                         buttonText
                     }}</CButton>
-                    <!-- <my-upload
-                        field="img"
-                        @crop-success="(img, field) => cropSuccess(img, field, 2)"
-                        v-model="show"
-                        :width="300"
-                        :height="300"
-                        :params="params"
-                        :headers="headers"
-                        img-format="png"
-                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -348,6 +341,7 @@
         <div class="mb-3">
             <CCard>
                 <CCardBody>
+                    <CCardTitle>3 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
                             <CCol xs="6">
@@ -485,16 +479,6 @@
                     <CButton color="light" href="#" @click="toggleShow(3)">{{
                         buttonText
                     }}</CButton>
-                    <!-- <my-upload
-                        field="img"
-                        @crop-success="(img, field) => cropSuccess(img, field, 3)"
-                        v-model="show"
-                        :width="300"
-                        :height="300"
-                        :params="params"
-                        :headers="headers"
-                        img-format="png"
-                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -502,6 +486,7 @@
         <div class="mb-3">
             <CCard>
                 <CCardBody>
+                    <CCardTitle>4 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
                             <CCol xs="6">
@@ -639,16 +624,6 @@
                     <CButton color="light" href="#" @click="toggleShow(4)">{{
                         buttonText
                     }}</CButton>
-                    <!-- <my-upload
-                        field="img"
-                        @crop-success="(img, field) => cropSuccess(img, field, 4)"
-                        v-model="show"
-                        :width="300"
-                        :height="300"
-                        :params="params"
-                        :headers="headers"
-                        img-format="png"
-                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -656,6 +631,7 @@
         <div class="mb-3">
             <CCard>
                 <CCardBody>
+                    <CCardTitle>5 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
                             <CCol xs="6">
@@ -793,16 +769,6 @@
                     <CButton color="light" href="#" @click="toggleShow(5)">{{
                         buttonText
                     }}</CButton>
-                    <!-- <my-upload
-                        field="img"
-                        @crop-success="(img, field) => cropSuccess(img, field, 5)"
-                        v-model="show"
-                        :width="300"
-                        :height="300"
-                        :params="params"
-                        :headers="headers"
-                        img-format="png"
-                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
@@ -810,6 +776,7 @@
         <div class="mb-3">
             <CCard>
                 <CCardBody>
+                    <CCardTitle>6 Изображение</CCardTitle>
                     <CContainer>
                         <CRow>
                             <CCol xs="6">
@@ -947,16 +914,6 @@
                     <CButton color="light" href="#" @click="toggleShow(6)">{{
                         buttonText
                     }}</CButton>
-                    <!-- <my-upload
-                        field="img"
-                        @crop-success="(img, field) => cropSuccess(img, field, 6)"
-                        v-model="show"
-                        :width="300"
-                        :height="300"
-                        :params="params"
-                        :headers="headers"
-                        img-format="png"
-                    ></my-upload> -->
                 </CCardBody>
             </CCard>
         </div>
