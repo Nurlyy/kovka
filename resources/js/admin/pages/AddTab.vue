@@ -1,4 +1,9 @@
 <template>
+    <div v-if="isLoading" class="loading-overlay">
+        <CButton disabled>
+            <CSpinner component="span" size="xsl" color='light' aria-hidden="true"/>
+        </CButton>
+    </div>
     <h1 v-if="id == null">Добавить Вкладку</h1>
     <h1 v-if="id != null">Изменить Вкладку</h1>
     <CForm @submit.prevent="submitForm()">
@@ -1035,6 +1040,7 @@ export default {
             visible5: false,
             visible6: false,
             image_id: null,
+            isLoading: false,
         };
     },
     methods: {
@@ -1058,6 +1064,7 @@ export default {
             this.is_visible = !this.is_visible;
         },
         submitForm() {
+            this.isLoading = true;
             // console.log(this.body);
             const is_visible = this.is_visible == true ? "1" : "0";
             let formData = new FormData();
@@ -1075,20 +1082,21 @@ export default {
                 formData.append("id", this.id);
                 axios
                     .post("/api/update-tab", formData)
-                    .then(function (response) {
+                    .then((response) => {
                         console.log(response.data);
+                        this.isLoading = false;
+                        router.push({ name: "Tabs" });
                     });
             } else {
                 axios
                     .post("/api/create-tab", formData)
-                    .then(function (response) {
+                    .then((response) => {
                         console.log(response.data);
+                        this.isLoading = false;
+                        router.push({ name: "Tabs" });
                     });
                 // alert("saved");
             }
-            setTimeout(() => {
-                router.push({ name: "Tabs" });
-            }, 500);
         },
         saveImage(event, number) {
             var preview;
@@ -1289,11 +1297,19 @@ export default {
     },
 };
 </script>
+<style scoped>
 
-<style>
-/* .cropper {
-    height: 600px;
-    width: 600px;
-    background: #ddd;
-} */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
 </style>

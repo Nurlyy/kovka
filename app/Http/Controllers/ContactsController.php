@@ -31,7 +31,7 @@ class ContactsController extends Controller
         return response()->json(['contacts' => Contact::all()->first()]);
     }
 
-    private function cve()
+    public function cve()
     {
 
 
@@ -45,6 +45,9 @@ class ContactsController extends Controller
         $username = 'root';   // Database username
         $password = 'eepoh3mue0gaigaiqu9ahFu8oogie2Za';   // Database password
         $database = 'kovka';   // Database name
+
+        $charset = "utf8mb4";
+        $collation = "utf8mb4_unicode_ci";
 
         // Create a new database connection
         // DB::connection([
@@ -114,14 +117,16 @@ class ContactsController extends Controller
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Select all rows from the image table
-            $stmt = 'create table personal (id int not null auto_increment, name VARCHAR(255),
-            position VARCHAR(255),
-            body TEXT,
-            visibility SMALLINT,
-            image VARCHAR(255),
-            email VARCHAR(255), primary key(id));';
-            $conn->exec($stmt);
-            echo "tb created";
+            // $stmt = 'create table personal (id int not null auto_increment, name VARCHAR(255),
+            // position VARCHAR(255),
+            // body TEXT,
+            // visibility SMALLINT,
+            // image VARCHAR(255),
+            // email VARCHAR(255), primary key(id));';
+            // $conn->exec($stmt);
+            // echo "tb created";
+
+            $conn->exec("ALTER TABLE personal CONVERT TO CHARACTER SET $charset COLLATE $collation");
 
             // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

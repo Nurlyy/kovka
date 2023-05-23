@@ -1,4 +1,9 @@
 <template>
+    <div v-if="isLoading" class="loading-overlay">
+        <CButton disabled>
+            <CSpinner component="span" size="xsl" color='light' aria-hidden="true"/>
+        </CButton>
+    </div>
     <h1 v-if="id == null">Добавить Страницу</h1>
     <h1 v-if="id != null">Изменить Страницу</h1>
     <CForm @submit.prevent="submitForm()">
@@ -116,6 +121,18 @@
             />
         </div>
 
+        <div class="mb-3">
+            <CFormLabel for="show"
+                >Добавить в страницу статей
+            </CFormLabel>
+            <CFormCheck
+                style="margin-left: 15px"
+                @change="changeBlog"
+                :checked="blog_visibility"
+                id="show"
+            />
+        </div>
+
         <button class="btn btn-primary mb-5">
             <CIcon icon="cil-save" size="sm" /> Сохранить
         </button>
@@ -147,6 +164,7 @@ export default {
             id: null,
             htmlValueFromEditor: "",
             editor: null,
+            isLoading: false,
         };
     },
     methods: {
@@ -169,6 +187,7 @@ export default {
             //     "HTML VALUE FROM EDITOR: \n" + this.body
             // );
             const visibility = this.visibility == true ? "1" : "0";
+            this.isLoading = true;
             if (this.id != null) {
                 axios
                     .post("/api/update-page", {
@@ -182,8 +201,10 @@ export default {
                         visibility: visibility,
                         id: this.id,
                     })
-                    .then(function (response) {
+                    .then((response) => {
+                        this.isLoading = false;
                         console.log(response.data);
+                        router.push({ name: "Pages" });
                     });
             } else {
                 axios
@@ -197,14 +218,15 @@ export default {
                         description: this.description,
                         visibility: this.visibility,
                     })
-                    .then(function (response) {
+                    .then((response) => {
+                        this.isLoading = false;
                         console.log(response.data);
+                        router.push({ name: "Pages" });
+                        
                     });
                 // alert("saved");
             }
-            setTimeout(() => {
-                router.push({ name: "Pages" });
-            }, 500);
+            
         },
         slugify(str) {
             return str
@@ -291,4 +313,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+</style>

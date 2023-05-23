@@ -1,4 +1,9 @@
 <template>
+    <div v-if="isLoading" class="loading-overlay">
+        <CButton disabled>
+            <CSpinner component="span" size="xsl" color='light' aria-hidden="true"/>
+        </CButton>
+    </div>
     <h1 v-if="id == null">Добавить Преимущество</h1>
     <h1 v-if="id != null">Изменить Преимущество</h1>
     <br />
@@ -66,6 +71,7 @@ export default {
             id: null,
             pages: [],
             page_id: null,
+            isLoading: false,
         };
     },
     mounted() {
@@ -79,6 +85,7 @@ export default {
     },
     methods: {
         submitForm() {
+            this.isLoading = true;
             if (this.id == null) {
                 if (this.image != null) {
                     let formData = new FormData();
@@ -90,6 +97,8 @@ export default {
                         .post("/api/create-regalia", formData)
                         .then((response) => {
                             console.log(response.data);
+                            this.isLoading = false;
+                            router.push({ name: "Regalias" });
                         })
                         .catch((error) => {
                             console.log(error);
@@ -107,15 +116,14 @@ export default {
                         .post("/api/update-regalia", formData)
                         .then((response) => {
                             console.log(response.data);
+                            this.isLoading = false;
+                            router.push({ name: "Regalias" });
                         })
                         .catch((error) => {
                             console.log(error);
                         });
                 }
             }
-            setTimeout(() => {
-                router.push({ name: "Regalias" });
-            }, 500);
         },
         saveImage(event) {
             this.image = event.target.files[0];
@@ -169,4 +177,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+</style>

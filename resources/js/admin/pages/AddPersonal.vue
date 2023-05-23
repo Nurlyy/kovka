@@ -1,4 +1,9 @@
 <template>
+    <div v-if="isLoading" class="loading-overlay">
+        <CButton disabled>
+            <CSpinner component="span" size="xsl" color='light' aria-hidden="true"/>
+        </CButton>
+    </div>
     <h1 v-if="id == null">Добавить Человека</h1>
     <h1 v-if="id != null">Изменить Человека</h1>
     <CForm @submit.prevent="submitForm()">
@@ -102,7 +107,7 @@ export default {
             id: null,
             image:null,
             email:null,
-
+            isLoading: false,
         };
     },
     methods: {
@@ -133,6 +138,7 @@ export default {
             // console.log(
             //     "HTML VALUE FROM EDITOR: \n" + this.body
             // );
+            this.isLoading = true;
             const visibility = this.visibility == true ? "1" : "0";
             let formData = new FormData();
             formData.append("position", this.position);
@@ -147,22 +153,23 @@ export default {
                     .post("/api/update-personal", 
                         formData
                     )
-                    .then(function (response) {
+                    .then((response) => {
                         console.log(response.data);
+                        this.isLoading = false;
+                        router.push({ name: "Personal" });
                     });
             } else {
                 axios
                     .post("/api/add-personal", 
                         formData
                     )
-                    .then(function (response) {
+                    .then((response) => {
                         console.log(response.data);
+                        this.isLoading = false;
+                        router.push({ name: "Personal" });
                     });
                 // alert("saved");
             }
-            setTimeout(() => {
-                router.push({ name: "Personal" });
-            }, 500);
         },
         slugify(str) {
             return str
@@ -204,4 +211,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+</style>

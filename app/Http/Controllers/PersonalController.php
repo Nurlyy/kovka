@@ -158,8 +158,8 @@ class PersonalController extends Controller
         $height = imagesy($image);
 
         // Calculate the new dimensions
-        $new_width = 320; // 50% of the original height or minimum 400 pixels
-        $new_height = $new_width * $height / $width; // Maintain the aspect ratio
+        $new_height = 320; // 50% of the original height or minimum 400 pixels
+        $new_width = $new_height * $width / $height; // Maintain the aspect ratio
 
         // Create a new image with the new dimensions
         $new_image = imagecreatetruecolor($new_width, $new_height);
