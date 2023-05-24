@@ -22,7 +22,7 @@
         <tbody>
             <tr v-for="item in items" :key="item.id">
                 <td><div class="table_td">{{ item.id }}</div></td>
-                <td><div class="table_td">{{ item.name }}</div></td>
+                <td><div class="table_td">{{ item.title }}</div></td>
                 <td><div class="table_td">{{ item.slug }}</div></td>
                 <td><div class="table_td">{{ item.keyword }}</div></td>
                 <td><div class="table_td"><CFormCheck style="margin-left: 15px" :checked='item.show' id="show" disabled /></div></td>

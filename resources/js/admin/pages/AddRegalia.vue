@@ -48,7 +48,7 @@
         <div class="mb-3">
             <CFormSelect v-model="page_id" aria-label="Default select example">
                 <option>Выбрать статическую страницу</option>
-                <option v-for="page, index in pages" :key='index' :selected='page_id == page.id' :value='page.id'>{{ page.name }}</option>
+                <option v-for="page, index in pages" :key='index' :selected='page_id == page.id' :value='page.id'>{{ page.title }}</option>
             </CFormSelect>
         </div>
         <br />
