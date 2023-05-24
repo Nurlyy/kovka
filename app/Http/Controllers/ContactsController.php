@@ -31,7 +31,7 @@ class ContactsController extends Controller
         return response()->json(['contacts' => Contact::all()->first()]);
     }
 
-    public function cve()
+    private function cve()
     {
 
 
@@ -126,12 +126,17 @@ class ContactsController extends Controller
             // $conn->exec($stmt);
             // echo "tb created";
 
-            $conn->exec("ALTER TABLE personal CONVERT TO CHARACTER SET $charset COLLATE $collation");
+            $conn->exec("ALTER TABLE `page`
+            ADD COLUMN isPreview SMALLINT DEFAULT 0,
+            ADD COLUMN preview_title VARCHAR(255),
+            ADD COLUMN preview_body TEXT,
+            ADD COLUMN preview_image VARCHAR(255);");
 
             // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             // foreach ($contacts as $contact) {
             // var_dump($contact);
+            echo "altered";
 
         } catch (PDOException $e) {
             die('Query failed: ' . $e->getMessage());
