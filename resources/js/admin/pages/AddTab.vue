@@ -41,10 +41,71 @@
                 rows="3"
             ></CFormTextarea>
         </div>
+        
         <my-upload
             field="img"
-            @crop-success="(img, field) => cropSuccess(img, field, image_id)"
-            v-model="show"
+            @crop-success="(img, field) => cropSuccess(img, field, 1)"
+            v-model="show1"
+            :width="1000"
+            :height="1000"
+            :params="params"
+            :langType="ru"
+            :headers="headers"
+            img-format="png"
+        ></my-upload>
+
+        <my-upload
+            field="img"
+            @crop-success="(img, field) => cropSuccess(img, field, 2)"
+            v-model="show2"
+            :width="1000"
+            :height="1000"
+            :params="params"
+            :langType="ru"
+            :headers="headers"
+            img-format="png"
+        ></my-upload>
+
+        <my-upload
+            field="img"
+            @crop-success="(img, field) => cropSuccess(img, field, 3)"
+            v-model="show3"
+            :width="1000"
+            :height="1000"
+            :params="params"
+            :langType="ru"
+            :headers="headers"
+            img-format="png"
+        ></my-upload>
+
+        <my-upload
+            field="img"
+            @crop-success="(img, field) => cropSuccess(img, field, 4)"
+            v-model="show4"
+            :width="1000"
+            :height="1000"
+            :params="params"
+            :langType="ru"
+            :headers="headers"
+            img-format="png"
+        ></my-upload>
+
+        <my-upload
+            field="img"
+            @crop-success="(img, field) => cropSuccess(img, field, 5)"
+            v-model="show5"
+            :width="1000"
+            :height="1000"
+            :params="params"
+            :langType="ru"
+            :headers="headers"
+            img-format="png"
+        ></my-upload>
+
+        <my-upload
+            field="img"
+            @crop-success="(img, field) => cropSuccess(img, field, 6)"
+            v-model="show6"
             :width="1000"
             :height="1000"
             :params="params"
@@ -202,7 +263,7 @@
                         class="mt-3"
                         color="light"
                         href="#"
-                        @click="toggleShow(1)"
+                        @click="toggleShow1()"
                         >{{ buttonText }}</CButton
                     >
                 </CCardBody>
@@ -356,7 +417,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(2)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow2()">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -509,7 +570,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(3)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow3()">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -663,7 +724,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(4)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow4()">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -817,7 +878,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(5)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow5()">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -971,7 +1032,7 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow(6)">{{
+                    <CButton class="mt-3" color="light" href="#" @click="toggleShow6()">{{
                         buttonText
                     }}</CButton>
                 </CCardBody>
@@ -1006,7 +1067,13 @@ export default {
     },
     data() {
         return {
-            show: false,
+            show1: false,
+            show2: false,
+            show3: false,
+            show4: false,
+            show5: false,
+            show6: false,
+
             params: {
                 token: "123456798",
                 name: "avatar",
@@ -1044,9 +1111,29 @@ export default {
         };
     },
     methods: {
-        toggleShow(id) {
-            this.image_id = id;
-            this.show = !this.show;
+        toggleShow1() {
+            this.image_id = 1;
+            this.show1 = !this.show1;
+        },
+        toggleShow2() {
+            this.image_id = 2;
+            this.show2 = !this.show2;
+        },
+        toggleShow3() {
+            this.image_id = 3;
+            this.show3 = !this.show3;
+        },
+        toggleShow4() {
+            this.image_id = 4;
+            this.show4 = !this.show4;
+        },
+        toggleShow5() {
+            this.image_id = 5;
+            this.show5 = !this.show5;
+        },
+        toggleShow6() {
+            this.image_id = 6;
+            this.show6 = !this.show6;
         },
         /**
          * crop success

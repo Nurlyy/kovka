@@ -55,6 +55,17 @@
     </div>
 </template>
 
+<!-- IMPORTANT!!! 
+    IF FULLSCREEN VIEW IS NOT WORKING{
+        CHANGE MAIN CSS PROPERTY IN TWO FILES OF PHOTOSWIPE ROOT DIRECTORY {
+            .pswp img {
+                max-width: none;
+                object-fit:contain !important;
+            }
+        }
+    }
+-->
+
 <script>
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
