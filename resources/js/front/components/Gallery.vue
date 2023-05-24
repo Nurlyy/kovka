@@ -74,6 +74,8 @@ export default {
             body: "",
             maxWidth: 0,
             maxHeight: 0,
+            maxheightClass: '',
+            dnoneActive: ''
         };
     },
     mounted() {
@@ -93,8 +95,8 @@ export default {
                 const img = new Image();
                 img.src = path;
                 // img.onload = () => {
-                    this.maxWidth = img.width;
-                    this.maxHeight = img.height;
+                this.maxWidth = img.width;
+                this.maxHeight = img.height;
                 // };
 
                 console.log("maxWidth: " + this.maxWidth);
@@ -106,33 +108,35 @@ export default {
                 this.pages = response.data.tabs;
                 // console.log(this.pages[0]);
                 this.selectedIndex = 0;
-                this.images.push({
-                    image: this.pages[0].image_1,
-                    preview: this.pages[0].image_1_preview,
-                });
-                this.images.push({
-                    image: this.pages[0].image_2,
-                    preview: this.pages[0].image_2_preview,
-                });
-                this.images.push({
-                    image: this.pages[0].image_3,
-                    preview: this.pages[0].image_3_preview,
-                });
-                this.images.push({
-                    image: this.pages[0].image_4,
-                    preview: this.pages[0].image_4_preview,
-                });
-                this.images.push({
-                    image: this.pages[0].image_5,
-                    preview: this.pages[0].image_5_preview,
-                });
-                this.images.push({
-                    image: this.pages[0].image_6,
-                    preview: this.pages[0].image_6_preview,
-                });
+                if (this.pages[0]) {
+                    this.images.push({
+                        image: this.pages[0].image_1,
+                        preview: this.pages[0].image_1_preview,
+                    });
+                    this.images.push({
+                        image: this.pages[0].image_2,
+                        preview: this.pages[0].image_2_preview,
+                    });
+                    this.images.push({
+                        image: this.pages[0].image_3,
+                        preview: this.pages[0].image_3_preview,
+                    });
+                    this.images.push({
+                        image: this.pages[0].image_4,
+                        preview: this.pages[0].image_4_preview,
+                    });
+                    this.images.push({
+                        image: this.pages[0].image_5,
+                        preview: this.pages[0].image_5_preview,
+                    });
+                    this.images.push({
+                        image: this.pages[0].image_6,
+                        preview: this.pages[0].image_6_preview,
+                    });
 
-                this.title = this.pages[0].title;
-                this.body = this.pages[0].body_text;
+                    this.title = this.pages[0].title;
+                    this.body = this.pages[0].body_text;
+                }
             });
         },
         galleryClick(index) {
@@ -168,8 +172,6 @@ export default {
             this.maxheightClass = "";
             this.dnoneActive = "";
         },
-
-        
     },
 };
 </script>

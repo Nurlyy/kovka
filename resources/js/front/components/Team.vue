@@ -71,7 +71,7 @@
   }
   </script>
   
-  <style lang="scss">
+  <style lang="scss" scoped>
   .carousel {
     width: calc(100% + 6px);
     margin-left:-3px;
