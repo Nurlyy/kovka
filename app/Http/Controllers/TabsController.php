@@ -316,29 +316,55 @@ class TabsController extends Controller
     public function deleteTab(Request $request)
     {
         $page = Pages::find(['id' => $request->id])->first();
-        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image1)) {
-            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image1);
+        // return str_replace('\\', '/', public_path()) . '/' . $page->image_1;
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_1) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_1)) {
+            // return str_replace('\\', '/', public_path()) . '/' . $page->image_1;
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_1);
         }
-        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image2)) {
-            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image2);
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_1_preview) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_1_preview)) {
+            // return str_replace('\\', '/', public_path()) . '/' . $page->image__1;
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_1_preview);
         }
-        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image3)) {
-            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image3);
+
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_2) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_2)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_2);
         }
-        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image4)) {
-            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image4);
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_2_preview) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_2_preview)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_2_preview);
         }
-        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image5)) {
-            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image5);
+        
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_3) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_3)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_3);
         }
-        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image6)) {
-            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image6);
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_3_preview) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_3_preview)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_3_preview);
+        }
+
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_4) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_4)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_4);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_4_preview) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_4_preview)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_4_preview);
+        }
+
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_5) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_5)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_5);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_5_preview) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_5_preview)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_5_preview);
+        }
+
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_6) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_6)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_6);
+        }
+        if (file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image_6_preview) && is_file(str_replace('\\', '/', public_path()) . '/' . $page->image_6_preview)) {
+            unlink(str_replace('\\', '/', public_path()) . '/' . $page->image_6_preview);
         }
 
         $page->delete();
     }
 
-    public function convertAllImagesToWebp()
+    private function convertAllImagesToWebp()
     {
         ini_set('memory_limit', '256M');
         // Set the directory path
@@ -400,7 +426,7 @@ class TabsController extends Controller
                 imagepalettetotruecolor($new_image);
 
                 // Convert the original image to the WebP format
-                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp', 100);
 
                 // Clean up the resources
                 imagedestroy($original_image);
@@ -414,7 +440,7 @@ class TabsController extends Controller
                 imagepalettetotruecolor($new_image);
 
                 // Convert the original image to the WebP format
-                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp');
+                imagewebp($original_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '.webp', 100);
 
                 // Clean up the resources
                 imagedestroy($original_image);
@@ -435,7 +461,7 @@ class TabsController extends Controller
         $height = imagesy($image);
 
         // Calculate the new dimensions
-        $new_width = 390; // 50% of the original height or minimum 400 pixels
+        $new_width = 550; // 50% of the original height or minimum 400 pixels
         $new_height = $new_width * $height / $width; // Maintain the aspect ratio
 
         // Create a new image with the new dimensions
@@ -445,7 +471,7 @@ class TabsController extends Controller
         imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
         // Save the new image as a .webp file
-        imagewebp($new_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '-preview' . '.webp', 80); // 80 is the quality parameter, which can be set between 0 and 100
+        imagewebp($new_image, $directory . pathinfo($file, PATHINFO_FILENAME) . '-preview' . '.webp', 100); // 80 is the quality parameter, which can be set between 0 and 100
 
         // Free up memory
         imagedestroy($image);
