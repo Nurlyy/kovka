@@ -3,7 +3,7 @@
     <div class="mine-conteaner">
         <div class="page">
             <div class="conteaner-logo">
-                <a href="" class="logo">
+                <a href="/" class="logo">
                     <img src="@/front/assets/images/logo.png" alt="" />
                 </a>
             </div>

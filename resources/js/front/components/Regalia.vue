@@ -2,7 +2,7 @@
     <div class="regalia">
         <a
             v-for="(regalia, index) in regalias"
-            :href='pages_slugs[regalia.id]'
+            :href="pages_slugs[regalia.id]"
             class="conteaner-card"
             :key="index"
         >
@@ -30,22 +30,19 @@ export default {
         axios.post("/api/get-regalia").then((response) => {
             this.regalias = response.data.regalia;
             axios.post("/api/get-pages").then((res) => {
-            if (res.data.items) {
-                this.pages = res.data.items;
-                this.regalias.forEach(regalia => {
-                    this.pages_slugs[regalia.id] = this.pages.map(function (page) {
-                        if(page.id == regalia.page_id){
-                            return '/page/' + page.slug;
-                        }else{
-                            return "#";
-                        }
+                if (res.data.items) {
+                    this.pages = res.data.items;
+                    var temp = [];
+                    this.pages.forEach(page => {
+                        temp[page.id] = page;
                     })
-                })
-                
-            }
+                    this.pages = temp;
+                    this.regalias.forEach((regalia) => {
+                        this.pages_slugs[regalia.id] = this.pages[regalia.page_id] ? "/page/" + this.pages[regalia.page_id].slug : "#";
+                    });
+                }
+            });
         });
-        });
-        
     },
 };
 </script>
