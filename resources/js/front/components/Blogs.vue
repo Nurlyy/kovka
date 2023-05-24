@@ -6,7 +6,7 @@
                 {{ page.title }}
             </h1>
             <div class="conteaner-page">
-                <div v-html="page.body"></div>
+                <div></div>
             </div>
         </div>
     </div>

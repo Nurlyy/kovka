@@ -1,7 +1,12 @@
 <template>
     <div v-if="isLoading" class="loading-overlay">
         <CButton disabled>
-            <CSpinner component="span" size="xsl" color='light' aria-hidden="true"/>
+            <CSpinner
+                component="span"
+                size="xsl"
+                color="light"
+                aria-hidden="true"
+            />
         </CButton>
     </div>
     <h1 v-if="id == null">Добавить Страницу</h1>
@@ -72,7 +77,7 @@
             :htmlValue="htmlValueFromEditor"
             @save="change"
             @imgAdd="imgUpload"
-            ref='mavoneditor'
+            ref="mavoneditor"
         />
 
         <!-- <editor-content :editor="editor" /> -->
@@ -122,16 +127,71 @@
         </div>
 
         <div class="mb-3">
-            <CFormLabel for="show"
-                >Добавить в страницу статей
-            </CFormLabel>
+            <CFormLabel for="show">Добавить в страницу статей </CFormLabel>
             <CFormCheck
                 style="margin-left: 15px"
                 @change="changeBlog"
-                :checked="blog_visibility"
+                :checked="isPreview"
                 id="show"
             />
         </div>
+
+        <CCollapse :visible='isPreview' class="mb-3">
+            <CCard>
+                
+                <CCardBody>
+                    <CCardTitle class="mb-3">Настройки превью</CCardTitle>
+                    <div>
+                        <img
+                            id="imagePreview"
+                            alt="Preview Image"
+                            style="
+                                height: 150px;
+                                border-radius: 15px;
+                                margin-top: 15;
+                                display: none;
+                            "
+                            class="mb-3"
+                        />
+                    </div>
+
+                    <CFormLabel v-if="id == null" for="image"
+                        >Изображение</CFormLabel
+                    >
+                    <CFormLabel v-if="id != null" for="image"
+                        >Изменить изображение</CFormLabel
+                    >
+                    <CFormInput
+                        @change="saveImage($event)"
+                        type="file"
+                        id="image"
+                        class="mb-3"
+                    />
+
+                    <div class="mb-3">
+                        <CFormLabel for="preview_title"
+                            >Заголовок превью</CFormLabel
+                        >
+                        <CFormInput
+                            type="text"
+                            v-model="preview_title"
+                            :value="preview_title"
+                            id="preview_title"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <CFormLabel for="body">Описание превью</CFormLabel>
+                        <CFormTextarea
+                            v-model="preview_body"
+                            :value="preview_body"
+                            type="text"
+                            id="body"
+                        />
+                    </div>
+                </CCardBody>
+            </CCard>
+        </CCollapse>
 
         <button class="btn btn-primary mb-5">
             <CIcon icon="cil-save" size="sm" /> Сохранить
@@ -145,6 +205,7 @@
 // import { Editor, EditorContent } from "@tiptap/vue-3";
 // import StarterKit from "@tiptap/starter-kit";
 import router from "@/admin/router/index.js";
+import { throwStatement } from "@babel/types";
 export default {
     name: "AddPage",
     components: {
@@ -165,9 +226,16 @@ export default {
             htmlValueFromEditor: "",
             editor: null,
             isLoading: false,
+            isPreview: false,
+            preview_title: "",
+            preview_body: "",
+            preview_image: null,
         };
     },
     methods: {
+        changeBlog() {
+            this.isPreview = !this.isPreview;
+        },
         change(v, html) {
             console.log(v);
             console.log(html);
@@ -183,50 +251,40 @@ export default {
             this.slug = this.slugify(this.name);
         },
         submitForm() {
+            this.$refs.mavoneditor.save();
             // console.log(
             //     "HTML VALUE FROM EDITOR: \n" + this.body
             // );
             const visibility = this.visibility == true ? "1" : "0";
             this.isLoading = true;
+            var formData = new FormData();
+            formData.append("name", this.name);
+            formData.append("slug", this.slug);
+            formData.append("title", this.title);
+            formData.append("header_title", this.header_title);
+            formData.append("body", this.body);
+            formData.append("keyword", this.keyword);
+            formData.append("description", this.description);
+            formData.append("visibility", visibility);
+            formData.append("isPreview", this.isPreview);
+            formData.append("preview_title", this.preview_title);
+            formData.append("preview_body", this.preview_body);
+            formData.append("preview_image", this.preview_image);
             if (this.id != null) {
-                axios
-                    .post("/api/update-page", {
-                        name: this.name,
-                        slug: this.slug,
-                        title: this.title,
-                        header_title: this.header_title,
-                        body: this.body,
-                        keyword: this.keyword,
-                        description: this.description,
-                        visibility: visibility,
-                        id: this.id,
-                    })
-                    .then((response) => {
-                        this.isLoading = false;
-                        console.log(response.data);
-                        router.push({ name: "Pages" });
-                    });
+                formData.append("id", this.id);
+                axios.post("/api/update-page", formData).then((response) => {
+                    this.isLoading = false;
+                    console.log(response.data);
+                    router.push({ name: "Pages" });
+                });
             } else {
-                axios
-                    .post("/api/add-page", {
-                        name: this.name,
-                        slug: this.slug,
-                        title: this.title,
-                        header_title: this.header_title,
-                        body: this.body,
-                        keyword: this.keyword,
-                        description: this.description,
-                        visibility: this.visibility,
-                    })
-                    .then((response) => {
-                        this.isLoading = false;
-                        console.log(response.data);
-                        router.push({ name: "Pages" });
-                        
-                    });
+                axios.post("/api/add-page", formData).then((response) => {
+                    this.isLoading = false;
+                    console.log(response.data);
+                    router.push({ name: "Pages" });
+                });
                 // alert("saved");
             }
-            
         },
         slugify(str) {
             return str
@@ -235,6 +293,26 @@ export default {
                 .replace(/[^\w\s-]/g, "")
                 .replace(/[\s_-]+/g, "-")
                 .replace(/^-+|-+$/g, "");
+        },
+        saveImage(event, number) {
+            var preview;
+            var image_id = "";
+            this.preview_image = event.target.files[0];
+            preview = document.getElementById("imagePreview");
+            image_id = "imagePreview";
+
+            // Create a new FileReader instance
+            var reader = new FileReader();
+
+            // Set the image preview source
+            reader.onload = function (event) {
+                preview.src = event.target.result;
+            };
+
+            preview.style.display = "block";
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(event.target.files[0]);
         },
         // imgUpload(pos, file, $vm) {
         //     const formdata = new FormData();
@@ -301,6 +379,11 @@ export default {
                     this.visibility =
                         response.data.page.show == "1" ? true : false;
                     this.id = response.data.page.id;
+                    this.isPreview =
+                        response.data.page.isPreview == "1" ? true : false;
+                    this.preview_title = response.data.page.preview_title;
+                    this.preview_body = response.data.page.preview_body;
+                    this.preview_image = response.data.page.preview_image;
                 });
         }
 
@@ -314,18 +397,16 @@ export default {
 </script>
 
 <style scoped>
-
 .loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
 }
-
 </style>
