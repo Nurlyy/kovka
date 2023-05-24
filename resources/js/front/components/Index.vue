@@ -3,7 +3,7 @@
     <div class="mine-conteaner">
         <Header />
         <Gallery />
-        <Team />
+        <Team v-if="teamVisibility" />
         <CallMe />
         <Regalia />
         
@@ -31,6 +31,16 @@ export default {
         Footer,
         Team,
     },
+    data(){
+        return{
+            teamVisibility: false,
+        }
+    },
+    mounted(){
+        axios.post('/api/get-personal-status').then((response) => {
+            this.teamVisibility = response.data.visibility;
+        });
+    }
 };
 </script>
 

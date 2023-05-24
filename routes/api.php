@@ -77,6 +77,8 @@ Route::post('get-personal', "App\Http\Controllers\PersonalController@getPersonal
 Route::post('get-personals-admin', "App\Http\Controllers\PersonalController@getPersonalsAdmin")->middleware('auth:api');
 Route::post('get-personal-admin', "App\Http\Controllers\PersonalController@getPersonalAdmin")->middleware('auth:api');
 Route::post('get-personal', "App\Http\Controllers\PersonalController@getPersonal");
+Route::post('set-personal-status', "App\Http\Controllers\MainPageController@setPersonalStatus")->middleware('auth:api');
+Route::post('get-personal-status', "App\Http\Controllers\MainPageController@getPersonalStatus");
 Route::post("upload-image", "App\Http\Controllers\PageController@uploadImage");
 
 // Route::post("cv", "App\Http\Controllers\ContactsController@cve");

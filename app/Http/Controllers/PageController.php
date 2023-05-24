@@ -19,8 +19,26 @@ class PageController extends Controller
         $keyword = $request->keyword;
         $description = $request->description;
         $show = $request->visibility;
+        $isPreview = $request->isPreview;
+        $preview_title = $request->preview_title;
+        $preview_body = $request->preview_body;
+        $preview_image = null;
 
         $slug_page = Page::select('slug', 'id')->where('slug', $slug)->first();
+
+        if($request->hasFile("preview_image")){
+            $imageName = time();
+            $ext = $request->preview_image->getClientOriginalExtension();
+            $request->preview_image->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            $this->convertImageToWebp($file, "pages");
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
+            if ($path != null) {
+                $preview_image = $path;
+            }
+            // return $path;
+        }
+
         // return response()->json($slug_page, 200);
         if ($slug_page == null || $slug_page == []) {
             $page = Page::create([
@@ -31,7 +49,11 @@ class PageController extends Controller
                 'body' => $body,
                 'keyword' => $keyword,
                 'description' => $description,
-                'show' => $show
+                'show' => $show,
+                'isPreview' => $isPreview,
+                'preview_title' => $preview_title,
+                'preview_body' => $preview_body,
+                'preview_image' => $preview_image,
             ]);
 
             return response()->json(['page' => $page], 201);
@@ -53,9 +75,30 @@ class PageController extends Controller
         $description = $request->description;
         $show = $request->visibility;
         $id = $request->id;
+        $isPreview = $request->isPreview;
+        $preview_title = $request->preview_title;
+        $preview_body = $request->preview_body;
+        $preview_image = null;
         // return $body;
         $page = Page::where('id', intval($id))->first();
         $slug_page = Page::select('slug', 'id')->where('slug', $slug)->first();
+
+        // return response()->json(['message' => ['file' => 'fail']], 500);
+        if($request->hasFile("preview_image")){
+            // return 'it has image;';
+            
+            $imageName = time();
+            $ext = $request->preview_image->getClientOriginalExtension();
+            $request->preview_image->move(public_path('uploads/pages/'), $imageName . "." . $ext);
+            $file =  $imageName . '.' . $ext;
+            
+            $this->convertImageToWebp($file, "pages");
+            $path = '/uploads/pages/' . $imageName . '.' . 'webp';
+            if ($path != null) {
+                $preview_image = $path;
+            }
+            // return $path;
+        }
         // return response()->json($slug_page, 200);
         if ($slug_page == null || $slug_page->slug == $slug && $slug_page->id == $id || $slug_page == null || $slug_page == []) {
             $page->update([
@@ -67,6 +110,10 @@ class PageController extends Controller
                 'keyword' => $keyword,
                 'description' => $description,
                 'show' => $show,
+                'isPreview' => $isPreview,
+                'preview_title' => $preview_title,
+                'preview_body' => $preview_body,
+                'preview_image' => $preview_image,
             ]);
         } else {
             return response()->json(['message' => 'Page with this slug already exists'], 500);
@@ -121,7 +168,7 @@ class PageController extends Controller
             $ext = $request->image->getClientOriginalExtension();
             $request->image->move(public_path('uploads/editor/'), $imageName . "." . $ext);
             $file =  $imageName . '.' . $ext;
-            $this->convertImageToWebp($file);
+            $this->convertImageToWebp($file, "editor");
             $path = '/uploads/editor/' . $imageName . '.' . 'webp';
             if ($path != null) {
                 $image = $path;
@@ -129,10 +176,10 @@ class PageController extends Controller
             return $path;
         }
     }
-    private function convertImageToWebp($file)
+    private function convertImageToWebp($file, $path)
     {
         ini_set('memory_limit', '256M');
-        $directory = str_replace('\\', '/', public_path()) . '/' . "uploads/editor/";
+        $directory = str_replace('\\', '/', public_path()) . '/' . "uploads/{$path}/";
         if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', 'png', "JPG", "JPEG", "PNG"))) {
 
             if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', "JPG", "JPEG"))) {

@@ -251,11 +251,11 @@ export default {
             this.slug = this.slugify(this.name);
         },
         submitForm() {
-            this.$refs.mavoneditor.save();
             // console.log(
             //     "HTML VALUE FROM EDITOR: \n" + this.body
             // );
             const visibility = this.visibility == true ? "1" : "0";
+            const isPreview = this.isPreview == true ? "1" : "0";
             this.isLoading = true;
             var formData = new FormData();
             formData.append("name", this.name);
@@ -266,7 +266,7 @@ export default {
             formData.append("keyword", this.keyword);
             formData.append("description", this.description);
             formData.append("visibility", visibility);
-            formData.append("isPreview", this.isPreview);
+            formData.append("isPreview", isPreview);
             formData.append("preview_title", this.preview_title);
             formData.append("preview_body", this.preview_body);
             formData.append("preview_image", this.preview_image);
@@ -294,7 +294,7 @@ export default {
                 .replace(/[\s_-]+/g, "-")
                 .replace(/^-+|-+$/g, "");
         },
-        saveImage(event, number) {
+        saveImage(event) {
             var preview;
             var image_id = "";
             this.preview_image = event.target.files[0];
@@ -384,6 +384,13 @@ export default {
                     this.preview_title = response.data.page.preview_title;
                     this.preview_body = response.data.page.preview_body;
                     this.preview_image = response.data.page.preview_image;
+
+                    var preview;
+                    if (this.preview_image != null) {
+                        preview = document.getElementById("imagePreview");
+                        preview.src = this.preview_image;
+                        preview.style.display = "block";
+                    }
                 });
         }
 
