@@ -78,7 +78,7 @@ const routes = [
                 meta: { requiresAuth: true },
             },
             {
-                path: "/admin/pages/:slug", // slug is the dynamic parameter
+                path: "/admin/pages/:id", // slug is the dynamic parameter
                 component: () =>
                     import(
                         /* webpackChunkName: "dashboard" */ "@/admin/pages/AddPage.vue"

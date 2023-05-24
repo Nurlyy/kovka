@@ -116,7 +116,7 @@
 
         <div class="mb-3">
             <CFormLabel for="show"
-                >Показывать ссылку на страницу в меню?
+                >Показывать на сайте (да / нет)
             </CFormLabel>
             <CFormCheck
                 style="margin-left: 15px"
@@ -361,10 +361,10 @@ export default {
         },
     },
     created() {
-        const slug = this.$route.params.slug;
-        if (slug) {
+        const id = this.$route.params.id;
+        if (id) {
             axios
-                .post("/api/get-page-admin", { slug: slug })
+                .post("/api/get-page-admin", { id: id })
                 .then((response) => {
                     // this.page = response.data.page;
                     // console.log(reponse.data);

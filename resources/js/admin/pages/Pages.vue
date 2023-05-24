@@ -27,7 +27,7 @@
                 <td><div class="table_td">{{ item.keyword }}</div></td>
                 <td><div class="table_td"><CFormCheck style="margin-left: 15px" :checked='item.show' id="show" disabled /></div></td>
                 <td>
-                    <CButton component="a" color="info" :href="'/admin/pages/' + item.slug" role="button"><CIcon icon="cil-pen" size="sm"/> Изменить</CButton>
+                    <CButton component="a" color="info" :href="'/admin/pages/' + item.id" role="button"><CIcon icon="cil-pen" size="sm"/> Изменить</CButton>
                     <!-- <router-link :to="'/admin/images/' + image.id"
                         >Изменить</router-link
                     > -->

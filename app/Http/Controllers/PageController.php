@@ -81,7 +81,11 @@ class PageController extends Controller
         $preview_image = null;
         // return $body;
         $page = Page::where('id', intval($id))->first();
-        $slug_page = Page::select('slug', 'id')->where('slug', $slug)->first();
+
+        $slug_page = Page::select('slug', 'id')
+                ->where('slug', $slug)
+                ->where('id', '!=', $page->id)
+                ->first();
 
         // return response()->json(['message' => ['file' => 'fail']], 500);
         if($request->hasFile("preview_image")){
@@ -149,8 +153,8 @@ class PageController extends Controller
 
     public function getPageAdmin(Request $request)
     {
-        $slug = $request->slug;
-        $page = Page::where('slug', $slug)->first();
+        $id = $request->id;
+        $page = Page::where('id', $id)->first();
         return response()->json(['page' => $page]);
     }
 
