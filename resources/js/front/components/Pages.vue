@@ -19,12 +19,13 @@
 </template>
 
 <script>
-import TopLineNavigation from './TopLineNavigation.vue';
-import Footer from './Footer.vue';
+import TopLineNavigation from "./TopLineNavigation.vue";
+import Footer from "./Footer.vue";
 export default {
     name: "Page",
     components: {
-        TopLineNavigation, Footer,
+        TopLineNavigation,
+        Footer,
     },
     data() {
         return {
@@ -41,6 +42,28 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+.conteaner-page {
+    max-width: 100%;
+    position: relative;
+    height: auto;
+    padding: 20px;
+    font-family: var(--font-family-times);
+    box-sizing: border-box;
+    background-color: #fafafa;
+    margin-top: 30px;
+    font-size: 16px !important;
+    blockquote {
+        border-left: 4px solid #ff0000;
+    }
+    ul {
+        li {
+            padding: 5px 0;
+        }
+    }
+}
+</style>
 
 <style scoped lang="scss">
 .page {
