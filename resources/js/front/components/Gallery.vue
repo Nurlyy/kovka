@@ -199,6 +199,7 @@ export default {
             border: 0;
             outline: 0;
             background-color: none;
+            position: relative;
             background: none;
             cursor: pointer;
             border-bottom: 2px solid #c9c9c9;

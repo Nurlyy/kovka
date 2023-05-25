@@ -81,6 +81,9 @@ Route::post('set-personal-status', "App\Http\Controllers\MainPageController@setP
 Route::post('get-personal-status', "App\Http\Controllers\MainPageController@getPersonalStatus");
 Route::post("upload-image", "App\Http\Controllers\PageController@uploadImage");
 
+Route::post("get-blogs", "App\Http\Controllers\PageController@getBlogs");
+Route::post("view-page", "App\Http\Controllers\PageController@viewPage");
+
 // Route::post("cv", "App\Http\Controllers\ContactsController@cve");
 // Route::post('get-image-admin', "App\Http\Controllers\ImageController@getImageAdmin");
 // Route::get('get-email-token', "App\Http\Controllers\AdminController@getEmailToken");

@@ -40,11 +40,15 @@ export default {
         };
     },
     mounted() {
+        var isPreview = false;
         const slug = this.$route.params.slug;
         axios.post("/api/get-page", { slug: slug }).then((response) => {
             this.page = response.data.page;
             document.title = this.page.header_title;
-            // console.log(response.data);
+            isPreview = response.data.page.isPreview == 1 ? true : false;
+            if(isPreview){
+                axios.post("/api/view-page", {page_id : this.page.id});
+            }   
         });
     },
 };

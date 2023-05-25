@@ -218,4 +218,18 @@ class PageController extends Controller
         }
         unlink($directory . $file);
     }
+
+    public function getBlogs(){
+        $blogs = Page::where('isPreview', '1')->get();
+        return response()->json(['blogs' => $blogs]);
+    }
+
+    public function viewPage(Request $request){
+        if($request->id){
+            $page_id = htmlentities($request->page_id);
+            $page = Page::where('id', $page_id)->first();
+            $page->views += 1;
+            $page->save();
+        }
+    }
 }
