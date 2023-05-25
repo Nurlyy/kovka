@@ -33,7 +33,6 @@ export default {
             page: {
                 title: "",
                 body: "",
-                
             },
         };
     },
@@ -50,14 +49,14 @@ export default {
 
 <style lang="scss">
 .conteaner-page {
-    max-width: 1100px;
-    position: relative;
-    height: auto;
-    padding: 20px;
-    font-family: var(--font-family-times);
-    box-sizing: border-box;
-    background-color: #fafafa;
-    margin: 30px auto;
+    max-width: 1100px !important;
+    position: relative !important;
+    height: auto !important;
+    padding: 20px !important;
+    font-family: var(--font-family-times) !important;
+    box-sizing: border-box !important;
+    background-color: #fafafa !important;
+    margin: 30px auto !important;
     font-size: 18px !important;
     line-height: 24px !important;
     .wrapper {
@@ -70,14 +69,13 @@ export default {
         h5,
         p {
             font-family: var(--font-family-times) !important;
-            font-weight: normal;
         }
         h1 {
             border-bottom: 1px solid #e7e7e7 !important;
             padding: 20px 0 40px !important;
             display: block !important;
             max-width: 700px !important;
-            margin: 0 auto !important;
+            margin: 0 auto 20px !important;
             width: var(--width-main) !important;
             color: var(--color-purple-h2) !important;
             font-size: var(--font-saze-h2) !important;
@@ -101,21 +99,21 @@ export default {
         ul li {
             position: relative;
             border-left: 4px solid #dddddd;
-            padding: 16px 20px 16px 28px;
-            margin: 12px 0 12px 80px;
+            padding: 10px 20px 10px 18px;
+            margin: 12px 0 12px 48px;
             -webkit-transition-duration: 0.3s;
             transition-duration: 0.3s;
         }
         ul li:before {
             line-height: 32px;
             position: absolute;
-            top: 10px;
-            left: -80px;
-            width: 80px;
+            top: 7px;
+            left: -70px;
+            width: 80;
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #dddddd;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ddd;
             counter-increment: li;
             content: counter(li);
             -webkit-transition-duration: 0.3s;
@@ -125,16 +123,16 @@ export default {
             box-sizing: border-box;
         }
         ul li:hover:before {
-            color: #77aedb;
+            color: rgb(84, 95, 104);
         }
         ul li:after {
             position: absolute;
-            top: 26px;
-            left: -40px;
-            width: 60px;
-            height: 60px;
-            border: 8px solid #3399ff;
-            border-radius: 50%;
+            top: 22px;
+            left: -30px;
+            width: 44px;
+            height: 44px;
+            border: 4px solid #44414d;
+            border-radius: 12px;
             content: "";
             opacity: 0;
             -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
@@ -142,7 +140,7 @@ export default {
             transition: transform 0.3s, opacity 0.3s;
             -webkit-transform: translateX(-50%) translateY(-50%) scale(0.1);
             -moz-transform: translateX(-50%) translateY(-50%) scale(0.1);
-            transform: translateX(-50%) translateY(-50%) scale(0.1);
+            transform: translate(-50%) translateY(-50%) scale(0.1);
             pointer-events: none;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -189,12 +187,13 @@ export default {
         }
     }
     .conteaner-page {
-        max-width: 1100px;
+        max-width: 100%;
         height: auto;
         padding: 20px;
         font-family: var(--font-family-times);
         box-sizing: border-box;
         background-color: #fafafa;
-        margin: 30px auto;
+        margin-top: 30px;
     }
 }
+</style>
