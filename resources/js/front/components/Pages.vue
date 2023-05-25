@@ -46,6 +46,7 @@ export default {
             this.page = response.data.page;
             document.title = this.page.header_title;
             isPreview = response.data.page.isPreview == 1 ? true : false;
+            // console.log(response.data.page);
             if(isPreview){
                 axios.post("/api/view-page", {page_id : this.page.id});
             }   

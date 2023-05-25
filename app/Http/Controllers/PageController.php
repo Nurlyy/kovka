@@ -225,11 +225,14 @@ class PageController extends Controller
     }
 
     public function viewPage(Request $request){
-        if($request->id){
+        if($request->page_id){
             $page_id = htmlentities($request->page_id);
             $page = Page::where('id', $page_id)->first();
-            $page->views += 1;
-            $page->save();
+            $page->views = intval($page->views) + 1;
+            $page->update([
+                'views' => $page->views
+            ]);
+            // return response()->json(['page' => $page]);
         }
     }
 }

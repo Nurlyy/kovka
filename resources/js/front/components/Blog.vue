@@ -1,43 +1,54 @@
 <template>
+    <TopLineNavigation />
     <div class="blog">
         <div class="conteaner-logo">
             <a href="" class="logo">
-                <img src="@/assets/images/logo.png" alt="">
+                <img src="@/front/assets/images/logo.png" alt="" />
             </a>
         </div>
-        <h1>
-            Дизайнерские новинки и другие материалы
-        </h1>
-        <div class="conteaner-blog">
-            <div class="blog-card"  v-for="blog, index in blogs" :key='index' :href='"/page/"+blog.slug'>
-                <div class="conteaner-img">
-                    <img :src='blog.preview_image' alt="" />
+        <h1>Дизайнерские новинки и другие материалы</h1>
+        <div class="wrapper">
+            <div class="conteaner-blog">
+                <div
+                    class="blog-card"
+                    v-for="(blog, index) in blogs"
+                    :key="index"
+                >
+                    <div class="conteaner-img">
+                        <img :src="blog.preview_image" alt="" />
+                    </div>
+                    <a :href="'/page/' + blog.slug" class="link-card">
+                        <span class="readings"> {{ blog.views }} </span>
+                        <span>
+                            {{ blog.preview_body }}
+                        </span>
+                    </a>
                 </div>
-                <a href="#" class="link-card">
-                    <span class="readings"> {{blog.views}} </span>
-                    <span>
-                        {{ blog.preview_body }}
-                    </span>
-                </a>
             </div>
         </div>
     </div>
+    <Footer />
 </template>
 
 <script>
+import TopLineNavigation from "./TopLineNavigation.vue";
+import Footer from "./Footer.vue";
 export default {
-    name: "Header",
+    name: "Blog",
+    components: {
+        TopLineNavigation,Footer
+    },
     data() {
         return {
             blogs: [],
         };
     },
     methods: {
-        getBlogs(){
+        getBlogs() {
             axios.post("/api/get-blogs").then((response) => {
                 this.blogs = response.data.blogs;
             });
-        }
+        },
     },
     mounted() {
         this.getBlogs();
@@ -47,6 +58,11 @@ export default {
 
 <style scoped lang="scss">
 .blog {
+    .wrapper {
+        max-width: 1100px !important;
+        margin-left:auto;
+        margin-right: auto;
+    }
     .conteaner-logo {
         width: 100%;
         text-align: center;
@@ -77,7 +93,7 @@ export default {
     }
     .conteaner-blog {
         position: relative;
-        max-width: 100%;
+        max-width: 1100px !important;
         display: grid;
         margin-top: 6px;
         grid-template-columns: repeat(4, 1fr);

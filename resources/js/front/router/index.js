@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Index from "@/front/components/Index.vue";
 import Pages from "@/front/components/Pages.vue";
+import Blog from "@/front/components/Blog.vue";
 
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
         path: "/",
         name: "Main",
         component: Index,
+    },
+    {
+        path: "/blog",
+        name: "Blog",
+        component: Blog,
     },
     {
         path: "/:catchAll(.*)", // Catch-all route
