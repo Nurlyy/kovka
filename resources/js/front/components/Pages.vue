@@ -9,7 +9,7 @@
         <div class="conteaner-page">
             <div class="wrapper">
                 <div class="conteaner-breadcrumbs">
-                    <a class="back-btn" href="#">Вернуться назад</a>
+                    <a @click="$router.go(-1)" class="back-btn" href="#">Вернуться назад</a>
                 </div>
                 <h1>
                     {{ page.title }}
@@ -84,7 +84,7 @@ export default {
         font-weight: 500 !important;
         font-family: var(--font-family-btn-navigation);
         transition: var(--transition);
-        background-image: url(@/assets/images/arrow.svg);
+        background-image: url(@/front/assets/arrow.svg);
         background-repeat: no-repeat;
         background-position: left 0px center;
         background-size: 24px;
