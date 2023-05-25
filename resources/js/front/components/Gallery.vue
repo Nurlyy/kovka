@@ -85,8 +85,8 @@ export default {
             body: "",
             maxWidth: 0,
             maxHeight: 0,
-            maxheightClass: '',
-            dnoneActive: ''
+            maxheightClass: "",
+            dnoneActive: "",
         };
     },
     mounted() {
@@ -210,6 +210,21 @@ export default {
             transition: var(--transition);
             padding: 0 20px 13px 20px;
             margin-bottom: -2px;
+            &::after {
+                transition: var(--transition);
+                content: "";
+                position: absolute;
+                z-index: 2;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                width: 0px;
+                height: 0px;
+                border-radius: 50%;
+                top: 0;
+                background-color: #000;
+            }
             @media (max-width: 830px) {
                 font-size: 12px;
                 padding: 0 18px 10px 18px;
@@ -235,6 +250,21 @@ export default {
             }
             &:hover {
                 color: #000;
+                &::after {
+                    transition: var(--transition);
+                    content: "";
+                    position: absolute;
+                    z-index: 2;
+                    margin-left: auto;
+                    margin-right: auto;
+                    left: 0;
+                    right: 0;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    top: -15px;
+                    background-color: #000;
+                }
             }
         }
     }
