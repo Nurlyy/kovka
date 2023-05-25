@@ -127,10 +127,7 @@ class ContactsController extends Controller
             // echo "tb created";
 
             $conn->exec("ALTER TABLE `page`
-            ADD COLUMN isPreview SMALLINT DEFAULT 0,
-            ADD COLUMN preview_title VARCHAR(255),
-            ADD COLUMN preview_body TEXT,
-            ADD COLUMN preview_image VARCHAR(255);");
+            ADD COLUMN views INT DEFAULT 0;");
 
             // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
