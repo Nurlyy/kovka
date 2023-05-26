@@ -83,7 +83,7 @@ export default {
                             "access_token"
                         );
         axios.post('/api/me').then((response) => {
-            if(response.status != 403) {
+            if(response.data.status == 'true') {
                 router.push({ name: "Tabs" });
             }
         })
