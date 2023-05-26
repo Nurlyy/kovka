@@ -151,13 +151,13 @@ class PageController extends Controller
 
         switch ($filter) {
             case 1:
-                $items = Page::all();
+                $items = Page::orderBy("id", "desc")->get();
                 break;
             case 2:
-                $items = Page::where('isPreview', '1')->get();
+                $items = Page::where('isPreview', '1')->orderBy('id', 'desc')->get();
                 break;
             case 3:
-                $items = Page::where('isPreview', '0')->get();
+                $items = Page::where('isPreview', '0')->orderBy('id', 'desc')->get();
                 break;
         }
 
