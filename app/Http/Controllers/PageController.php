@@ -26,7 +26,7 @@ class PageController extends Controller
 
         $slug_page = Page::select('slug', 'id')->where('slug', $slug)->first();
 
-        if($request->hasFile("preview_image")){
+        if ($request->hasFile("preview_image")) {
             $imageName = time();
             $ext = $request->preview_image->getClientOriginalExtension();
             $request->preview_image->move(public_path('uploads/pages/'), $imageName . "." . $ext);
@@ -78,24 +78,24 @@ class PageController extends Controller
         $isPreview = $request->isPreview;
         $preview_title = $request->preview_title;
         $preview_body = $request->preview_body;
-        $preview_image = null;
+        $preview_image = $request->preview_image;
         // return $body;
         $page = Page::where('id', intval($id))->first();
 
         $slug_page = Page::select('slug', 'id')
-                ->where('slug', $slug)
-                ->where('id', '!=', $page->id)
-                ->first();
+            ->where('slug', $slug)
+            ->where('id', '!=', $page->id)
+            ->first();
 
         // return response()->json(['message' => ['file' => 'fail']], 500);
-        if($request->hasFile("preview_image")){
+        if ($request->hasFile("preview_image")) {
             // return 'it has image;';
-            
+
             $imageName = time();
             $ext = $request->preview_image->getClientOriginalExtension();
             $request->preview_image->move(public_path('uploads/pages/'), $imageName . "." . $ext);
             $file =  $imageName . '.' . $ext;
-            
+
             $this->convertImageToWebp($file, "pages");
             $path = '/uploads/pages/' . $imageName . '.' . 'webp';
             if ($path != null) {
@@ -145,9 +145,22 @@ class PageController extends Controller
         return response()->json(['items' => $items]);
     }
 
-    public function getPagesAdmin()
+    public function getPagesAdmin(Request $request)
     {
-        $items = Page::all();
+        $filter = $request->filter;
+
+        switch ($filter) {
+            case 1:
+                $items = Page::all();
+                break;
+            case 2:
+                $items = Page::where('isPreview', '1')->get();
+                break;
+            case 3:
+                $items = Page::where('isPreview', '0')->get();
+                break;
+        }
+
         return response()->json(['items' => $items]);
     }
 
@@ -166,8 +179,9 @@ class PageController extends Controller
         return response()->json(['items' => Page::all()], 204);
     }
 
-    public function uploadImage(Request $request){
-        if($request->hasFile("image")){
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile("image")) {
             $imageName = time();
             $ext = $request->image->getClientOriginalExtension();
             $request->image->move(public_path('uploads/editor/'), $imageName . "." . $ext);
@@ -219,13 +233,15 @@ class PageController extends Controller
         unlink($directory . $file);
     }
 
-    public function getBlogs(){
-        $blogs = Page::where('isPreview', '1')->get();
+    public function getBlogs()
+    {
+        $blogs = Page::where('isPreview', '1')->where('show', '1')->get();
         return response()->json(['blogs' => $blogs]);
     }
 
-    public function viewPage(Request $request){
-        if($request->page_id){
+    public function viewPage(Request $request)
+    {
+        if ($request->page_id) {
             $page_id = htmlentities($request->page_id);
             $page = Page::where('id', $page_id)->first();
             $page->views = intval($page->views) + 1;

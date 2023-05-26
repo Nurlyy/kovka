@@ -397,9 +397,6 @@ export default {
         // Fetch page data from database using slug
         // Set page data to this.page
     },
-    beforeUnmount() {
-        this.editor.destroy();
-    },
 };
 </script>
 

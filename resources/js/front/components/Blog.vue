@@ -6,7 +6,7 @@
                 <img src="@/front/assets/images/logo.png" alt="" />
             </a>
         </div>
-        <h1>Дизайнерские новинки и другие материалы</h1>
+        <h1>Дизайнерские новинки и другие идеи</h1>
         <div class="wrapper">
             <div class="conteaner-blog">
                 <div
@@ -124,7 +124,7 @@ export default {
                 height: 100%;
                 top: 0;
                 left: 0;
-                background-color: rgba(0, 0, 0, 0.45);
+                background-color: rgba(0, 0, 0, 0.4);
                 z-index: 3;
                 transition: var(--transition);
                 .readings {
