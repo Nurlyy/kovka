@@ -1,4 +1,5 @@
 <template>
+    <CAlert :visible="alert_state" color="success">Изменения сохранены</CAlert>
     <h1>Контактные данные</h1>
     <CForm @submit.prevent="submitForm">
         <div style="width: 50%">
@@ -47,6 +48,7 @@ export default {
             email: "",
             phone_number: "",
             address: "",
+            alert_state: false,
         };
     },
     mounted() {
@@ -65,8 +67,16 @@ export default {
                     phone_number: this.phone_number,
                     address: this.address,
                 })
-                .then(function (response) {
+                .then((response) => {
                     console.log(response.data);
+                    this.alert_state = true;
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    setTimeout(() => {
+                        this.alert_state = false;
+                    }, 3000);
                 });
             // alert('saved');
         },
