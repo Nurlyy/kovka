@@ -29,6 +29,15 @@
         <script src="https://cdn.jsdelivr.net/gh/silvia-odwyer/pixels.js/dist/Pixels.js"></script>
         <title>Ковка и дерево</title>
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125886068-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-125886068-1');
+        </script>
+
     </head>
     <body>
         <div id="app"></div>
