@@ -1,7 +1,12 @@
 <template>
     <div v-if="isLoading" class="loading-overlay">
         <CButton disabled>
-            <CSpinner component="span" size="xsl" color='light' aria-hidden="true"/>
+            <CSpinner
+                component="span"
+                size="xsl"
+                color="light"
+                aria-hidden="true"
+            />
         </CButton>
     </div>
     <h1 v-if="id == null">Добавить Вкладку</h1>
@@ -41,7 +46,7 @@
                 rows="3"
             ></CFormTextarea>
         </div>
-        
+
         <my-upload
             field="img"
             @crop-success="(img, field) => cropSuccess(img, field, 1)"
@@ -138,13 +143,7 @@
                                             <img
                                                 id="imagePreview1"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>Оригинал</p>
                                         </div>
@@ -169,13 +168,7 @@
                                             <img
                                                 id="imagePreview1_filtered_selected"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>
                                                 <strong>Фильтр: </strong
@@ -242,12 +235,7 @@
                                                             'imagePreview1_filtered_' +
                                                             index
                                                         "
-                                                        style="
-                                                            height: 100px;
-                                                            border-radius: 15px;
-                                                            margin-top: 15;
-                                                            display: none;
-                                                        "
+                                                        class='preview_filter_image'
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -294,13 +282,7 @@
                                             <img
                                                 id="imagePreview2"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>Оригинал</p>
                                         </div>
@@ -325,13 +307,7 @@
                                             <img
                                                 id="imagePreview2_filtered_selected"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>
                                                 <strong>Фильтр: </strong
@@ -370,14 +346,13 @@
                                                     ) in filters"
                                                     :key="index"
                                                     @click="
-                                                            selectFilter(
-                                                                'imagePreview2',
-                                                                filter,
-                                                                2
-                                                            );
-                                                            filterValue2 =
-                                                                filter;
-                                                        "
+                                                        selectFilter(
+                                                            'imagePreview2',
+                                                            filter,
+                                                            2
+                                                        );
+                                                        filterValue2 = filter;
+                                                    "
                                                     :style="{
                                                         border:
                                                             filterValue2 ===
@@ -399,13 +374,7 @@
                                                             'imagePreview2_filtered_' +
                                                             index
                                                         "
-                                                        style="
-                                                            height: 100px;
-                                                            border-radius: 15px;
-                                                            margin-top: 15;
-                                                            display: none;
-                                                        "
-                                                        
+                                                        class='preview_filter_image'
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -417,9 +386,13 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow2()">{{
-                        buttonText
-                    }}</CButton>
+                    <CButton
+                        class="mt-3"
+                        color="light"
+                        href="#"
+                        @click="toggleShow2()"
+                        >{{ buttonText }}</CButton
+                    >
                 </CCardBody>
             </CCard>
         </div>
@@ -448,13 +421,7 @@
                                             <img
                                                 id="imagePreview3"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>Оригинал</p>
                                         </div>
@@ -479,13 +446,7 @@
                                             <img
                                                 id="imagePreview3_filtered_selected"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>
                                                 <strong>Фильтр: </strong
@@ -524,14 +485,13 @@
                                                     ) in filters"
                                                     :key="index"
                                                     @click="
-                                                            selectFilter(
-                                                                'imagePreview3',
-                                                                filter,
-                                                                3
-                                                            );
-                                                            filterValue3 =
-                                                                filter;
-                                                        "
+                                                        selectFilter(
+                                                            'imagePreview3',
+                                                            filter,
+                                                            3
+                                                        );
+                                                        filterValue3 = filter;
+                                                    "
                                                     :style="{
                                                         border:
                                                             filterValue3 ===
@@ -553,12 +513,7 @@
                                                             'imagePreview3_filtered_' +
                                                             index
                                                         "
-                                                        style="
-                                                            height: 100px;
-                                                            border-radius: 15px;
-                                                            margin-top: 15;
-                                                            display: none;
-                                                        "
+                                                        class='preview_filter_image'
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -570,9 +525,13 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow3()">{{
-                        buttonText
-                    }}</CButton>
+                    <CButton
+                        class="mt-3"
+                        color="light"
+                        href="#"
+                        @click="toggleShow3()"
+                        >{{ buttonText }}</CButton
+                    >
                 </CCardBody>
             </CCard>
         </div>
@@ -601,13 +560,7 @@
                                             <img
                                                 id="imagePreview4"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>Оригинал</p>
                                         </div>
@@ -632,13 +585,7 @@
                                             <img
                                                 id="imagePreview4_filtered_selected"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>
                                                 <strong>Фильтр: </strong
@@ -677,14 +624,13 @@
                                                     ) in filters"
                                                     :key="index"
                                                     @click="
-                                                            selectFilter(
-                                                                'imagePreview4',
-                                                                filter,
-                                                                4
-                                                            );
-                                                            filterValue4 =
-                                                                filter;
-                                                        "
+                                                        selectFilter(
+                                                            'imagePreview4',
+                                                            filter,
+                                                            4
+                                                        );
+                                                        filterValue4 = filter;
+                                                    "
                                                     :style="{
                                                         border:
                                                             filterValue4 ===
@@ -706,13 +652,7 @@
                                                             'imagePreview4_filtered_' +
                                                             index
                                                         "
-                                                        style="
-                                                            height: 100px;
-                                                            border-radius: 15px;
-                                                            margin-top: 15;
-                                                            display: none;
-                                                        "
-                                                        
+                                                        class='preview_filter_image'
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -724,9 +664,13 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow4()">{{
-                        buttonText
-                    }}</CButton>
+                    <CButton
+                        class="mt-3"
+                        color="light"
+                        href="#"
+                        @click="toggleShow4()"
+                        >{{ buttonText }}</CButton
+                    >
                 </CCardBody>
             </CCard>
         </div>
@@ -755,13 +699,7 @@
                                             <img
                                                 id="imagePreview5"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>Оригинал</p>
                                         </div>
@@ -786,13 +724,7 @@
                                             <img
                                                 id="imagePreview5_filtered_selected"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>
                                                 <strong>Фильтр: </strong
@@ -831,14 +763,13 @@
                                                     ) in filters"
                                                     :key="index"
                                                     @click="
-                                                            selectFilter(
-                                                                'imagePreview5',
-                                                                filter,
-                                                                5
-                                                            );
-                                                            filterValue5 =
-                                                                filter;
-                                                        "
+                                                        selectFilter(
+                                                            'imagePreview5',
+                                                            filter,
+                                                            5
+                                                        );
+                                                        filterValue5 = filter;
+                                                    "
                                                     :style="{
                                                         border:
                                                             filterValue5 ===
@@ -860,13 +791,7 @@
                                                             'imagePreview5_filtered_' +
                                                             index
                                                         "
-                                                        style="
-                                                            height: 100px;
-                                                            border-radius: 15px;
-                                                            margin-top: 15;
-                                                            display: none;
-                                                        "
-                                                        
+                                                        class='preview_filter_image'
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -878,9 +803,13 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow5()">{{
-                        buttonText
-                    }}</CButton>
+                    <CButton
+                        class="mt-3"
+                        color="light"
+                        href="#"
+                        @click="toggleShow5()"
+                        >{{ buttonText }}</CButton
+                    >
                 </CCardBody>
             </CCard>
         </div>
@@ -909,13 +838,7 @@
                                             <img
                                                 id="imagePreview6"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>Оригинал</p>
                                         </div>
@@ -940,13 +863,7 @@
                                             <img
                                                 id="imagePreview6_filtered_selected"
                                                 alt="Preview Image"
-                                                style="
-                                                    height: 150px;
-                                                    border-radius: 15px;
-                                                    margin-top: 15;
-                                                    display: none;
-                                                "
-                                                class="mb-3"
+                                                class="mb-3 preview_image"
                                             />
                                             <p>
                                                 <strong>Фильтр: </strong
@@ -985,14 +902,13 @@
                                                     ) in filters"
                                                     :key="index"
                                                     @click="
-                                                            selectFilter(
-                                                                'imagePreview6',
-                                                                filter,
-                                                                6
-                                                            );
-                                                            filterValue6 =
-                                                                filter;
-                                                        "
+                                                        selectFilter(
+                                                            'imagePreview6',
+                                                            filter,
+                                                            6
+                                                        );
+                                                        filterValue6 = filter;
+                                                    "
                                                     :style="{
                                                         border:
                                                             filterValue6 ===
@@ -1014,13 +930,7 @@
                                                             'imagePreview6_filtered_' +
                                                             index
                                                         "
-                                                        style="
-                                                            height: 100px;
-                                                            border-radius: 15px;
-                                                            margin-top: 15;
-                                                            display: none;
-                                                        "
-                                                        
+                                                        class='preview_filter_image'
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -1032,9 +942,13 @@
                         </CRow>
                     </CContainer>
 
-                    <CButton class="mt-3" color="light" href="#" @click="toggleShow6()">{{
-                        buttonText
-                    }}</CButton>
+                    <CButton
+                        class="mt-3"
+                        color="light"
+                        href="#"
+                        @click="toggleShow6()"
+                        >{{ buttonText }}</CButton
+                    >
                 </CCardBody>
             </CCard>
         </div>
@@ -1167,21 +1081,17 @@ export default {
             formData.append("header", this.header);
             if (this.id != null) {
                 formData.append("id", this.id);
-                axios
-                    .post("/api/update-tab", formData)
-                    .then((response) => {
-                        console.log(response.data);
-                        this.isLoading = false;
-                        router.push({ name: "Tabs" });
-                    });
+                axios.post("/api/update-tab", formData).then((response) => {
+                    console.log(response.data);
+                    this.isLoading = false;
+                    router.push({ name: "Tabs" });
+                });
             } else {
-                axios
-                    .post("/api/create-tab", formData)
-                    .then((response) => {
-                        console.log(response.data);
-                        this.isLoading = false;
-                        router.push({ name: "Tabs" });
-                    });
+                axios.post("/api/create-tab", formData).then((response) => {
+                    console.log(response.data);
+                    this.isLoading = false;
+                    router.push({ name: "Tabs" });
+                });
                 // alert("saved");
             }
         },
@@ -1385,18 +1295,30 @@ export default {
 };
 </script>
 <style scoped>
-
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+.preview_image {
+    height: 550px;
+    border-radius: 15px;
+    margin-top: 15;
+    display: none;
 }
 
+.preview_filter_image {
+    height: 75px;
+    border-radius: 15px;
+    margin-top: 15;
+    display: none;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
 </style>
