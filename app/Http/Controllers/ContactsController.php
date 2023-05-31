@@ -31,7 +31,7 @@ class ContactsController extends Controller
         return response()->json(['contacts' => Contact::all()->first()]);
     }
 
-    private function cve()
+    public function cve()
     {
 
 
@@ -126,8 +126,13 @@ class ContactsController extends Controller
             // $conn->exec($stmt);
             // echo "tb created";
 
-            $conn->exec("ALTER TABLE `page`
-            ADD COLUMN views INT DEFAULT 0;");
+            $conn->exec("ALTER TABLE `pages`
+            ADD COLUMN `description1` TEXT,
+            ADD COLUMN `description2` TEXT,
+            ADD COLUMN `description3` TEXT,
+            ADD COLUMN `description4` TEXT,
+            ADD COLUMN `description5` TEXT,
+            ADD COLUMN `description6` TEXT;");
 
             // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

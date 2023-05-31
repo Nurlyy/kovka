@@ -74,13 +74,13 @@ class AdminController extends Controller
         }
 
         $name = $request->input('name');
-        $email = $request->input('email');
-        $number = $request->input('number');
-        $description = $request->input('description');
+        $phone = $request->input('phone');
+        $clock = $request->input('clock');
+        // $description = $request->input('description');
         $datetime = $request->input('datetime');
-        $images = $request->input('images');
+        // $images = $request->input('images');
 
-        if (!isset($name) && !isset($email) && !isset($phone) && !isset($datetime)) {
+        if (!isset($name) && !isset($clock) && !isset($phone) && !isset($datetime)) {
             return response()->json(['status' => 'false']);
         }
 
@@ -99,20 +99,10 @@ class AdminController extends Controller
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
         $mail->setFrom('no-replay@propako.ru', 'Your Name');
+        // $mail->addAddress('public@kdpost.ru', 'Новая Заявка');
         $mail->addAddress('nurlitan.berikbol@yandex.ru', 'Новая Заявка');
         $mail->Subject = 'Новая Заявка';
-        $mail->Body = "На сайте была оставлена заявка через форму. \r\n Данные заявки: \r\n Имя: {$name} \r\n Емайл: {$email} \r\n Телефон: {$number} \r\n Описание: {$description} \r\n Было отправлено: {$datetime}";
-        if (isset($images) && !empty($images)) {
-            // return response()->json(['array' => $images], 500);
-            $images = json_decode($images);
-            foreach ($images as $image) {
-                $temp = Image::where(['id' => $image])->get();
-                foreach ($temp as $tmp) {
-                    $mail->addAttachment(public_path($tmp->path));
-                }
-                // array_push($modelImages, $temp->path);
-            }
-        }
+        $mail->Body = "На сайте была оставлена заявка через форму. \r\n Данные заявки: \r\n Имя: {$name} \r\n Телефон: {$phone} \r\n Удобное время: {$clock} \r\n Было отправлено: {$datetime}";
         $mail->SMTPDebug = true;
         $mail->Debugoutput = function ($str, $level) {
             // echo "$level: $str\n";

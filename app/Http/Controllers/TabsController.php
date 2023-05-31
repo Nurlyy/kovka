@@ -36,6 +36,12 @@ class TabsController extends Controller
         $body_text = $request->body_text;
         $title = $request->title;
         $is_visible = $request->is_visible;
+        $description1 = $request->description1;
+        $description2 = $request->description2;
+        $description3 = $request->description3;
+        $description4 = $request->description4;
+        $description5 = $request->description5;
+        $description6 = $request->description6;
 
         if ($request->hasFile('image1')) {
             if ($page->image1 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image1)) {
@@ -161,6 +167,12 @@ class TabsController extends Controller
             'body_text' => $body_text,
             'title' => $title,
             'is_visible' => $is_visible,
+            'description1' => $description1,
+            'description2' => $description2,
+            'description3' => $description3,
+            'description4' => $description4,
+            'description5' => $description5,
+            'description6' => $description6,
         ]);
     }
 
@@ -186,6 +198,14 @@ class TabsController extends Controller
         $body_text = $request->body_text;
         $title = $request->title;
         $is_visible = $request->is_visible;
+
+        $description1 = $request->description1;
+        $description2 = $request->description2;
+        $description3 = $request->description3;
+        $description4 = $request->description4;
+        $description5 = $request->description5;
+        $description6 = $request->description6;
+
         if ($request->hasFile('image1')) {
             // var_dump('hasfile');exit;
             $imageName = time() . '-image-1';
@@ -291,6 +311,12 @@ class TabsController extends Controller
             'body_text' => $body_text,
             'title' => $title,
             'is_visible' => $is_visible,
+            'description1' => $description1,
+            'description2' => $description2,
+            'description3' => $description3,
+            'description4' => $description4,
+            'description5' => $description5,
+            'description6' => $description6,
         ]);
     }
 

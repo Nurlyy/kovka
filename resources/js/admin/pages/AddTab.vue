@@ -123,7 +123,7 @@
             <CCard>
                 <CCardBody class="mb-3">
                     <CCardTitle>1 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -248,12 +248,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow1()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description1"
+                            :value="description1"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -262,7 +272,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>2 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -387,12 +397,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow2()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description2"
+                            :value="description2"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -401,7 +421,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>3 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -526,12 +546,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow3()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description3"
+                            :value="description3"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -540,7 +570,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>4 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -665,12 +695,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow4()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description4"
+                            :value="description4"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -679,7 +719,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>5 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -804,12 +844,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow5()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description5"
+                            :value="description5"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -818,12 +868,12 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>6 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
                                     v-show="image6 != null"
-                                    style="
+                                    style=" 
                                         text-align: center;
                                         justify-content: center;
                                     "
@@ -943,12 +993,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow6()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description6"
+                            :value="description6"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -1022,6 +1082,12 @@ export default {
             visible6: false,
             image_id: null,
             isLoading: false,
+            description1: "",
+            description2: "",
+            description3: "",
+            description4: "",
+            description5: "",
+            description6: "",
         };
     },
     methods: {
@@ -1078,6 +1144,12 @@ export default {
             formData.append("image4", this.image4);
             formData.append("image5", this.image5);
             formData.append("image6", this.image6);
+            formData.append("description1", this.description1);
+            formData.append("description2", this.description2);
+            formData.append("description3", this.description3);
+            formData.append("description4", this.description4);
+            formData.append("description5", this.description5);
+            formData.append("description6", this.description6);
             formData.append("header", this.header);
             if (this.id != null) {
                 formData.append("id", this.id);
@@ -1240,6 +1312,12 @@ export default {
                 this.image4 = response.data.tabs.image_4;
                 this.image5 = response.data.tabs.image_5;
                 this.image6 = response.data.tabs.image_6;
+                this.description1 = response.data.tabs.description1;
+                this.description2 = response.data.tabs.description2;
+                this.description3 = response.data.tabs.description3;
+                this.description4 = response.data.tabs.description4;
+                this.description5 = response.data.tabs.description5;
+                this.description6 = response.data.tabs.description6;
                 this.header = response.data.tabs.header;
                 var preview;
                 if (this.image1 != null) {
@@ -1296,7 +1374,8 @@ export default {
 </script>
 <style scoped>
 .preview_image {
-    height: 550px;
+    max-height: 550px;
+    max-width: 498px;
     border-radius: 15px;
     margin-top: 15;
     display: none;

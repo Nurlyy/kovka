@@ -18,7 +18,7 @@
             >
                 <img
                     :src="image.preview"
-                    alt=""
+                    :alt="image.description"
                     class="imageImg"
                     :id="'imageImg_' + index"
                 />
@@ -123,26 +123,32 @@ export default {
                     this.images.push({
                         image: this.pages[0].image_1,
                         preview: this.pages[0].image_1_preview,
+                        description: this.pages[0].description1,
                     });
                     this.images.push({
                         image: this.pages[0].image_2,
                         preview: this.pages[0].image_2_preview,
+                        description: this.pages[0].description2,
                     });
                     this.images.push({
                         image: this.pages[0].image_3,
                         preview: this.pages[0].image_3_preview,
+                        description: this.pages[0].description3,
                     });
                     this.images.push({
                         image: this.pages[0].image_4,
                         preview: this.pages[0].image_4_preview,
+                        description: this.pages[0].description4,
                     });
                     this.images.push({
                         image: this.pages[0].image_5,
                         preview: this.pages[0].image_5_preview,
+                        description: this.pages[0].description5,
                     });
                     this.images.push({
                         image: this.pages[0].image_6,
                         preview: this.pages[0].image_6_preview,
+                        description: this.pages[0].description6,
                     });
 
                     this.title = this.pages[0].title;
@@ -156,26 +162,32 @@ export default {
             this.images.push({
                 image: this.pages[index].image_1,
                 preview: this.pages[index].image_1_preview,
+                description: this.pages[index].description1,
             });
             this.images.push({
                 image: this.pages[index].image_2,
                 preview: this.pages[index].image_2_preview,
+                description: this.pages[index].description2,
             });
             this.images.push({
                 image: this.pages[index].image_3,
                 preview: this.pages[index].image_3_preview,
+                description: this.pages[index].description3,
             });
             this.images.push({
                 image: this.pages[index].image_4,
                 preview: this.pages[index].image_4_preview,
+                description: this.pages[index].description4,
             });
             this.images.push({
                 image: this.pages[index].image_5,
                 preview: this.pages[index].image_5_preview,
+                description: this.pages[index].description5,
             });
             this.images.push({
                 image: this.pages[index].image_6,
                 preview: this.pages[index].image_6_preview,
+                description: this.pages[index].description6,
             });
 
             this.title = this.pages[index].title;
