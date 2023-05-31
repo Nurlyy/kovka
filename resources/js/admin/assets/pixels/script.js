@@ -15,9 +15,11 @@ export default function applyFilter(Image_id, put_to, filter) {
     context.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
 
     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-
-    var newImgData = pixelsJS.filterImgData(imageData, filter);
-    context.putImageData(newImgData, 0, 0);
+    if(filter != "original"){
+        imageData = pixelsJS.filterImgData(imageData, filter);
+    }
+    
+    context.putImageData(imageData, 0, 0);
 
     // context.putImageData(imageData, 0, 0);
 

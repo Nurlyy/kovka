@@ -90,15 +90,13 @@ class AdminController extends Controller
         $mail->isSMTP();
 
         // Enable SMTP authentication
-        $mail->SMTPAuth = true;
-        $mail->AuthType = 'LOGIN';
-        $mail->Username = 'no-replay@propako.ru';
-        $mail->Password = 'EXNkxmMsjYBPKwszxsoktx6b';
-
-        $mail->Host = 'smtp.yandex.com';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
-        $mail->setFrom('no-replay@propako.ru', 'Your Name');
+        $mail->Host       = 'smtp.yandex.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'public@kdpost.ru';                     //SMTP username
+        $mail->Password   = 'Globalpro2023';                               //SMTP password
+        $mail->SMTPSecure = 'ssl';         
+        $mail->Port       = 465;
+        $mail->setFrom('public@kdpost.ru', 'Your Name');
         // $mail->addAddress('public@kdpost.ru', 'Новая Заявка');
         $mail->addAddress('nurlitan.berikbol@yandex.ru', 'Новая Заявка');
         $mail->Subject = 'Новая Заявка';
@@ -113,6 +111,7 @@ class AdminController extends Controller
             return response()->json(['status' => 'true']);
             // echo 'Email sent successfully!';
         } catch (Exception $e) {
+            return response()->json(['status' => 'false','message' => $e->getMessage()]);
             return response()->json(['status' => 'false']);
             // echo 'Email could not be sent. Error: ' . $mail->ErrorInfo;
         }
