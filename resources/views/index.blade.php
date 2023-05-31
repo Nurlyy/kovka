@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
@@ -21,6 +22,9 @@
         <!-- Favicon -->
         <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
+        <!-- META DESCRIPTION -->
+        <meta name="description" content="">
 
 
         <link rel="preconnect" href="https://fonts.googleapis.com">

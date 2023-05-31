@@ -40,6 +40,10 @@ export default {
         axios.post('/api/get-personal-status').then((response) => {
             this.teamVisibility = response.data.visibility;
         });
+        axios.post('/api/get-main-page').then((response) => {
+            const description = response.data.mainPage.description;
+            document.querySelector('meta[name="description"]').setAttribute('content', description);
+        })
     }
 };
 </script>
