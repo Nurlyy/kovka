@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="conteaner-logo">
-      <a href="/" class="logo">
+      <a href="/" aria-label="Main Logo" class="logo">
         <img src="@/front/assets/images/logo.png" alt="">
       </a>
     </div>

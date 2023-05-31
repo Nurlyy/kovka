@@ -30,6 +30,7 @@
                     target="_blank"
                     rel="noreferrer"
                     id="imageView"
+                    :aria-label='image.description'
                 >
                 </a>
             </div>
