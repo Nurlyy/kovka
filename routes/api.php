@@ -52,7 +52,7 @@ Route::post('get-tabs-admin', "App\Http\Controllers\TabsController@getTabsAdmin"
 Route::post('create-tab', "App\Http\Controllers\TabsController@createTab")->middleware('auth:api');
 Route::post('delete-tab', "App\Http\Controllers\TabsController@deleteTab")->middleware('auth:api');
 Route::post('update-tab', "App\Http\Controllers\TabsController@updateTab")->middleware('auth:api');
-// Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
+Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
 
 // Route::post('get-filters', "App\Http\Controllers\FilterController@getFilters");
@@ -86,8 +86,8 @@ Route::post("view-page", "App\Http\Controllers\PageController@viewPage");
 
 // Route::post("cv", "App\Http\Controllers\ContactsController@cve");
 // Route::post('get-image-admin', "App\Http\Controllers\ImageController@getImageAdmin");
-// Route::get('get-email-token', "App\Http\Controllers\AdminController@getEmailToken");
-// Route::post('send-email', "App\Http\Controllers\AdminController@sendEmail");
+Route::get('get-email-token', "App\Http\Controllers\AdminController@getEmailToken");
+Route::post('send-email', "App\Http\Controllers\AdminController@sendEmail");
 // Route::middleware('auth:api')->group(function () {
 //     Route::post('/logout', [AuthController::class, 'logout']);
 // });

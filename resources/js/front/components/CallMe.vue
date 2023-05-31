@@ -7,17 +7,69 @@
         Сообщите пожалуйста удобное для вас время, ваше имя и номер телефона
       </p>
       <div class="conteaner-form">
-        <input type="text" class="user" placeholder="Ваше имя">
-        <input type="text" class="phone" placeholder="Ваш номер телефона">
-        <input type="text" class="clock" placeholder="Удобное время">
-        <button>Отправить</button>
+        <input type="text" class="user" v-model='name' placeholder="Ваше имя">
+        <input type="text" class="phone" v-model='phone' placeholder="Ваш номер телефона">
+        <input type="text" class="clock" v-model='clock' placeholder="Удобное время">
+        <button @click='getCookieToken'>Отправить</button>
       </div>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'CallMe'
+    name: 'CallMe',
+    data(){
+        return {
+            name: '',
+            phone: '',
+            clock: '',
+        }
+    },
+    methods: {
+        getCookieToken() {
+            axios
+                .get("/api/get-email-token", { withCredentials: true })
+                .then((response) => {
+                    console.log("got email token");
+                    const cookie = this.getCookie("emailToken");
+                    if (cookie != null && cookie != "undefined") {
+                        console.log("check email token");
+
+                        this.sendMail();
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+        sendMail() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, "0");
+            const day = String(now.getDate()).padStart(2, "0");
+            const hours = String(now.getHours()).padStart(2, "0");
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+            const seconds = String(now.getSeconds()).padStart(2, "0");
+            const dateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            var sendObject = {name: this.name,
+                    name: this.name,
+                    phone: this.phone,
+                    clock: this.clock,
+                    datetime: dateTime,
+                };
+
+            axios
+                .post("/api/send-email", sendObject)
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data.status == "true") {
+                        console.log("success");
+                    } else {
+                        console.log("failure");
+                    }
+                });
+        },
+    }
   }
   </script>
   
