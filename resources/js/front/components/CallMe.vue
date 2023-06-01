@@ -1,4 +1,9 @@
 <template>
+    <div class="toast" id="toast">
+        <div class="toast-body">
+            {{ title }}
+        </div>
+    </div>
     <div class="call-me">
         <h3>Перезвоните мне</h3>
         <p>
@@ -39,6 +44,10 @@ export default {
             name: "",
             phone: "",
             clock: "",
+            toasts: [],
+            showToast: false,
+            title: "test",
+            content: "test",
         };
     },
     methods: {
@@ -90,11 +99,26 @@ export default {
 
             axios.post("/api/send-email", sendObject).then((response) => {
                 console.log(response.data);
-                if (response.data.status == "true") {
+                var status = response.data.status;
+                if (status == "true") {
                     console.log("success");
                     this.name = "";
                     this.phone = "";
                     this.clock = "";
+
+                    this.title = status
+                        ? "Вы успешно оставили заявку!"
+                        : "Произошла ошибка!";
+                    this.content = status
+                        ? "Мы обязательно обработаем вашу заявку"
+                        : "Попробуйте заново";
+                    document.querySelector('#toast').classList = "toast visible";
+                    console.log(this.showToast);
+                    setTimeout(() => {
+                        this.showToast = false;
+                        console.log(this.showToast);
+                        document.querySelector('#toast').classList = "toast";
+                    }, 3000);
                 } else {
                     console.log("failure");
                 }
@@ -105,6 +129,36 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.toast {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    transform: translateY(-100%);
+    opacity: 0;
+
+    transition: opacity 500ms, transform 500ms;
+}
+
+.toast.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-body {
+    margin: 28px;
+    padding: 20px 24px;
+
+    font-size: larger;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    background-color: white;
+    border: solid;
+    color: #5e4186;
+
+    border-radius: 4px;
+}
+
 .call-me {
     position: relative;
     width: var(--width-main);
