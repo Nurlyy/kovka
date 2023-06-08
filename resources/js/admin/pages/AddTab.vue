@@ -235,6 +235,7 @@
                                                             'imagePreview1_filtered_' +
                                                             index
                                                         "
+                                                        :src='getImagePath(filter)'
                                                         class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
@@ -384,6 +385,7 @@
                                                             'imagePreview2_filtered_' +
                                                             index
                                                         "
+                                                        :src='getImagePath(filter)'
                                                         class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
@@ -533,6 +535,7 @@
                                                             'imagePreview3_filtered_' +
                                                             index
                                                         "
+                                                        :src='getImagePath(filter)'
                                                         class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
@@ -682,6 +685,7 @@
                                                             'imagePreview4_filtered_' +
                                                             index
                                                         "
+                                                        :src='getImagePath(filter)'
                                                         class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
@@ -831,6 +835,7 @@
                                                             'imagePreview5_filtered_' +
                                                             index
                                                         "
+                                                        :src='getImagePath(filter)'
                                                         class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
@@ -980,6 +985,7 @@
                                                             'imagePreview6_filtered_' +
                                                             index
                                                         "
+                                                        :src='getImagePath(filter)'
                                                         class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
@@ -1223,16 +1229,21 @@ export default {
             preview.src = event;
             preview.style.display = "block";
 
-            // setTimeout(() => {
-            //     this.filters.forEach((filter, index) => {
-            //         applyFilter(
-            //             image_id,
-            //             image_id + "_filtered_" + index,
-            //             filter
-            //         );
-            //     });
-            // }, 500);
+            setTimeout(() => {
+                this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                        var prev = document.getElementById(image_id + "_filtered_" + index);
+                        prev.src = `/uploads/previews/${filter}.png`;
+                        prev.style.display = "block";
+                        // filter
+                    // );
+                });
+            }, 500);
         },
+        getImagePath(filter){
+            // return `/uploads/previews/${filter}.png`;
+        },  
         change({ coordinates, canvas }) {
             console.log(coordinates, canvas);
         },
@@ -1320,90 +1331,102 @@ export default {
                     preview = document.getElementById("imagePreview1");
                     preview.src = this.image1;
                     preview.style.display = "block";
-                    // setTimeout(() => {
-                    //     this.filters.forEach((filter, index) => {
-                    //         applyFilter(
-                    //             "imagePreview1",
-                    //             "imagePreview1" + "_filtered_" + index,
-                    //             filter
-                    //         );
-                    //     });
-                    // }, 500);
+                    setTimeout(() => {
+                        this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                            var prev = document.getElementById("imagePreview1" + "_filtered_" + index);
+                            prev.src = `/uploads/previews/${filter}.png`;
+                            prev.style.display = "block";
+                        // filter
+                    // );
+                        });
+                    }, 500);
                 }
 
                 if (this.image2 != null) {
                     preview = document.getElementById("imagePreview2");
                     preview.src = this.image2;
                     preview.style.display = "block";
-                    // setTimeout(() => {
-                    //     this.filters.forEach((filter, index) => {
-                    //         applyFilter(
-                    //             "imagePreview2",
-                    //             "imagePreview2" + "_filtered_" + index,
-                    //             filter
-                    //         );
-                    //     });
-                    // }, 500);
+                    setTimeout(() => {
+                        this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                            var prev = document.getElementById("imagePreview2" + "_filtered_" + index);
+                            prev.src = `/uploads/previews/${filter}.png`;
+                            prev.style.display = "block";
+                        // filter
+                    // );
+                        });
+                    }, 500);
                 }
 
                 if (this.image3 != null) {
                     preview = document.getElementById("imagePreview3");
                     preview.src = this.image3;
                     preview.style.display = "block";
-                    // setTimeout(() => {
-                    //     this.filters.forEach((filter, index) => {
-                    //         applyFilter(
-                    //             "imagePreview3",
-                    //             "imagePreview3" + "_filtered_" + index,
-                    //             filter
-                    //         );
-                    //     });
-                    // }, 500);
+                    setTimeout(() => {
+                        this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                            var prev = document.getElementById("imagePreview3" + "_filtered_" + index);
+                            prev.src = `/uploads/previews/${filter}.png`;
+                            prev.style.display = "block";
+                        // filter
+                    // );
+                        });
+                    }, 500);
                 }
 
                 if (this.image4 != null) {
                     preview = document.getElementById("imagePreview4");
                     preview.src = this.image4;
                     preview.style.display = "block";
-                    // setTimeout(() => {
-                    //     this.filters.forEach((filter, index) => {
-                    //         applyFilter(
-                    //             "imagePreview4",
-                    //             "imagePreview4" + "_filtered_" + index,
-                    //             filter
-                    //         );
-                    //     });
-                    // }, 500);
+                    setTimeout(() => {
+                        this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                            var prev = document.getElementById("imagePreview4" + "_filtered_" + index);
+                            prev.src = `/uploads/previews/${filter}.png`;
+                            prev.style.display = "block";
+                        // filter
+                    // );
+                        });
+                    }, 500);
                 }
 
                 if (this.image5 != null) {
                     preview = document.getElementById("imagePreview5");
                     preview.src = this.image5;
                     preview.style.display = "block";
-                    // setTimeout(() => {
-                    //     this.filters.forEach((filter, index) => {
-                    //         applyFilter(
-                    //             "imagePreview5",
-                    //             "imagePreview5" + "_filtered_" + index,
-                    //             filter
-                    //         );
-                    //     });
-                    // }, 500);
+                    setTimeout(() => {
+                        this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                            var prev = document.getElementById("imagePreview5" + "_filtered_" + index);
+                            prev.src = `/uploads/previews/${filter}.png`;
+                            prev.style.display = "block";
+                        // filter
+                    // );
+                        });
+                    }, 500);
                 }
 
                 if (this.image6 != null) {
                     preview = document.getElementById("imagePreview6");
                     preview.src = this.image6;
                     preview.style.display = "block";
-                    // setTimeout(() => {
-                    //     this.filters.forEach((filter, index) => {
-                    //         applyFilter(
-                    //             "imagePreview6",
-                    //             "imagePreview6" + "_filtered_" + index,
-                    //             filter
-                    //         );
-                    //     });
-                    // }, 500);
+                    setTimeout(() => {
+                        this.filters.forEach((filter, index) => {
+                    // applyFilter(
+                    //     image_id,
+                            var prev = document.getElementById("imagePreview6" + "_filtered_" + index);
+                            prev.src = `/uploads/previews/${filter}.png`;
+                            prev.style.display = "block";
+                        // filter
+                    // );
+                        });
+                    }, 500);
                 }
             });
         }
