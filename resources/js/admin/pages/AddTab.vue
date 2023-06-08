@@ -1424,14 +1424,14 @@ export default {
 </script>
 <style scoped>
 .preview_image {
-<<<<<<< HEAD
+/* <<<<<<< HEAD */
     max-height: 400px;
     max-width: 400px;
     
-=======
-    max-height: 550px;
-    max-width: 498px;
->>>>>>> c8041094ae916104a885a4a9e155c892c530220e
+/* ======= */
+    /* max-height: 550px; */
+    /* max-width: 498px; */
+/* >>>>>>> c8041094ae916104a885a4a9e155c892c530220e */
     border-radius: 15px;
     margin-top: 15;
     display: none;
