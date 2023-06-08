@@ -4,7 +4,7 @@
         <!-- <div class="carousel__item">{{ slide }}</div> -->
         <div class="conteaner-card-team">
           <div class="conteaner-photo-team">
-            <img :src='person.image'>
+            <img :src='person.image' :alt='person.name'>
           </div>
           <p class="name">
             {{person.name}}

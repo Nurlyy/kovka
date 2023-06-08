@@ -36,6 +36,12 @@ class TabsController extends Controller
         $body_text = $request->body_text;
         $title = $request->title;
         $is_visible = $request->is_visible;
+        $description1 = $request->description1;
+        $description2 = $request->description2;
+        $description3 = $request->description3;
+        $description4 = $request->description4;
+        $description5 = $request->description5;
+        $description6 = $request->description6;
 
         if ($request->hasFile('image1')) {
             if ($page->image1 != null && file_exists(str_replace('\\', '/', public_path()) . '/' . $page->image1)) {
@@ -161,6 +167,12 @@ class TabsController extends Controller
             'body_text' => $body_text,
             'title' => $title,
             'is_visible' => $is_visible,
+            'description1' => $description1,
+            'description2' => $description2,
+            'description3' => $description3,
+            'description4' => $description4,
+            'description5' => $description5,
+            'description6' => $description6,
         ]);
     }
 
@@ -186,6 +198,14 @@ class TabsController extends Controller
         $body_text = $request->body_text;
         $title = $request->title;
         $is_visible = $request->is_visible;
+
+        $description1 = $request->description1;
+        $description2 = $request->description2;
+        $description3 = $request->description3;
+        $description4 = $request->description4;
+        $description5 = $request->description5;
+        $description6 = $request->description6;
+
         if ($request->hasFile('image1')) {
             // var_dump('hasfile');exit;
             $imageName = time() . '-image-1';
@@ -291,6 +311,12 @@ class TabsController extends Controller
             'body_text' => $body_text,
             'title' => $title,
             'is_visible' => $is_visible,
+            'description1' => $description1,
+            'description2' => $description2,
+            'description3' => $description3,
+            'description4' => $description4,
+            'description5' => $description5,
+            'description6' => $description6,
         ]);
     }
 
@@ -420,6 +446,28 @@ class TabsController extends Controller
             if (in_array(pathinfo($file, PATHINFO_EXTENSION), array('jpg', 'jpeg', "JPG", "JPEG"))) {
                 // Load the original image
                 $original_image = imagecreatefromjpeg($directory . $file);
+                $exif = exif_read_data($directory . $file);
+                if ($exif && isset($exif['Orientation'])) {
+                    $orientation = $exif['Orientation'];
+                    if ($orientation != 1) {
+                        $deg = 0;
+                        switch ($orientation) {
+                            case 3:
+                                $deg = 180;
+                                break;
+                            case 6:
+                                $deg = 270;
+                                break;
+                            case 8:
+                                $deg = 90;
+                                break;
+                        }
+                        if ($deg) {
+                            $original_image = imagerotate($original_image, $deg, 0);
+                        }
+                        // then rewrite the rotated image back to the disk as $filename 
+                    } // if there is some rotation necessary
+                }
 
                 // Create a new WebP image
                 $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));
@@ -434,6 +482,28 @@ class TabsController extends Controller
             } elseif (in_array(pathinfo($file, PATHINFO_EXTENSION), array('png', 'PNG'))) {
                 // Load the original image
                 $original_image = imagecreatefrompng($directory . $file);
+                // $exif = exif_read_data($directory . $file);
+                // if ($exif && isset($exif['Orientation'])) {
+                //     $orientation = $exif['Orientation'];
+                //     if ($orientation != 1) {
+                //         $deg = 0;
+                //         switch ($orientation) {
+                //             case 3:
+                //                 $deg = 180;
+                //                 break;
+                //             case 6:
+                //                 $deg = 270;
+                //                 break;
+                //             case 8:
+                //                 $deg = 90;
+                //                 break;
+                //         }
+                //         if ($deg) {
+                //             $original_image = imagerotate($original_image, $deg, 0);
+                //         }
+                //         // then rewrite the rotated image back to the disk as $filename 
+                //     } // if there is some rotation necessary
+                // }
 
                 // Create a new WebP image
                 $new_image = imagecreatetruecolor(imagesx($original_image), imagesy($original_image));

@@ -86,8 +86,8 @@ Route::post("view-page", "App\Http\Controllers\PageController@viewPage");
 
 // Route::post("cv", "App\Http\Controllers\ContactsController@cve");
 // Route::post('get-image-admin', "App\Http\Controllers\ImageController@getImageAdmin");
-// Route::get('get-email-token', "App\Http\Controllers\AdminController@getEmailToken");
-// Route::post('send-email', "App\Http\Controllers\AdminController@sendEmail");
+Route::get('get-email-token', "App\Http\Controllers\AdminController@getEmailToken");
+Route::post('send-email', "App\Http\Controllers\AdminController@sendEmail");
 // Route::middleware('auth:api')->group(function () {
 //     Route::post('/logout', [AuthController::class, 'logout']);
 // });

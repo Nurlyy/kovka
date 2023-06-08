@@ -5,6 +5,7 @@
             :href="pages_slugs[regalia.id]"
             class="conteaner-card"
             :key="index"
+            :aria-label='regalia.title'
         >
             <div class="conteanet-ico card-1-ico">
                 <img :src="regalia.image" alt="" />

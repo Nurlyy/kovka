@@ -123,7 +123,7 @@
             <CCard>
                 <CCardBody class="mb-3">
                     <CCardTitle>1 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -235,7 +235,7 @@
                                                             'imagePreview1_filtered_' +
                                                             index
                                                         "
-                                                        class='preview_filter_image'
+                                                        class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -248,12 +248,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow1()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description1"
+                            :value="description1"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -262,7 +272,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>2 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -374,7 +384,7 @@
                                                             'imagePreview2_filtered_' +
                                                             index
                                                         "
-                                                        class='preview_filter_image'
+                                                        class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -387,12 +397,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow2()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description2"
+                            :value="description2"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -401,7 +421,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>3 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -513,7 +533,7 @@
                                                             'imagePreview3_filtered_' +
                                                             index
                                                         "
-                                                        class='preview_filter_image'
+                                                        class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -526,12 +546,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow3()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description3"
+                            :value="description3"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -540,7 +570,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>4 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -652,7 +682,7 @@
                                                             'imagePreview4_filtered_' +
                                                             index
                                                         "
-                                                        class='preview_filter_image'
+                                                        class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -665,12 +695,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow4()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description4"
+                            :value="description4"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -679,7 +719,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>5 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -791,7 +831,7 @@
                                                             'imagePreview5_filtered_' +
                                                             index
                                                         "
-                                                        class='preview_filter_image'
+                                                        class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -804,12 +844,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow5()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description5"
+                            :value="description5"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -818,7 +868,7 @@
             <CCard>
                 <CCardBody>
                     <CCardTitle>6 Изображение</CCardTitle>
-                    <CContainer>
+                    <CContainer class="mb-3">
                         <CRow>
                             <CCol xs="6">
                                 <CCard
@@ -930,7 +980,7 @@
                                                             'imagePreview6_filtered_' +
                                                             index
                                                         "
-                                                        class='preview_filter_image'
+                                                        class="preview_filter_image"
                                                     />
                                                     <p>{{ filter }}</p>
                                                 </div>
@@ -943,12 +993,22 @@
                     </CContainer>
 
                     <CButton
-                        class="mt-3"
+                        class="mb-3"
                         color="light"
                         href="#"
                         @click="toggleShow6()"
                         >{{ buttonText }}</CButton
                     >
+
+                    <div class="mb-3">
+                        <CFormLabel for="description">Alt тэг</CFormLabel>
+                        <CFormTextarea
+                            v-model="description6"
+                            :value="description6"
+                            id="description"
+                            rows="3"
+                        ></CFormTextarea>
+                    </div>
                 </CCardBody>
             </CCard>
         </div>
@@ -1013,7 +1073,7 @@ export default {
             filterValue4: null,
             filterValue5: null,
             filterValue6: null,
-            filters: ["darkify", "pane"],
+            filters: ["original", "darkify", 'wood', 'bluescale', 'evening', 'crimson', 'phase', 'coral', 'incbrightness', 'vintage', 'radio', 'twenties', 'pixel_blue', 'warmth'],
             visible1: false,
             visible2: false,
             visible3: false,
@@ -1022,6 +1082,12 @@ export default {
             visible6: false,
             image_id: null,
             isLoading: false,
+            description1: "",
+            description2: "",
+            description3: "",
+            description4: "",
+            description5: "",
+            description6: "",
         };
     },
     methods: {
@@ -1078,6 +1144,12 @@ export default {
             formData.append("image4", this.image4);
             formData.append("image5", this.image5);
             formData.append("image6", this.image6);
+            formData.append("description1", this.description1);
+            formData.append("description2", this.description2);
+            formData.append("description3", this.description3);
+            formData.append("description4", this.description4);
+            formData.append("description5", this.description5);
+            formData.append("description6", this.description6);
             formData.append("header", this.header);
             if (this.id != null) {
                 formData.append("id", this.id);
@@ -1151,19 +1223,15 @@ export default {
             preview.src = event;
             preview.style.display = "block";
 
-            setTimeout(() => {
-                // preview.src = applyFilter(image_id)
-                this.filters.forEach((filter, index) => {
-                    applyFilter(
-                        image_id,
-                        image_id + "_filtered_" + index,
-                        filter
-                    );
-                });
-
-                // preview.width = preview.naturalWidth;
-                // preview.height = preview.naturalHeight;
-            }, 500);
+            // setTimeout(() => {
+            //     this.filters.forEach((filter, index) => {
+            //         applyFilter(
+            //             image_id,
+            //             image_id + "_filtered_" + index,
+            //             filter
+            //         );
+            //     });
+            // }, 500);
         },
         change({ coordinates, canvas }) {
             console.log(coordinates, canvas);
@@ -1240,42 +1308,102 @@ export default {
                 this.image4 = response.data.tabs.image_4;
                 this.image5 = response.data.tabs.image_5;
                 this.image6 = response.data.tabs.image_6;
+                this.description1 = response.data.tabs.description1;
+                this.description2 = response.data.tabs.description2;
+                this.description3 = response.data.tabs.description3;
+                this.description4 = response.data.tabs.description4;
+                this.description5 = response.data.tabs.description5;
+                this.description6 = response.data.tabs.description6;
                 this.header = response.data.tabs.header;
                 var preview;
                 if (this.image1 != null) {
                     preview = document.getElementById("imagePreview1");
                     preview.src = this.image1;
                     preview.style.display = "block";
+                    // setTimeout(() => {
+                    //     this.filters.forEach((filter, index) => {
+                    //         applyFilter(
+                    //             "imagePreview1",
+                    //             "imagePreview1" + "_filtered_" + index,
+                    //             filter
+                    //         );
+                    //     });
+                    // }, 500);
                 }
 
                 if (this.image2 != null) {
                     preview = document.getElementById("imagePreview2");
                     preview.src = this.image2;
                     preview.style.display = "block";
+                    // setTimeout(() => {
+                    //     this.filters.forEach((filter, index) => {
+                    //         applyFilter(
+                    //             "imagePreview2",
+                    //             "imagePreview2" + "_filtered_" + index,
+                    //             filter
+                    //         );
+                    //     });
+                    // }, 500);
                 }
 
                 if (this.image3 != null) {
                     preview = document.getElementById("imagePreview3");
                     preview.src = this.image3;
                     preview.style.display = "block";
+                    // setTimeout(() => {
+                    //     this.filters.forEach((filter, index) => {
+                    //         applyFilter(
+                    //             "imagePreview3",
+                    //             "imagePreview3" + "_filtered_" + index,
+                    //             filter
+                    //         );
+                    //     });
+                    // }, 500);
                 }
 
                 if (this.image4 != null) {
                     preview = document.getElementById("imagePreview4");
                     preview.src = this.image4;
                     preview.style.display = "block";
+                    // setTimeout(() => {
+                    //     this.filters.forEach((filter, index) => {
+                    //         applyFilter(
+                    //             "imagePreview4",
+                    //             "imagePreview4" + "_filtered_" + index,
+                    //             filter
+                    //         );
+                    //     });
+                    // }, 500);
                 }
 
                 if (this.image5 != null) {
                     preview = document.getElementById("imagePreview5");
                     preview.src = this.image5;
                     preview.style.display = "block";
+                    // setTimeout(() => {
+                    //     this.filters.forEach((filter, index) => {
+                    //         applyFilter(
+                    //             "imagePreview5",
+                    //             "imagePreview5" + "_filtered_" + index,
+                    //             filter
+                    //         );
+                    //     });
+                    // }, 500);
                 }
 
                 if (this.image6 != null) {
                     preview = document.getElementById("imagePreview6");
                     preview.src = this.image6;
                     preview.style.display = "block";
+                    // setTimeout(() => {
+                    //     this.filters.forEach((filter, index) => {
+                    //         applyFilter(
+                    //             "imagePreview6",
+                    //             "imagePreview6" + "_filtered_" + index,
+                    //             filter
+                    //         );
+                    //     });
+                    // }, 500);
                 }
             });
         }
@@ -1296,9 +1424,14 @@ export default {
 </script>
 <style scoped>
 .preview_image {
+<<<<<<< HEAD
     max-height: 400px;
     max-width: 400px;
     
+=======
+    max-height: 550px;
+    max-width: 498px;
+>>>>>>> c8041094ae916104a885a4a9e155c892c530220e
     border-radius: 15px;
     margin-top: 15;
     display: none;

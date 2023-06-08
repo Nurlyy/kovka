@@ -126,8 +126,18 @@ class ContactsController extends Controller
             // $conn->exec($stmt);
             // echo "tb created";
 
+<<<<<<< HEAD
             $conn->exec("ALTER TABLE `main_page`
             ADD COLUMN `description` TEXT;");
+=======
+            $conn->exec("ALTER TABLE `pages`
+            ADD COLUMN `description1` TEXT,
+            ADD COLUMN `description2` TEXT,
+            ADD COLUMN `description3` TEXT,
+            ADD COLUMN `description4` TEXT,
+            ADD COLUMN `description5` TEXT,
+            ADD COLUMN `description6` TEXT;");
+>>>>>>> c8041094ae916104a885a4a9e155c892c530220e
 
             // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

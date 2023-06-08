@@ -27,5 +27,11 @@ class Pages extends Model
         'body_text',
         'title',
         'is_visible',
+        'description1',
+        'description2',
+        'description3',
+        'description4',
+        'description5',
+        'description6',
     ];
 }
