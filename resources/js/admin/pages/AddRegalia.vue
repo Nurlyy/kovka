@@ -31,6 +31,28 @@
         </div>
         <br />
         <div class="mb-3">
+            <h5>Выбранное фоновое изображение преимущества</h5>
+            <img
+                id="bgImagePreview"
+                alt="Preview Background Image"
+                style="
+                    height: 150px;
+                    border-radius: 15px;
+                    margin-top: 15;
+                    display: none;
+                "
+                class="mb-3"
+            />
+            <CFormLabel v-if="id == null" for="bg_image"
+                >Изображение преимущества</CFormLabel
+            >
+            <CFormLabel v-if="id != null" for="bg_image"
+                >Изменить фоновое изображение преимущества</CFormLabel
+            >
+            <CFormInput @change="saveBgImage" type="file" id="bg_image" />
+        </div>
+        <br />
+        <div class="mb-3">
             <CFormLabel for="title">Заголовок</CFormLabel>
             <CFormInput v-model="title" :value="title" id="title"></CFormInput>
         </div>
@@ -66,6 +88,7 @@ export default {
     data() {
         return {
             image: null,
+            bg_image: null,
             title: null,
             body: null,
             id: null,
@@ -90,6 +113,7 @@ export default {
                 if (this.image != null) {
                     let formData = new FormData();
                     formData.append("image", this.image);
+                    formData.append("bg_image", this.bg_image);
                     formData.append("body", this.body);
                     formData.append("title", this.title);
                     formData.append('page_id', this.page_id);
@@ -108,6 +132,7 @@ export default {
                 if (this.image != null) {
                     let formData = new FormData();
                     formData.append("image", this.image);
+                    formData.append("bg_image", this.bg_image);
                     formData.append("body", this.body);
                     formData.append("title", this.title);
                     formData.append("page_id", this.page_id);
@@ -142,6 +167,23 @@ export default {
             // Read the image file as a data URL
             reader.readAsDataURL(event.target.files[0]);
         },
+        saveBgImage(event) {
+            this.bg_image = event.target.files[0];
+            var preview = document.getElementById("bgImagePreview");
+
+            // Create a new FileReader instance
+            var reader = new FileReader();
+
+            // Set the image preview source
+            reader.onload = function (event) {
+                preview.src = event.target.result;
+            };
+
+            preview.style.display = "block";
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(event.target.files[0]);
+        },
     },
     created() {
         // axios.post("/api/get-filters", {}).then((response) => {
@@ -153,6 +195,7 @@ export default {
                 // this.page = response.data.page;
                 // console.log(reponse.data);
                 this.image = response.data.regalia.image;
+                this.bg_image = response.data.regalia.bg_image;
                 this.body = response.data.regalia.body;
                 this.title = response.data.regalia.title;
                 this.page_id = response.data.regalia.page_id;
@@ -163,6 +206,10 @@ export default {
                 this.id = id;
                 var preview = document.getElementById("imagePreview");
                 preview.src = this.image;
+                preview.style.display = "block";
+
+                preview = document.getElementById("bgImagePreview");
+                preview.src = this.bg_image;
                 preview.style.display = "block";
 
                 // if (this.availableFilters.includes(imageFilter)) {
