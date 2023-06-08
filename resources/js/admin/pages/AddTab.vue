@@ -1296,7 +1296,9 @@ export default {
 </script>
 <style scoped>
 .preview_image {
-    height: 550px;
+    max-height: 400px;
+    max-width: 400px;
+    
     border-radius: 15px;
     margin-top: 15;
     display: none;

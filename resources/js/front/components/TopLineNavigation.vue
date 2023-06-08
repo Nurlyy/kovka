@@ -2,7 +2,7 @@
     <div class="top-line-navigation">
         <nav>
             <a href="/page/contact" class="contacts-btn">Контакты</a>
-            <a href="/blog" style="margin-left: 10px;" class="contacts-btn">Блог</a>
+            <!-- <a href="/blog" style="margin-left: 10px;" class="contacts-btn">Блог</a> -->
             <span>{{number}}</span>
             <span>{{email}}</span>
             <span>{{address}}</span>

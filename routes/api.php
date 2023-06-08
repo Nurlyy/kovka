@@ -52,7 +52,7 @@ Route::post('get-tabs-admin', "App\Http\Controllers\TabsController@getTabsAdmin"
 Route::post('create-tab', "App\Http\Controllers\TabsController@createTab")->middleware('auth:api');
 Route::post('delete-tab', "App\Http\Controllers\TabsController@deleteTab")->middleware('auth:api');
 Route::post('update-tab', "App\Http\Controllers\TabsController@updateTab")->middleware('auth:api');
-// Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
+Route::post('save-admin', "App\Http\Controllers\AdminController@saveAdmin")->middleware('auth:api');
 
 
 // Route::post('get-filters', "App\Http\Controllers\FilterController@getFilters");
