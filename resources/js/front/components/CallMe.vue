@@ -65,16 +65,17 @@ export default {
             return null;
         },
         getCookieToken() {
-            if(this.name == '' && this.phone == ''){
+            if (this.name == "" && this.phone == "") {
                 this.title = "Неверные данные!";
-                    this.content = "Пожалуйста заполните все поля корректно";
-                    document.querySelector('#toast').classList = "toast visible";
+                this.content = "Пожалуйста заполните все поля корректно";
+                document.querySelector("#toast").classList = "toast visible";
+                console.log(this.showToast);
+                setTimeout(() => {
+                    this.showToast = false;
                     console.log(this.showToast);
-                    setTimeout(() => {
-                        this.showToast = false;
-                        console.log(this.showToast);
-                        document.querySelector('#toast').classList = "toast";
-                    }, 3000);
+                    document.querySelector("#toast").classList = "toast";
+                }, 3000);
+                return;
             }
             axios
                 .get("/api/get-email-token", { withCredentials: true })
@@ -123,12 +124,13 @@ export default {
                     this.content = status
                         ? "Мы обязательно обработаем вашу заявку"
                         : "Попробуйте заново";
-                    document.querySelector('#toast').classList = "toast visible";
+                    document.querySelector("#toast").classList =
+                        "toast visible";
                     console.log(this.showToast);
                     setTimeout(() => {
                         this.showToast = false;
                         console.log(this.showToast);
-                        document.querySelector('#toast').classList = "toast";
+                        document.querySelector("#toast").classList = "toast";
                     }, 3000);
                 } else {
                     console.log("failure");

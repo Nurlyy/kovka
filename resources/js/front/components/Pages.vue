@@ -66,10 +66,11 @@ export default {
     max-width: 1100px !important;
     position: relative !important;
     height: auto !important;
-    padding: 20px !important;
+    padding: 20px 20px 60px 20px !important;
     font-family: var(--font-family-times) !important;
     box-sizing: border-box !important;
-    background-color: #fafafa !important;
+    background-color: none !important;
+    border: 1px solid #dfdfdf;
     margin: 30px auto !important;
     font-size: 18px !important;
     line-height: 24px !important;
@@ -119,18 +120,19 @@ export default {
             margin: 0 auto 20px !important;
             width: var(--width-main) !important;
             color: var(--color-purple-h2) !important;
-            font-size: var(--font-saze-h2) !important;
+            // font-size: var(--font-saze-h2) !important;
             font-family: var(--font-family-neumann) !important;
             font-weight: 400 !important;
             text-align: left !important;
         }
         blockquote {
-            padding: 0 20px !important;
+            padding: 1px 25px !important;
             margin: 0;
-            border: 3px solid #44414d;
-            border-radius: 8px;
+            border-left: 3px solid #44414d;
+            border-radius: 0px;
             box-sizing: border-box;
             background: #fff;
+            color: #5e5e5e;
         }
         ul {
             padding: 0;
@@ -193,6 +195,34 @@ export default {
             -moz-transform: translateX(-50%) translateY(-50%) scale(1);
             transform: translateX(-50%) translateY(-50%) scale(1);
         }
+        // table {
+        //     width: 100%;
+        //     tbody {
+        //         tr {
+        //             th {
+        //                 img {
+        //                     object-fit: contain;
+        //                     width: 100%;
+        //                     height: 100%;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+    }
+    table {
+        width: 100%;
+        tbody {
+            tr {
+                td {
+                    img {
+                        object-fit: contain;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
     }
     table {
         width: 100%;
@@ -245,11 +275,25 @@ export default {
         background-color: none !important;
         max-width: 100%;
         height: auto;
-        padding: 20px;
+        padding: 20px 20px 60px 20px !important;
         font-family: var(--font-family-times);
         box-sizing: border-box;
-        background-color: #fafafa;
+        // background-color: #fafafa;
         margin-top: 30px;
     }
+    // table {
+    //     width: 100%;
+    //     tbody {
+    //         tr {
+    //             th {
+    //                 img {
+    //                     object-fit: contain;
+    //                     width: 100%;
+    //                     height: 100%;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 </style>
