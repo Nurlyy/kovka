@@ -36,7 +36,7 @@
                 </td>
                 <td  v-if="filter != 3">
                     <div class="table_td">
-                        <img v-if="item.preview_image != null" :src="item.preview_image" height="80" style="border-radius:5px;" />
+                        <img v-if="item.preview_image != null && item.isPreview" :src="item.preview_image" height="80" style="border-radius:5px;" />
                     </div>
                 </td>
                 <td>

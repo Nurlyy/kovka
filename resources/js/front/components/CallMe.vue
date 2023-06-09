@@ -65,6 +65,17 @@ export default {
             return null;
         },
         getCookieToken() {
+            if(this.name == '' && this.phone == ''){
+                this.title = "Неверные данные!";
+                    this.content = "Пожалуйста заполните все поля корректно";
+                    document.querySelector('#toast').classList = "toast visible";
+                    console.log(this.showToast);
+                    setTimeout(() => {
+                        this.showToast = false;
+                        console.log(this.showToast);
+                        document.querySelector('#toast').classList = "toast";
+                    }, 3000);
+            }
             axios
                 .get("/api/get-email-token", { withCredentials: true })
                 .then((response) => {

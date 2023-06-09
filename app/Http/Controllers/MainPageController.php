@@ -13,12 +13,13 @@ class MainPageController extends Controller
         $header = $request->header;
         $title = $request->title;
         $body = $request->body;
-
+        $description = $request->description;
         $mainPage = MainPage::first();
         $mainPage->update([
             'header' => $header,
             'title' => $title,
-            'body' => $body
+            'body' => $body,
+            "description" => $description
         ]);
         return response()->json(['mainPage' => $mainPage]);
     }

@@ -10,6 +10,6 @@ class MainPage extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table ='main_page';
-    protected $fillable = ['title', 'header', 'body', 'personal_status'];
+    protected $fillable = ['title', 'header', 'body', 'personal_status', 'description'];
     
 }
