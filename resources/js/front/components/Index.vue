@@ -68,7 +68,7 @@ body {
   --width-main: 100%;
   --width-height: 100%;
   --background-color: none;
-  --background-img:url(@/front/assets/images/background.png);
+//   --background-img:url(@/front/assets/images/background.png);
 
   --transition: .3s;
 

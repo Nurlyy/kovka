@@ -65,10 +65,11 @@ export default {
   padding: 20px !important;
   font-family: var(--font-family-times) !important;
   box-sizing: border-box !important;
-  background-color: #fafafa !important;
+//   background-color: #fafafa !important;
   margin:30px auto !important;
   font-size: 18px !important;
   line-height: 24px !important;
+  border: 1px solid #dfdfdf;
   .wrapper {
     position: relative;
     max-width: 700px;
@@ -111,7 +112,7 @@ export default {
     margin: 0 auto 20px !important;
     width: var(--width-main) !important;
     color: var(--color-purple-h2) !important;
-    font-size: var(--font-saze-h2) !important;
+    // font-size: var(--font-saze-h2) !important;
     font-family: var(--font-family-neumann) !important;
     font-weight: 400 !important;
     text-align: left !important;
