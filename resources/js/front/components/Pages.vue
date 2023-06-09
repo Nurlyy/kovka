@@ -151,7 +151,7 @@ export default {
             line-height: 32px;
             position: absolute;
             top: 7px;
-            left: -70px;
+            left: -35px;
             width: 80;
             text-align: center;
             font-size: 22px;
