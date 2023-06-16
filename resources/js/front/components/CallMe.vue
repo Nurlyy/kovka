@@ -175,7 +175,7 @@ export default {
 .call-me {
     position: relative;
     width: var(--width-main);
-    background-color: #fafafa;
+    background-color: none;
     padding: 40px 20px;
     box-sizing: border-box;
     margin-top: 6px;

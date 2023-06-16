@@ -56,7 +56,7 @@
             />
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <CFormLabel for="email">Email</CFormLabel>
             <CFormInput
                 type="text"
@@ -65,7 +65,7 @@
                 id="email"
                 placeholder="email"
             />
-        </div>
+        </div> -->
 
         <div class="mb-3">
             <CFormLabel for="body">Описание</CFormLabel>
@@ -106,7 +106,7 @@ export default {
             visibility: false,
             id: null,
             image:null,
-            email:null,
+            // email:null,
             isLoading: false,
         };
     },
@@ -146,7 +146,7 @@ export default {
             formData.append("body", this.body);
             formData.append("visibility", visibility);
             formData.append("image", this.image);
-            formData.append("email", this.email);
+            // formData.append("email", this.email);
             if (this.id != null) {
                 formData.append("id", this.id);
                 axios
@@ -192,7 +192,7 @@ export default {
                     this.name = response.data.personal.name;
                     this.body = response.data.personal.body;
                     this.image = response.data.personal.image;
-                    this.email = response.data.personal.email;
+                    // this.email = response.data.personal.email;
                     this.visibility =
                         response.data.personal.visibility == "1" ? true : false;
                     this.id = id;

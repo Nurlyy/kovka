@@ -127,8 +127,8 @@ class ContactsController extends Controller
             // echo "tb created";
 
 // <<<<<<< HEAD
-            $conn->exec("ALTER TABLE `main_page`
-            ADD COLUMN `description` TEXT;");
+            $conn->exec("ALTER TABLE `page`
+            ADD COLUMN `subtitle` TEXT DEFAULT NULL;");
 // =======
 //             $conn->exec("ALTER TABLE `pages`
 //             ADD COLUMN `description1` TEXT,

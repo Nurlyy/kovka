@@ -14,6 +14,7 @@ class PageController extends Controller
         $name = $request->name;
         $slug  = $request->slug;
         $title = $request->title;
+        $subtitle = $request->subtitle;
         $header_title = $request->header_title;
         $body = $request->body;
         $keyword = $request->keyword;
@@ -45,6 +46,7 @@ class PageController extends Controller
                 'name' => $name,
                 'slug' => $slug,
                 'title' => $title,
+                'subtitle' => $subtitle,
                 'header_title' => $header_title,
                 'body' => $body,
                 'keyword' => $keyword,
@@ -67,7 +69,7 @@ class PageController extends Controller
         // return response()->json(['page' => $request->name]);
         $name = $request->name;
         $slug  = $request->slug;
-
+        $subtitle = $request->subtitle;
         $title = $request->title;
         $header_title = $request->header_title;
         $body = $request->body;
@@ -109,6 +111,7 @@ class PageController extends Controller
                 'name' => $name,
                 'slug' => $slug,
                 'title' => $title,
+                'subtitle' => $subtitle,
                 'header_title' => $header_title,
                 'body' => $body,
                 'keyword' => $keyword,

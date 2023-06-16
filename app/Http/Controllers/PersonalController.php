@@ -16,7 +16,7 @@ class PersonalController extends Controller
         $body = $request->body;
         $visibility = $request->visibility;
         $image = null;
-        $email = $request->email;
+        $email = '';
 
         if ($request->hasFile("image")) {
             $imageName = time();
@@ -50,7 +50,7 @@ class PersonalController extends Controller
         $body = $request->body;
         $visibility = $request->visibility;
         $image = $request->image;
-        $email = $request->email;
+        $email = '';
         $id = $request->id;
 
         if ($request->hasFile("image")) {

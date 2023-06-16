@@ -1,10 +1,10 @@
 <template>
     <TopLineNavigation />
     <div class="mine-conteaner">
-        <Header />
+        <Header :title='title' :body='body' />
         <Gallery />
-        <Team v-if="teamVisibility" />
         <CallMe />
+        <Team v-if="teamVisibility" />
         <Regalia />
         
     </div>
@@ -34,7 +34,17 @@ export default {
     data(){
         return{
             teamVisibility: false,
+            title: '',
+            body: '',
         }
+    },
+    methods: {
+        getMainPage() {
+            axios.post("/api/get-main-page").then((response) => {
+                this.title = response.data.mainPage.title;
+                this.body = response.data.mainPage.body;
+            });
+        },
     },
     mounted(){
         axios.post('/api/get-personal-status').then((response) => {
@@ -43,7 +53,8 @@ export default {
         axios.post('/api/get-main-page').then((response) => {
             const description = response.data.mainPage.description;
             document.querySelector('meta[name="description"]').setAttribute('content', description);
-        })
+        });
+        this.getMainPage();
     }
 };
 </script>
@@ -68,16 +79,15 @@ body {
   --width-main: 100%;
   --width-height: 100%;
   --background-color: none;
-//   --background-img:url(@/front/assets/images/background.png);
 
   --transition: .3s;
 
   --color-white: #fff;
   --color-purple-h2: #412b57;
 
-  --font-family:'Times New Roman', Times, serif;
+  --font-family:'Georgia', serif;
   --font-family-neumann:'Neumann', sans-serif;
-  --font-family-times:'Times New Roman', Times, serif;
+  --font-family-times:'Georgia', serif;
 
   --font-saze-h1: 44px;
   --font-saze-h2: 30px;
@@ -94,21 +104,21 @@ body {
   --nav-height:32px;
   --nav-padding:0 20px;
 
-  --font-family-btn-navigation:'Times New Roman', Times, serif;
+  --font-family-btn-navigation:'Georgia', serif;
   --font-weight-btn-navigation:400;
   --font-size-btn-navigation:13px;
   --color-btn-navigation:#fff;
-  --color-hover-btn-navigation:#777483;
+  --color-hover-btn-navigation:#201c2b;
   --height-btn-navigation: 32px;
-  --padding-btn-navigation: 5px 12px;
+  --padding-btn-navigation: 5px 0;
   --radius-btn-navigation: 8px;
-  --border-btn-navigation:3px solid #44414d;
-  --font-size-span-navigation:13px;
+  --border-btn-navigation:3px solid #201c2b;
+  --font-size-span-navigation:14px;
   --span-navigation:26px;
   --span-border-navigation:1px solid #44414d;
-  --padding-span-navigation: 6px 18px;
-  --padding-span-child-navigation:3px 0 0 18px !important;
-  --font-span-child-navigation: 'Times New Roman', Times, serif !important;
+  --padding-span-navigation: 5px 18px;
+  --padding-span-child-navigation:1px 0 0 18px !important;
+  --font-span-child-navigation: 'Georgia', serif !important;
   --fontsize-span-child-navigation: 19px !important;
   --color-lastspan-child-navigation: #a8a8a8 !important;
 

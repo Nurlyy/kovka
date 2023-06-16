@@ -61,6 +61,19 @@
                 placeholder="TITLE"
             />
         </div>
+        
+        <div class="mb-3">
+            <CFormLabel for="subtitle"
+                >Подзаголовок страницы</CFormLabel
+            >
+            <CFormInput
+                type="text"
+                v-model="subtitle"
+                :value="subtitle"
+                id="subtitle"
+                placeholder="Подаголовок"
+            />
+        </div>
 
         <CFormLabel for="title">Текст страницы</CFormLabel>
         <!-- <QuillEditor
@@ -217,6 +230,7 @@ export default {
             name: "",
             slug: "",
             title: "",
+            subtitle: "",
             header_title: "",
             body: "",
             keyword: "",
@@ -261,6 +275,7 @@ export default {
             formData.append("name", this.name);
             formData.append("slug", this.slug);
             formData.append("title", this.title);
+            formData.append("subtitle", this.subtitle);
             formData.append("header_title", this.header_title);
             formData.append("body", this.body);
             formData.append("keyword", this.keyword);
@@ -372,6 +387,7 @@ export default {
                     this.name = response.data.page.name;
                     this.slug = response.data.page.slug;
                     this.title = response.data.page.title;
+                    this.subtitle = response.data.page.subtitle;
                     this.header_title = response.data.page.header_title;
                     this.body = response.data.page.body;
                     this.keyword = response.data.page.keyword;

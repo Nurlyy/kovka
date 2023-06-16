@@ -30,7 +30,7 @@
                     target="_blank"
                     rel="noreferrer"
                     id="imageView"
-                    :aria-label='image.description'
+                    :aria-label="image.description"
                 >
                 </a>
             </div>
@@ -217,10 +217,10 @@ export default {
             cursor: pointer;
             border-bottom: 2px solid #c9c9c9;
             color: #888888;
-            text-transform: uppercase;
+            // text-transform: uppercase;
             font-size: 13px;
-            font-weight: 600;
-            font-family: var(--font-family-btn-navigation);
+            font-weight: normal;
+            font-family: Georgia;
             transition: var(--transition);
             padding: 0 20px 13px 20px;
             margin-bottom: -2px;
@@ -344,7 +344,7 @@ export default {
     .gallery-text {
         position: relative;
         width: var(--width-main);
-        background-color: #fafafa;
+        background-color: none;
         height: 510px;
         padding: 70px 20px;
         box-sizing: border-box;
@@ -389,7 +389,7 @@ export default {
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 300px;
+            height: 230px;
             text-align: center;
             &.dnone {
                 display: none;
@@ -400,14 +400,14 @@ export default {
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                height: 270px;
+                height: 230px;
                 background: rgb(2, 0, 36);
                 background: linear-gradient(
                     180deg,
-                    rgba(250, 250, 250, 0) 0%,
-                    rgba(250, 250, 250, 0.9) 30%,
-                    rgba(250, 250, 250, 1) 50%,
-                    rgba(250, 250, 250, 1) 100%
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.9) 30%,
+                    rgba(255, 255, 255, 1) 50%,
+                    rgba(255, 255, 255, 1) 100%
                 );
             }
             button {
