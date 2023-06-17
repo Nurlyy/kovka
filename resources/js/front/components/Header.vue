@@ -26,19 +26,7 @@ export default {
         title: String, 
         body: String,
     },
-    mounted() {
-        this.getMainPage();
-    },
-    methods: {
-        getMainPage() {
-            axios.post("/api/get-main-page").then((response) => {
-                this.header = response.data.mainPage.header;
-                this.title = response.data.mainPage.title;
-                this.body = response.data.mainPage.body;
-                document.title = this.header;
-            });
-        },
-    },
+    
 };
 </script>
 

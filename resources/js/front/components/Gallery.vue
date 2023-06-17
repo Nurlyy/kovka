@@ -218,7 +218,7 @@ export default {
             border-bottom: 2px solid #c9c9c9;
             color: #888888;
             // text-transform: uppercase;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: normal;
             font-family: Georgia;
             transition: var(--transition);
