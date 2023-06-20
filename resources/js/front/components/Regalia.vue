@@ -125,7 +125,7 @@ export default {
             width: var(--width-main);
             color: #000;
             font-size: 16px;
-            font-family: var(--font-family-neumann);
+            font-family: 'Playfair Display', arial;
             font-weight: normal;
             min-height: 50px;
             margin: 0 0 12px 0;

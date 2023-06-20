@@ -86,7 +86,7 @@ body {
   --color-purple-h2: #412b57;
 
   --font-family:'Georgia', serif;
-  --font-family-neumann:'Neumann', sans-serif;
+  --font-family-neumann:'Playfair Display', sans-serif;
   --font-family-times:'Georgia', serif;
 
   --font-saze-h1: 44px;
