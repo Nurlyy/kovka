@@ -2,7 +2,7 @@
     <div class="header">
         <div class="conteaner-logo">
             <a href="/" aria-label="Main Logo" class="logo">
-                <img src="@/front/assets/images/logo.png" alt="" />
+                <img src="@/front/assets/images/logo3.png" alt="" />
             </a>
         </div>
         <h1>
@@ -67,7 +67,7 @@ export default {
         line-height: 22px;
         font-family: var(--font-family-times);
         text-align: center;
-        padding: 10px 3% 60px;
+        padding: 20px 1% 60px;
         margin: 0;
         box-sizing: border-box;
     }

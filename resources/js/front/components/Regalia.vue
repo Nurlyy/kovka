@@ -124,7 +124,7 @@ export default {
             text-align: left;
             width: var(--width-main);
             color: #000;
-            font-size: 16px;
+            font-size: 18px;
             font-family: 'Playfair Display', arial;
             font-weight: normal;
             min-height: 50px;

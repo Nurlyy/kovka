@@ -86,11 +86,10 @@ export default {
 .conteaner-card-team {
     background-color: none;
     border: 1px solid #ebebeb;
-    height: auto;
+    height: 100%;
     padding: 0;
     text-decoration: none;
     width: 100%;
-    height: auto;
     margin: 0 3px;
     min-height: 400px;
     box-sizing: border-box;

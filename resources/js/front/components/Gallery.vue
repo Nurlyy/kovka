@@ -369,7 +369,7 @@ export default {
             }
         }
         .conteaner-text {
-            max-width: 678px;
+            max-width: 860px;
             margin: 0 auto;
             box-sizing: border-box;
             p {
@@ -379,7 +379,7 @@ export default {
                 line-height: 22px;
                 font-family: var(--font-family-times);
                 text-align: center;
-                padding: 10px 0;
+                padding: 20px 0;
                 margin: 0;
                 text-align: justify;
             }
