@@ -94,7 +94,7 @@ export default {
       box-sizing: border-box;
       border-right:var(--span-border-navigation);
       margin-top:3px;
-      &:nth-child(2) {
+      &:nth-child(3) {
         padding: var(--padding-span-child-navigation);
         border-right: none !important;
         font-family: var(--font-span-child-navigation);
@@ -106,17 +106,17 @@ export default {
       @media (max-width: 780px) {
         border-right: none !important;
         padding:9px 20px 0 0;
-        &:nth-child(2) {
+        &:nth-child(3) {
           padding: 6px 0 0 0;
           border-right: none !important;
           font-family: var(--font-span-child-navigation);
           font-size: var(--fontsize-span-child-navigation);
         }
-        &:nth-child(3) {
+        &:nth-child(4) {
           float:right;
           padding-left:0px;
         }
-        &:nth-child(4) {
+        &:nth-child(5) {
           float:right;
           width:320px !important;
           padding:5px 0 0 0;
@@ -130,7 +130,7 @@ export default {
         font-size:12px;
         width:100%;
         text-align: right;
-        &:nth-child(2) {
+        &:nth-child(3) {
           display: block !important;
           float:none;
           padding: 13px 0 0 0;
@@ -138,14 +138,14 @@ export default {
           font-family: var(--font-span-child-navigation);
           font-size: 16px;
         }
-        &:nth-child(3) {
+        &:nth-child(4) {
           display: block !important;
           float:none;
           padding: 6px 0 0 20px;
           border-right: none !important;
           font-size: 13px;
         }
-        &:nth-child(4) {
+        &:nth-child(5) {
           display: none;
           padding:3px 0 0 0;
           border-right: none !important;
