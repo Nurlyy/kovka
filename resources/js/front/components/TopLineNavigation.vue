@@ -1,6 +1,7 @@
 <template>
     <div class="top-line-navigation">
         <nav>
+            <a href="/"><img src="@/front/assets/images/PNG-logo-mini.png" alt="Ковка и Дерево" class="logo-mini"></a>
             <a href="/page/contact" class="contacts-btn">Контакты</a>
             <!-- <a href="/blog" style="margin-left: 10px;" class="contacts-btn">Блог</a> -->
             <span>{{number}}</span>
@@ -54,6 +55,14 @@ export default {
     padding: var(--nav-padding);
     box-sizing: border-box;
     margin: 0 auto;
+    .logo-mini {
+      float:left;
+      width:66px;
+      margin-right: 15px;
+      @media (max-width: 900px) {
+        display: none;
+      }
+    }
     .contacts-btn {
       float:left;
       height:var(--height-btn-navigation);
